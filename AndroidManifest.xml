@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="org.ligi.android.dubwise_uavtalk"
+      android:versionCode="1"
+      android:versionName="0.1">
+
+
+	<uses-sdk android:targetSdkVersion="3" android:minSdkVersion="4"></uses-sdk>
+	
+	
+     <supports-screens android:largeScreens="true"
+						  android:normalScreens="true" 
+						  android:smallScreens="true"
+						  android:anyDensity="true" /> 
+	
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+	<uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+	
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+		
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+	
+	<uses-library android:name="com.google.android.maps"/>
+
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name=".DUBwiseUAVTalk"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UAVObjectOptionsActivity"/>
+        <activity android:name=".SettingsListActivity"/>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity"/>
+        
+        <activity android:name="org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceBlockEditActivity"/>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity"/>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceDebugActivity"/>
+        
+        
+        <activity android:name="org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.conn.ConnectionMenu"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsListActivity">
+        	<intent-filter>
+                <action android:name="PICK_UAVOBJECT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="EDIT_UAVOBJECT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="SHOWMETA_UAVOBJECT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldListActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldArrayListActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefsActivity"></activity>
+    </application>
+    
+</manifest>

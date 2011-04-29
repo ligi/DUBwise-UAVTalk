@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connect">connect</string>
+    <string name="via_bt">via Bluetooth</string>
+    <string name="browse_uavobjects">browse UAVObjects</string>
+    <string name="settings">settings</string>
+    <string name="title_show_uavobjmeta">show MetaData</string>
+    <string name="title_edit_uavobj">Edit UAVObject</string>
+    <string name="title_pick_uavobj">Pick UAVObject</string>
+    <string name="edit">edit</string>
+    <string name="show_metadata">Show MetaData</string>
+    <string name="uavobjects">UAVObjects</string>
+    <string name="status_voice">StatusVoice</string>
+    <string name="via_udp">via UDP (N/A)</string>
+    <string name="connection_details">Connection Details</string>
+    <string name="handshake_status">Handshake Status</string>
+    <string name="connection">Connection</string>
+    <string name="app_name">DUBwise UAVTalk</string>
+    <string name="channels">Channels</string>
+    <string name="nick">Nick</string>
+    <string name="roll">Roll</string>
+    <string name="yaw">Yaw</string>
+    <string name="throttle">Throttle</string>
+    <string name="none">None</string>
+    <string name="pitch">Pitch</string>
+    <string name="accessory">Accessory</string>
+    <string name="view_instruments">Instruments</string>
+    <string name="switching_on_bt">Switching on Bluetooth</string>
+</resources>
