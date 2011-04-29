@@ -118,10 +118,6 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) { 
-            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row=vi.inflate(android.R.layout.simple_list_item_1, null); 
-            TextView label=(TextView)row.findViewById(android.R.id.text1);
-            label.setText(""+UAVObjects.getManualControlCommand().getChannel()[position]);
 
             LinearLayout lin=new LinearLayout(context);
             // ProgressBar p=   new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
