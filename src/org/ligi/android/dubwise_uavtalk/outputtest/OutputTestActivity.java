@@ -96,7 +96,6 @@ public class OutputTestActivity extends ListActivity {
         
 
             LinearLayout lin=new LinearLayout(context);
-            // ProgressBar p=   new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
             lin.setOrientation(LinearLayout.VERTICAL);
             LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT);
 
@@ -164,8 +163,6 @@ public class OutputTestActivity extends ListActivity {
             frame_minmax.addView(max_tv);
             frame_minmax.addView(value_tv);
             lin.addView(frame_minmax);
-
-            
             
             return(lin); 
         }
