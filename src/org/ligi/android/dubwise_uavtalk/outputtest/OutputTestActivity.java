@@ -27,6 +27,7 @@ package org.ligi.android.dubwise_uavtalk.outputtest;
 
 import org.ligi.android.commons.SeekBarMinMax;
 import org.ligi.android.dubwise_uavtalk.R;
+import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
 
 
@@ -66,6 +67,8 @@ public class OutputTestActivity extends ListActivity {
         adapter=new myArrayAdapter(this);
         this.setListAdapter(adapter);
 
+		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_ONCHANGE);
+		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdatePeriod(100);
         
         new AlertDialog.Builder(this)
         .setTitle(R.string.special_awareness)
@@ -112,11 +115,17 @@ public class OutputTestActivity extends ListActivity {
             FrameLayout frame=new FrameLayout(context);
             frame.setLayoutParams(lp);
 
-            int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
-            int min=UAVObjects.getActuatorSettings().getChannelMin()[position];
+            /*int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
+            final int min=UAVObjects.getActuatorSettings().getChannelMin()[position];
             int val=UAVObjects.getActuatorCommand().getChannel()[position];
+            */
+            int max=2000;
+            final int min=0;
+            int val=1500;
+            
             
             SeekBarMinMax seekbar= new SeekBarMinMax(context,min,max);
+            seekbar.setTag(position);
             final TextView value_tv=new TextView(context); 
             
             seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
@@ -124,7 +133,10 @@ public class OutputTestActivity extends ListActivity {
 				@Override
 				public void onProgressChanged(SeekBar seekBar, int progress,
 						boolean fromUser) {
-					value_tv.setText(""+progress);
+					int[] chan_arr=UAVObjects.getActuatorCommand().getChannel();
+					chan_arr[(Integer)seekBar.getTag()]=progress+min;
+					UAVObjects.getActuatorCommand().setChannel(chan_arr);
+					value_tv.setText(""+UAVObjects.getActuatorCommand().getChannel()[(Integer)seekBar.getTag()]);
 				}
 
 				@Override
