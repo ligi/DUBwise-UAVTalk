@@ -27,5 +27,6 @@
     <string name="view_instruments">Instruments</string>
     <string name="switching_on_bt">Switching on Bluetooth</string>
     <string name="output_test">Output Test</string>
-    <string name="special_awareness">Special Awareness</string>
+    <string name="special_awareness">!! Special Awareness !!</string>
+    <string name="outputtest_warning">This activity can be dangerous. Safety first! Please remove any propellers and/or mount the UAV good.</string>
 </resources>

@@ -26,10 +26,15 @@ package org.ligi.android.dubwise_uavtalk.outputtest;
 
 
 import org.ligi.android.commons.SeekBarMinMax;
+import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjects;
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -62,7 +67,23 @@ public class OutputTestActivity extends ListActivity {
         this.setListAdapter(adapter);
 
         
-        new AlertDialog.Builder(this);
+        new AlertDialog.Builder(this)
+        .setTitle(R.string.special_awareness)
+        .setMessage(R.string.outputtest_warning)
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setPositiveButton("OK",new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			}
+        })        
+        .setNegativeButton("BACK!",new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+			}
+        })
+        .show();
+
     }
 
     @Override
