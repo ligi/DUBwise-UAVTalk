@@ -356,8 +356,16 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
     public void notifyUAVObjectChange(UAVObject changed_object) {
         Log.i("object change " + changed_object.getObjName());
         if (changed_object.getMetaData().getGCSTelemetryUpdateMode()==UAVObjectMetaData.UPDATEMODE_ONCHANGE) {
-            send_obj(changed_object,UAVTalkDefinitions.TYPE_OBJ_ACK);
-            Log.i("sending because onchange");
+            
+        	Log.i("sending because onchange");
+        	
+        	if (changed_object.getMetaData().isGCSTelemetryAcked())  {
+            	send_obj(changed_object,UAVTalkDefinitions.TYPE_OBJ_ACK);
+            	Log.i("with ack"); }
+            else {
+            	send_obj(changed_object,UAVTalkDefinitions.TYPE_OBJ);
+        		Log.i("without ack"); }
+            
         }
     }
 }

@@ -69,8 +69,9 @@ public class OutputTestActivity extends ListActivity {
 
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_ONCHANGE);
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdatePeriod(100);
-		UAVObjects.getActuatorCommand().getMetaData().setFlightTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_NEVER);
-		UAVObjects.getActuatorCommand().getMetaData().setFlightTelemetryUpdatePeriod(0);
+		UAVObjects.getActuatorCommand().getMetaData().setFlightTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_ONCHANGE);
+		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryAcked(false);
+		UAVObjects.getActuatorCommand().getMetaData().setFlightAccess(UAVObjectMetaData.ACCESS_READONLY);
         
         new AlertDialog.Builder(this)
         .setTitle(R.string.special_awareness)
@@ -117,14 +118,9 @@ public class OutputTestActivity extends ListActivity {
             FrameLayout frame=new FrameLayout(context);
             frame.setLayoutParams(lp);
 
-            /*int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
+            int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
             final int min=UAVObjects.getActuatorSettings().getChannelMin()[position];
             int val=UAVObjects.getActuatorCommand().getChannel()[position];
-            */
-            int max=2000;
-            final int min=0;
-            int val=1500;
-            
             
             SeekBarMinMax seekbar= new SeekBarMinMax(context,min,max);
             seekbar.setTag(position);
