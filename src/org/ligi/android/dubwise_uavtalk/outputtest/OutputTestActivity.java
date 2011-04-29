@@ -26,14 +26,11 @@ package org.ligi.android.dubwise_uavtalk.outputtest;
 
 
 import org.ligi.android.commons.SeekBarMinMax;
-import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +38,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -56,8 +52,6 @@ import android.widget.TextView;
 public class OutputTestActivity extends ListActivity {
 
     private myArrayAdapter adapter;
-    
-    private int old_update_period;
 
     /** Called when the activity is first created. */
     @Override
@@ -67,17 +61,12 @@ public class OutputTestActivity extends ListActivity {
         adapter=new myArrayAdapter(this);
         this.setListAdapter(adapter);
 
-        // we want to have the data fast at 10Hz
-        UAVObjectMetaData meta=UAVObjects.getManualControlCommand().getMetaData();
-        old_update_period=meta.getFlightTelemetryUpdatePeriod();
-        meta.setFlightTelemetryUpdatePeriod(100);
-
+        
         new AlertDialog.Builder(this);
     }
 
     @Override
     protected void onStop() {
-        UAVObjects.getManualControlCommand().getMetaData().setFlightTelemetryUpdatePeriod(old_update_period);
         super.onStop();
     }
 
