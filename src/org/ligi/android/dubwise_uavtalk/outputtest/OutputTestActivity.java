@@ -43,6 +43,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 /**
@@ -102,16 +103,39 @@ public class OutputTestActivity extends ListActivity {
             FrameLayout frame=new FrameLayout(context);
             frame.setLayoutParams(lp);
 
-            SeekBarMinMax p= new SeekBarMinMax(context);
-            p.setMax(256);
-            p.setVerticalFadingEdgeEnabled(false);
-            p.setPadding(3, 3, 3, 1);
-            int max=UAVObjects.getManualControlSettings().getChannelMax()[position];
-            int min=UAVObjects.getManualControlSettings().getChannelMin()[position];
-            int val=UAVObjects.getManualControlCommand().getChannel()[position];
-            p.setMax(max-min);
-            p.setProgress(val-min);
-            frame.addView(p);
+            /* int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
+            int min=UAVObjects.getActuatorSettings().getChannelMin()[position];
+            int val=UAVObjects.getActuatorCommand().getChannel()[position];
+            */
+            int min=1000;
+            int max=1500;
+            int val=1200;
+            
+            SeekBarMinMax seekbar= new SeekBarMinMax(context,min,max);
+            final TextView value_tv=new TextView(context); 
+            
+            seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
+
+				@Override
+				public void onProgressChanged(SeekBar seekBar, int progress,
+						boolean fromUser) {
+					value_tv.setText(""+progress);
+				}
+
+				@Override
+				public void onStartTrackingTouch(SeekBar seekBar) {
+				}
+
+				@Override
+				public void onStopTrackingTouch(SeekBar seekBar) {
+				} });
+            
+            
+            seekbar.setVerticalFadingEdgeEnabled(false);
+            seekbar.setPadding(3, 3, 3, 1);
+            seekbar.setProgress(val);
+            
+            frame.addView(seekbar);
 
             TextView text = new TextView(context);
             String txt=	"channel #" + position; 
@@ -135,14 +159,14 @@ public class OutputTestActivity extends ListActivity {
             max_tv.setText(""+max);
             max_tv.setPadding(0, 0, 7,0);
 
-            TextView neutral_tv=new TextView(context);
-            neutral_tv.setGravity(Gravity.CENTER);
-            neutral_tv.setText(""+UAVObjects.getManualControlSettings().getChannelNeutral()[position]);
-            neutral_tv.setPadding(7, 0, 0,0);
+
+            value_tv.setGravity(Gravity.CENTER);
+            value_tv.setText(""+UAVObjects.getManualControlSettings().getChannelNeutral()[position]);
+            value_tv.setPadding(7, 0, 0,0);
 
             frame_minmax.addView(min_tv);
             frame_minmax.addView(max_tv);
-            frame_minmax.addView(neutral_tv);
+            frame_minmax.addView(value_tv);
             lin.addView(frame_minmax);
 
             
