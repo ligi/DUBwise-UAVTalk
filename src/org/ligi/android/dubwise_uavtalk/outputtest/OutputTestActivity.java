@@ -69,6 +69,8 @@ public class OutputTestActivity extends ListActivity {
 
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_ONCHANGE);
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdatePeriod(100);
+		UAVObjects.getActuatorCommand().getMetaData().setFlightTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_NEVER);
+		UAVObjects.getActuatorCommand().getMetaData().setFlightTelemetryUpdatePeriod(0);
         
         new AlertDialog.Builder(this)
         .setTitle(R.string.special_awareness)
