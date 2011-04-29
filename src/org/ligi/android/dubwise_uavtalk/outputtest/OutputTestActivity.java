@@ -103,13 +103,9 @@ public class OutputTestActivity extends ListActivity {
             FrameLayout frame=new FrameLayout(context);
             frame.setLayoutParams(lp);
 
-            /* int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
+            int max=UAVObjects.getActuatorSettings().getChannelMax()[position];
             int min=UAVObjects.getActuatorSettings().getChannelMin()[position];
             int val=UAVObjects.getActuatorCommand().getChannel()[position];
-            */
-            int min=1000;
-            int max=1500;
-            int val=1200;
             
             SeekBarMinMax seekbar= new SeekBarMinMax(context,min,max);
             final TextView value_tv=new TextView(context); 
