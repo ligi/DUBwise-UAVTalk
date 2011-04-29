@@ -30,6 +30,7 @@ import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;
 import org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
+import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefs;
@@ -58,7 +59,9 @@ public class DUBwiseUAVTalk extends ListActivity {
     public final static int MENU_BROWSE_UAVOBJECTS=3;
     public final static int MENU_VIEW_CHANNELS=4;
     public final static int MENU_VIEW_INSTRUMENTS=5;
+    public final static int MENU_OUTPUTEST=6;
 
+    
     private IconTextActionAdapter myAdapter;
 
     public static boolean kickstarted=false;
@@ -102,6 +105,7 @@ public class DUBwiseUAVTalk extends ListActivity {
         myAdapter.add(MENU_BROWSE_UAVOBJECTS,android.R.drawable.ic_menu_agenda, R.string.uavobjects);
         myAdapter.add(MENU_VIEW_CHANNELS,android.R.drawable.ic_menu_directions, R.string.channels);
         myAdapter.add(MENU_VIEW_INSTRUMENTS,android.R.drawable.ic_menu_view, R.string.view_instruments);
+        myAdapter.add(MENU_OUTPUTEST,android.R.drawable.ic_menu_edit, R.string.output_test);
 
         this.setListAdapter(myAdapter);
     }
@@ -126,7 +130,9 @@ public class DUBwiseUAVTalk extends ListActivity {
         case MENU_VIEW_INSTRUMENTS:
             IntentHelper.startActivityClass(this,InstrumentDisplayActivity.class);
             break;
-
+        case MENU_OUTPUTEST:
+            IntentHelper.startActivityClass(this,OutputTestActivity.class);
+            break;
         }
     }
 

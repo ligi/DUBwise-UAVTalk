@@ -26,4 +26,6 @@
     <string name="accessory">Accessory</string>
     <string name="view_instruments">Instruments</string>
     <string name="switching_on_bt">Switching on Bluetooth</string>
+    <string name="output_test">Output Test</string>
+    <string name="special_awareness">Special Awareness</string>
 </resources>
