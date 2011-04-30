@@ -30,6 +30,7 @@ import org.openpilot.uavtalk.UAVObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -64,6 +65,16 @@ public class UAVObjectsListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         String action_str=this.getIntent().getAction();
+        
+
+        Intent intent = getIntent();
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+          String query = intent.getStringExtra(SearchManager.QUERY);
+          new AlertDialog.Builder(this).setMessage("search " + query).show();
+          
+        }
+        
         Log.i("Starting UAVObjectsListActivity with action" + action_str);
         
         if (action_str.equalsIgnoreCase("PICK_UAVOBJECT")) {

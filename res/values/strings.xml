@@ -26,4 +26,5 @@
     <string name="accessory">Accessory</string>
     <string name="view_instruments">Instruments</string>
     <string name="switching_on_bt">Switching on Bluetooth</string>
+    <string name="search_hint">find uavobjects</string>
 </resources>
