@@ -1,6 +1,6 @@
 /**************************************************************************
  *                                                                       
- * Author:  Marcus -LiGi- Bueschleb   
+gi * Author:  Marcus -LiGi- Bueschleb   
  *  http://ligi.de
  *  
  * Project URL:

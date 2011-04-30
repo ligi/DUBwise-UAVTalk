@@ -69,6 +69,9 @@
         <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldListActivity"></activity>
         <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldArrayListActivity"></activity>
         <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefsActivity"></activity>
+	    <provider android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsSearchSuggestions"
+              android:authorities="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsSearchSuggestions" />
+
     </application>
     
 </manifest>
