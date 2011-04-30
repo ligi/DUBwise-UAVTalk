@@ -19,6 +19,8 @@
 
 package org.ligi.android.dubwise_uavtalk.uavtalk;
 
+import java.util.Vector;
+
 import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
 import org.ligi.android.common.dialogs.DialogDiscarder;
 import org.ligi.android.dubwise_uavtalk.R;
@@ -63,19 +65,35 @@ public class UAVObjectsListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        String action_str=this.getIntent().getAction();
         
+        Intent myIntent = getIntent();
+        String action_str=myIntent.getAction();
 
-        Intent intent = getIntent();
+        
+        UAVObject[] uavobjects=UAVObjects.getUAVObjectArray();
+        
+        if (Intent.ACTION_SEARCH.equals(myIntent.getAction())) {
+          String query = myIntent.getStringExtra(SearchManager.QUERY);
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-          String query = intent.getStringExtra(SearchManager.QUERY);
-          new AlertDialog.Builder(this).setMessage("search " + query).show();
+          Vector<UAVObject> obj_vector =new Vector<UAVObject>();
+          Vector<UAVObject> founds_vector =new Vector<UAVObject>();
+          for (int i=0;i<uavobjects.length;i++)
+        	  obj_vector.add(uavobjects[i]);
           
+          for (UAVObject obj:obj_vector)
+        	  if (obj.getObjName().toUpperCase().contains(query.toUpperCase()))
+        		  founds_vector.add(obj);
+
+          Log.i("found " + founds_vector.size());
+          for (UAVObject obj:founds_vector)
+        	  Log.i("found " + obj.getObjName());
+          uavobjects=new UAVObject[founds_vector.size()];
+          founds_vector.copyInto(uavobjects);
         }
         
         Log.i("Starting UAVObjectsListActivity with action" + action_str);
+        
+        
         
         if (action_str.equalsIgnoreCase("PICK_UAVOBJECT")) {
             this.setTitle(R.string.title_pick_uavobj);
@@ -87,8 +105,9 @@ public class UAVObjectsListActivity extends ListActivity {
             this.setTitle(R.string.title_show_uavobjmeta);
             myAction=ACTION_SHOWMETA_UAVOBJECT;
         } else Log.w("I do not know that action " + action_str + " using fallback");
-
-        UAVObjectsArrayAdapter adapter=new UAVObjectsArrayAdapter(this, android.R.layout.simple_list_item_1, UAVObjects.getUAVObjectArray());
+        
+        
+        UAVObjectsArrayAdapter adapter=new UAVObjectsArrayAdapter(this, android.R.layout.simple_list_item_1, uavobjects);
         this.setListAdapter( adapter);
         new PeriodicallyInvalidateAdapter(this,adapter);
 
