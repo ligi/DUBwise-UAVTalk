@@ -27,4 +27,6 @@
     <string name="view_instruments">Instruments</string>
     <string name="switching_on_bt">Switching on Bluetooth</string>
     <string name="search_hint">find uavobjects</string>
+    <string name="help">Help</string>
+    <string name="meta_data">Meta Data</string>
 </resources>

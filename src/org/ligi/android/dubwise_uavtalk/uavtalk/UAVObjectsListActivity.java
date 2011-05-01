@@ -33,7 +33,9 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
@@ -60,9 +62,8 @@ public class UAVObjectsListActivity extends ListActivity {
 
     public final static int ACTION_PICK_UAVOBJECT=0;
     public final static int ACTION_EDIT_UAVOBJECT=1;
-    public final static int ACTION_SHOWMETA_UAVOBJECT=2;
-
-    private int myAction=ACTION_SHOWMETA_UAVOBJECT; // default
+    
+    private int myAction=ACTION_EDIT_UAVOBJECT; // default
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,10 +102,7 @@ public class UAVObjectsListActivity extends ListActivity {
         } else if (action_str.equalsIgnoreCase("EDIT_UAVOBJECT")) {
             this.setTitle(R.string.title_edit_uavobj);
             myAction=ACTION_EDIT_UAVOBJECT;
-        } else if (action_str.equalsIgnoreCase("SHOWMETA_UAVOBJECT")) {
-            this.setTitle(R.string.title_show_uavobjmeta);
-            myAction=ACTION_SHOWMETA_UAVOBJECT;
-        } else Log.w("I do not know that action " + action_str + " using fallback");
+        }else Log.w("I do not know that action " + action_str + " using fallback");
         
         
         UAVObjectsArrayAdapter adapter=new UAVObjectsArrayAdapter(this, android.R.layout.simple_list_item_1, uavobjects);
@@ -217,53 +215,74 @@ public class UAVObjectsListActivity extends ListActivity {
         }
 
         public void onClick(View v) {
-            //new AlertDialog.Builder(context).setMessage("foo").setSingleChoiceItems(new CharSequence[] { CharSequence .class ("Description"),"Meta Data"},-1, null).show();
-            UAVObject obj=((UAVObject)(v.getTag()));
-            UAVObjectMetaData obj_meta=obj.getMetaData();
+            act_obj=((UAVObject)(v.getTag()));
             switch (myAction) {
             case ACTION_EDIT_UAVOBJECT:
             case ACTION_PICK_UAVOBJECT:
                 Intent fieldListActivity=new Intent(context,UAVObjectFieldListActivity.class);
-                //fieldListActivity.putExtra("action",myAdapter
-                fieldListActivity.putExtra("objid", obj.getObjID());
+                fieldListActivity.putExtra("objid", act_obj.getObjID());
                 fieldListActivity.putExtra("action", myAction);
                 startActivityForResult(fieldListActivity, 0);
-                //startActivity(fieldListActivity);
-                break;
-
-            case ACTION_SHOWMETA_UAVOBJECT:
-                String msg="";
-                msg+="ID " + obj.getObjID()+"\n";
-
-                msg+="gcs Access: " + UAVObjectMetaData.getAccessString(obj_meta.getGCSAccess()) +"\n";
-                msg+="gcs Update Mode: " + UAVObjectMetaData.getUpdateModeString(obj_meta.getGCSTelemetryUpdateMode()) +"\n";
-                msg+="gcs Update Period: " + obj_meta.getGCSTelemetryUpdatePeriod() +"\n";
-
-                msg+="flight Access: " + UAVObjectMetaData.getAccessString(obj_meta.getFlightAccess()) +"\n";
-                msg+="flight Update Mode: " + UAVObjectMetaData.getUpdateModeString(obj_meta.getFlightTelemetryUpdateMode()) +"\n";
-                msg+="flight Update Period: " + obj_meta.getFlightTelemetryUpdatePeriod() +"\n";
-
-                msg+="logging update mode: " + UAVObjectMetaData.getUpdateModeString(obj_meta.getLoggingUpdateMode()) + "\n";
-                msg+="logging update period: " +obj_meta.getLoggingUpdatePeriod() + "\n";
-
-                new AlertDialog.Builder(context)
-                .setTitle("Meta Data for " + obj.getObjName())
-                .setMessage(msg)
-                .setPositiveButton("OK", new DialogDiscarder())
-                .show();
-
                 break;
             }
         }
+        
         public boolean onTouch(View v, MotionEvent arg1) {
             v.setBackgroundResource(android.R.drawable.list_selector_background);
             v.setPadding(10, 0, 0, 0);
             return false;
         }
 
+        UAVObject act_obj;
 		@Override
 		public boolean onLongClick(View v) {
-			new AlertDialog.Builder(context).setMessage("longclick").show();
+			act_obj=(UAVObject)v.getTag();
+			final int LONGCLICK_ACTION_HELP=0;
+			final int LONGCLICK_ACTION_METADATA=1;
+			Resources myRessources=context.getResources();
+			CharSequence[] longclick_menu_items=new CharSequence[] {
+					myRessources.getString(R.string.help) ,myRessources.getString(R.string.meta_data)
+			};
+			new AlertDialog.Builder(context)
+			
+			.setItems(longclick_menu_items,new android.content.DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch(which) {
+							case LONGCLICK_ACTION_HELP:
+								new AlertDialog.Builder(context)
+									.setTitle("Help for " + act_obj.getObjName())
+									.setMessage(act_obj.getObjDescription())
+									.setPositiveButton("OK", new DialogDiscarder())
+									.show();
+								break;
+							case LONGCLICK_ACTION_METADATA:
+								String msg="";
+								UAVObjectMetaData obj_meta=act_obj.getMetaData();
+				                msg+="ID " + act_obj.getObjID()+"\n";
+
+				                msg+="gcs Access: " + UAVObjectMetaData.getAccessString(obj_meta.getGCSAccess()) +"\n";
+				                msg+="gcs Update Mode: " + UAVObjectMetaData.getUpdateModeString(obj_meta.getGCSTelemetryUpdateMode()) +"\n";
+				                msg+="gcs Update Period: " + obj_meta.getGCSTelemetryUpdatePeriod() +"\n";
+
+				                msg+="flight Access: " + UAVObjectMetaData.getAccessString(obj_meta.getFlightAccess()) +"\n";
+				                msg+="flight Update Mode: " + UAVObjectMetaData.getUpdateModeString(obj_meta.getFlightTelemetryUpdateMode()) +"\n";
+				                msg+="flight Update Period: " + obj_meta.getFlightTelemetryUpdatePeriod() +"\n";
+
+				                msg+="logging update mode: " + UAVObjectMetaData.getUpdateModeString(obj_meta.getLoggingUpdateMode()) + "\n";
+				                msg+="logging update period: " +obj_meta.getLoggingUpdatePeriod() + "\n";
+
+				                new AlertDialog.Builder(context)
+				                .setTitle("Meta Data for " + act_obj.getObjName())
+				                .setMessage(msg)
+				                .setPositiveButton("OK", new DialogDiscarder())
+				                .show();
+
+				                break;
+						}
+						
+					}} ).create().show();
+			
 			return true;
 		}
 
