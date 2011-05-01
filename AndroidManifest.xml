@@ -34,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UAVObjectOptionsActivity"/>
         <activity android:name=".SettingsListActivity"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity"/>
         
