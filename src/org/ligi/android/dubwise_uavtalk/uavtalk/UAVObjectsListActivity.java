@@ -21,7 +21,6 @@ package org.ligi.android.dubwise_uavtalk.uavtalk;
 
 import java.util.Vector;
 
-import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
 import org.ligi.android.common.dialogs.DialogDiscarder;
 import org.ligi.android.dubwise_uavtalk.R;
 import org.ligi.tracedroid.logging.Log;
@@ -35,15 +34,18 @@ import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
@@ -93,8 +95,6 @@ public class UAVObjectsListActivity extends ListActivity {
         
         Log.i("Starting UAVObjectsListActivity with action" + action_str);
         
-        
-        
         if (action_str.equalsIgnoreCase("PICK_UAVOBJECT")) {
             this.setTitle(R.string.title_pick_uavobj);
             myAction=ACTION_PICK_UAVOBJECT;
@@ -109,7 +109,7 @@ public class UAVObjectsListActivity extends ListActivity {
         
         UAVObjectsArrayAdapter adapter=new UAVObjectsArrayAdapter(this, android.R.layout.simple_list_item_1, uavobjects);
         this.setListAdapter( adapter);
-        new PeriodicallyInvalidateAdapter(this,adapter);
+        //new PeriodicallyInvalidateAdapter(this,adapter);
 
     }
     
@@ -126,7 +126,7 @@ public class UAVObjectsListActivity extends ListActivity {
         }
     }
 
-    class UAVObjectsArrayAdapter extends ArrayAdapter<UAVObject> implements OnClickListener, OnTouchListener {
+    class UAVObjectsArrayAdapter extends ArrayAdapter<UAVObject> implements OnTouchListener,OnClickListener,OnLongClickListener {
 
         private Context context;
         private UAVObject[] objects;
@@ -138,34 +138,81 @@ public class UAVObjectsListActivity extends ListActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) { 
-
-            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        	
 
             UAVObject act_obj=(UAVObject)(objects[position]);
-            View row;
-            if (UAVTalkPrefs.isUAVObjectDescriptionDisplayEnabled()) {
-                row=vi.inflate(android.R.layout.two_line_list_item, null);
-                TextView label=(TextView)row.findViewById(android.R.id.text1); 
-                label.setText(((UAVObject)(objects[position])).getObjName());
 
-                TextView descr=(TextView)row.findViewById(android.R.id.text2); 
-                descr.setText(((UAVObject)(objects[position])).getObjDescription());
+            LinearLayout lin=new LinearLayout(context);
+            lin.setOrientation(LinearLayout.HORIZONTAL);
+            ProgressBar active=new ProgressBar(context);
+           
+            // TODO make new view showing in and output
+            
+            TextView tv=new TextView(context);
+            
+            class ActivityUpdater implements Runnable {
+            	
+            	private UAVObject uavobject;
+            	private View v;
+            	Handler h=new Handler();
+            	
+            	public ActivityUpdater(UAVObject uavobject,View view) {
+            		
+            		this.v=view;
+            		
+            		this.uavobject=uavobject;
+            		new Thread(this).start();
+            	}
+            	
+				@Override
+				public void run() {
+					while (v.getVisibility()!=View.GONE) {
+						
+						class SetVisibilityRunnable implements Runnable {
 
+							public void run() {
+								if (uavobject.getMetaData().getLastDeserialize()-System.currentTimeMillis()+500>0)
+									v.setVisibility(View.VISIBLE);
+								else
+									v.setVisibility(View.INVISIBLE);
+							}
+							
+						}
+						
+						h.post(new SetVisibilityRunnable());
+						
+						
+						try {
+							Thread.sleep(200);
+						} catch (InterruptedException e) {
+						}
+            		}
+				}
+            	
             }
-            else {
-                row=vi.inflate(android.R.layout.simple_list_item_1, null);
-                TextView label=(TextView)row.findViewById(android.R.id.text1); 
-                label.setText(((UAVObject)(objects[position])).getObjName());
-            }
+            
 
-            if (System.currentTimeMillis()-act_obj.getMetaData().getLastDeserialize()<2550)
+            
+            new ActivityUpdater(((UAVObject)(objects[position])),active);
+            tv.setText(((UAVObject)(objects[position])).getObjName());
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_MM, 15.0f);
+            lin.addView(tv);
+            lin.addView(active);
+            
+            /*if (System.currentTimeMillis()-act_obj.getMetaData().getLastDeserialize()<2550)
                 row.setBackgroundColor(Color.argb( 255- (int) (System.currentTimeMillis()-act_obj.getMetaData().getLastDeserialize())/10 , 0x23,0x23,0xFF));
 
+            
             row.setOnClickListener(this);
             row.setOnTouchListener(this);
-
-            row.setTag(act_obj);
-            return row;
+*/
+            lin.setTag(act_obj);
+            lin.setOnClickListener(this);
+         
+            lin.setOnLongClickListener(this);
+            lin.setOnTouchListener(this);
+            
+            return lin;
 
         }
 
@@ -208,12 +255,18 @@ public class UAVObjectsListActivity extends ListActivity {
                 break;
             }
         }
-
         public boolean onTouch(View v, MotionEvent arg1) {
             v.setBackgroundResource(android.R.drawable.list_selector_background);
             v.setPadding(10, 0, 0, 0);
             return false;
-        }		
+        }
+
+		@Override
+		public boolean onLongClick(View v) {
+			new AlertDialog.Builder(context).setMessage("longclick").show();
+			return true;
+		}
+
     }
 
 }

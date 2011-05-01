@@ -32,6 +32,7 @@ import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
+import org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsListActivity;
 import org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefs;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
@@ -114,8 +115,8 @@ public class DUBwiseUAVTalk extends ListActivity {
             IntentHelper.startActivityClass(this, ConnectionMenu.class);
             break;
         case MENU_BROWSE_UAVOBJECTS:
-            //IntentHelper.action(this, "PICK_UAVOBJECT");//.startActivityClass(this,UAVObjectsListActivity.class);
-            IntentHelper.startActivityClass(this,UAVObjectOptionsActivity.class);
+        	// TODO check if good default
+        	IntentHelper.action(this, "EDIT_UAVOBJECT");
             break;
         case MENU_BROWSE_SETTINGS:
             IntentHelper.startActivityClass(this,SettingsListActivity.class);
