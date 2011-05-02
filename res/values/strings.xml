@@ -29,4 +29,6 @@
     <string name="search_hint">find uavobjects</string>
     <string name="help">Help</string>
     <string name="meta_data">Meta Data</string>
+    <string name="no_rc_warning">Please switch on RC!</string>
+    <string name="no_rc_title">NO RC!</string>
 </resources>
