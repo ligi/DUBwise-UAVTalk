@@ -118,8 +118,8 @@ public class DUBwiseUAVTalk extends ListActivity {
             IntentHelper.startActivityClass(this, ConnectionMenu.class);
             break;
         case MENU_BROWSE_UAVOBJECTS:
-            //IntentHelper.action(this, "PICK_UAVOBJECT");//.startActivityClass(this,UAVObjectsListActivity.class);
-            IntentHelper.startActivityClass(this,UAVObjectOptionsActivity.class);
+        	// TODO check if good default
+        	IntentHelper.action(this, "EDIT_UAVOBJECT");
             break;
         case MENU_BROWSE_SETTINGS:
             IntentHelper.startActivityClass(this,SettingsListActivity.class);

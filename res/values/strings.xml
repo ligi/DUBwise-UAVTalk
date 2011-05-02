@@ -29,4 +29,10 @@
     <string name="output_test">Output Test</string>
     <string name="special_awareness">!! Special Awareness !!</string>
     <string name="outputtest_warning">This activity can be dangerous. Safety first! Please remove any propellers and/or mount the UAV good.</string>
+    <string name="search_hint">find uavobjects</string>
+    <string name="help">Help</string>
+    <string name="meta_data">Meta Data</string>
+    <string name="no_rc_warning">Please switch on RC!</string>
+    <string name="no_rc_title">NO RC!</string>
+
 </resources>

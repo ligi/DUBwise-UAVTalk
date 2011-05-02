@@ -1,0 +1,14 @@
+0.1
+ - initial public Version with UAVObject-Browser and StatusVoice
+
+0.2
+ - improving connection ( reconnect on disconnect and so )
+ - initial instrument display ( only artificial horizon atm)
+ - autoconnect to last connected device and auto jump to instrument display after successful connect
+ - add channel view screen 
+ - initial output test UI ( just UI concept - not working atm )
+
+0.3
+ - searchable UAVObjects
+ - improved workflow around UAVObjects
+ - show a warning when no RC is connected @ ChannelViewAcitivity

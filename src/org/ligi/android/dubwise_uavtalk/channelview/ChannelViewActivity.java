@@ -27,8 +27,10 @@ package org.ligi.android.dubwise_uavtalk.channelview;
 import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
+import org.openpilot.uavtalk.uavobjects.ManualControlCommand;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,7 +57,7 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
     private myArrayAdapter adapter;
     private boolean running=true;
     private int old_update_period;
-
+    private AlertDialog no_rc_alert;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,11 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
         old_update_period=meta.getFlightTelemetryUpdatePeriod();
         meta.setFlightTelemetryUpdatePeriod(100);
 
+        no_rc_alert=new AlertDialog.Builder(this)
+	        .setMessage(R.string.no_rc_warning)
+	        .setTitle(R.string.no_rc_title)
+	        .create();
+	        
         new Thread(this).start();
     }
 
@@ -197,12 +204,22 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
         running=false;
         super.onDestroy();
     }
+    
+    
 
     final Handler mHandler = new Handler();
     // Create runnable for posting
     final Runnable mUpdateResults = new Runnable() {
         public void run() {
-            adapter.notifyDataSetChanged();
+        	boolean connected=UAVObjects.getManualControlCommand().getConnected() == ManualControlCommand.CONNECTED_TRUE;
+            if ((no_rc_alert.isShowing())&&(connected))
+            	no_rc_alert.hide();
+            if ((!no_rc_alert.isShowing())&&(!connected))
+            	no_rc_alert.show();	
+            
+            if (connected) 
+            	adapter.notifyDataSetChanged();
+            
         }
     };
 
