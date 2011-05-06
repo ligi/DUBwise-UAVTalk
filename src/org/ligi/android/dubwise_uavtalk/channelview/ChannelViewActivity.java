@@ -33,6 +33,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
@@ -76,6 +78,14 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
         no_rc_alert=new AlertDialog.Builder(this)
 	        .setMessage(R.string.no_rc_warning)
 	        .setTitle(R.string.no_rc_title)
+	        .setOnCancelListener(new OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					finish();
+				}
+	        	
+	        })
 	        .create();
 	        
         new Thread(this).start();
