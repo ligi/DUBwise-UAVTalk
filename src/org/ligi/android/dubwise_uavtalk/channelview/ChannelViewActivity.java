@@ -191,7 +191,6 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
             frame_minmax.addView(neutral_tv);
             lin.addView(frame_minmax);
 
-            //UAVObjects.getManualControlSettings().
             return(lin); 
         }
 
