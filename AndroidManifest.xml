@@ -43,7 +43,8 @@
         
         <activity android:name="org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity"></activity>
         <activity android:name="org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsListActivity">
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsListActivity"
+       		android:launchMode="singleTop">
         	<intent-filter>
                 <action android:name="PICK_UAVOBJECT" />
                 <category android:name="android.intent.category.DEFAULT" />

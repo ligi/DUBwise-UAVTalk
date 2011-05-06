@@ -70,10 +70,18 @@ public class UAVObjectsListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handleIntent(getIntent());
+     }
+    
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+    
+    public void handleIntent(Intent myIntent) {
+    	myAction=last_action;
         
-        myAction=last_action;
-        
-        Intent myIntent = getIntent();
         String action_str=myIntent.getAction();
         
         UAVObject[] uavobjects=UAVObjects.getUAVObjectArray();
@@ -115,8 +123,8 @@ public class UAVObjectsListActivity extends ListActivity {
         
         UAVObjectsArrayAdapter adapter=new UAVObjectsArrayAdapter(this, android.R.layout.simple_list_item_1, uavobjects);
         this.setListAdapter( adapter);
-    }
     
+    }
 
 	/**
      * just passes the result to the next activity down the line when there was a result
