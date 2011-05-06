@@ -55,7 +55,7 @@ import android.widget.TextView;
  *
  * TODO - implement a better way for marking recently updated ones other tan invalidating the adapter
  *  
- * @author ligi the UAVObjects
+ * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
 public class UAVObjectsListActivity extends ListActivity {
@@ -71,13 +71,12 @@ public class UAVObjectsListActivity extends ListActivity {
         
         Intent myIntent = getIntent();
         String action_str=myIntent.getAction();
-
         
         UAVObject[] uavobjects=UAVObjects.getUAVObjectArray();
         
-        if (Intent.ACTION_SEARCH.equals(myIntent.getAction())) {
+        if (Intent.ACTION_SEARCH.equals(action_str)) {
           String query = myIntent.getStringExtra(SearchManager.QUERY);
-
+          Log.i("ACTION_SEARCH in UAVOBjectsListActivity with query" + query);
           Vector<UAVObject> obj_vector =new Vector<UAVObject>();
           Vector<UAVObject> founds_vector =new Vector<UAVObject>();
           for (int i=0;i<uavobjects.length;i++)
@@ -90,6 +89,7 @@ public class UAVObjectsListActivity extends ListActivity {
           Log.i("found " + founds_vector.size());
           for (UAVObject obj:founds_vector)
         	  Log.i("found " + obj.getObjName());
+          
           uavobjects=new UAVObject[founds_vector.size()];
           founds_vector.copyInto(uavobjects);
         }
