@@ -30,6 +30,9 @@ import org.openpilot.uavtalk.UAVObjects;
  * class to represent a link to an UAVObject including a static function
  * to replace links in a String with either the value or a human 
  * readable description
+ *
+ * TODO make some buffer algorithm that detecting links in a string doesnt have to be done
+ * every time ( lot of times for FreeText and statusvoice
  * 
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
@@ -124,7 +127,6 @@ public class UAVObjectLink {
                 break; // no closing
 
             UAVObjectLink lnk=new UAVObjectLink(out.substring(start_pos,end_pos));
-
 
             String insert="";
             switch (replace_mode) {
