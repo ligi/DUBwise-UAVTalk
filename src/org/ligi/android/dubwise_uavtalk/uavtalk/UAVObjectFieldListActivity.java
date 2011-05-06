@@ -21,6 +21,7 @@ package org.ligi.android.dubwise_uavtalk.uavtalk;
 
 import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
 import org.ligi.tracedroid.Log;
+import org.openpilot.uavtalk.UAVObject;
 import org.openpilot.uavtalk.UAVObjectFieldDescription;
 import org.openpilot.uavtalk.UAVObjects;
 
@@ -56,9 +57,18 @@ public class UAVObjectFieldListActivity extends ListActivity {
         objid=this.getIntent().getIntExtra("objid", 0);
         action=this.getIntent().getIntExtra("action", 0);
 
-        //ActivityCalls.beforeContent(this);
+        UAVObject act_obj=UAVObjects.getObjectByID(objid);
 
-        my_adapter=new UAVObjectsFieldDescriptionArrayAdapter(this, android.R.layout.simple_list_item_1, UAVObjects.getObjectByID(objid).getFieldDescriptions());
+        switch(action) {
+        	case UAVObjectsListActivity.ACTION_EDIT_UAVOBJECT:
+                this.setTitle("edit " + act_obj.getObjName());
+                break;
+        	case UAVObjectsListActivity.ACTION_PICK_UAVOBJECT:
+                this.setTitle("pick from " + act_obj.getObjName());
+                break;
+        }
+                    
+        my_adapter=new UAVObjectsFieldDescriptionArrayAdapter(this, android.R.layout.simple_list_item_1, act_obj.getFieldDescriptions());
         this.setListAdapter(my_adapter);
         new PeriodicallyInvalidateAdapter(this,my_adapter);
 
