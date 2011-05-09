@@ -43,7 +43,7 @@
         
         <activity android:name="org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity"></activity>
         <activity android:name="org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsListActivity"
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectsListActivity"
        		android:launchMode="singleTop">
         	<intent-filter>
                 <action android:name="PICK_UAVOBJECT" />
@@ -65,10 +65,10 @@
                    android:resource="@xml/searchable"/>
             
         </activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldListActivity"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldArrayListActivity"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefsActivity"></activity>
-	    <provider android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsSearchSuggestions"
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectFieldListActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectFieldArrayListActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefsActivity"></activity>
+	    <provider android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectsSearchSuggestions"
               android:authorities="UAVObjectsSearchSuggestions" />
 
     </application>

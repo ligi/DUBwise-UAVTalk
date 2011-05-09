@@ -17,7 +17,7 @@
  *
  **************************************************************************/
 
-package org.ligi.android.dubwise_uavtalk.uavtalk;
+package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
 import org.ligi.tracedroid.Log;

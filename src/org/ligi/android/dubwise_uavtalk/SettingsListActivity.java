@@ -27,7 +27,8 @@ package org.ligi.android.dubwise_uavtalk;
 import org.ligi.android.common.adapter.IconTextActionAdapter;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
-import org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefsActivity;
+import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefsActivity;
+
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;

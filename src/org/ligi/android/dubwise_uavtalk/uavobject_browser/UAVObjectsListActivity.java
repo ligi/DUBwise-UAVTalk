@@ -17,7 +17,7 @@
  *
  **************************************************************************/
 
-package org.ligi.android.dubwise_uavtalk.uavtalk;
+package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import java.util.Vector;
 

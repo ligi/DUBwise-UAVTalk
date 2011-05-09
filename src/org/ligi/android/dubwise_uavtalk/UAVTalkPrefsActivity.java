@@ -24,7 +24,7 @@
 package org.ligi.android.dubwise_uavtalk;
 
 
-import org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefs;
+import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
 
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;

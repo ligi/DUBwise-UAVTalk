@@ -22,7 +22,7 @@
  *
  **************************************************************************/
 
-package org.ligi.android.dubwise_uavtalk.uavtalk;
+package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.openpilot.uavtalk.UAVObjectFieldDescription;
 import org.openpilot.uavtalk.UAVObjects;
