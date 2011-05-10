@@ -53,8 +53,6 @@ import android.widget.TextView;
 /**
  * Activity to List all UAVObjecs
  *
- * TODO - implement a better way for marking recently updated ones other tan invalidating the adapter
- *  
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
