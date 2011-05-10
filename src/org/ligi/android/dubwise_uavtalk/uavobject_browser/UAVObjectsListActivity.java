@@ -139,15 +139,18 @@ public class UAVObjectsListActivity extends ListActivity {
 
 
     public void doActionOnObj(UAVObject obj) {
-        switch (myAction) {
-        case ACTION_EDIT_UAVOBJECT:
-        case ACTION_PICK_UAVOBJECT:
-            Intent fieldListActivity=new Intent(this,UAVObjectFieldListActivity.class);
-            fieldListActivity.putExtra("objid", obj.getObjID());
-            fieldListActivity.putExtra("action", myAction);
-            startActivityForResult(fieldListActivity, 0);
-            break;
-        }
+    	switch (myAction) {
+    	case ACTION_EDIT_UAVOBJECT:
+    	case ACTION_PICK_UAVOBJECT:
+    		Intent fieldListActivity=new Intent(this,UAVObjectFieldListActivity.class);
+    		fieldListActivity.putExtra("objid", obj.getObjID());
+    		fieldListActivity.putExtra("action", myAction);
+    		startActivityForResult(fieldListActivity, 0);
+    		break;
+    	default:
+    		Log.w("unknown action @ doActionOnObj " + myAction );
+    		break;
+    	}
     }
     
     class UAVObjectsArrayAdapter extends ArrayAdapter<UAVObject> implements OnTouchListener,OnClickListener,OnLongClickListener {
