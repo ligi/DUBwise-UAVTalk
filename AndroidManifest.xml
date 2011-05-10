@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="org.ligi.android.dubwise_uavtalk"
-      android:versionCode="2"
-      android:versionName="0.2">
+      android:versionCode="4"
+      android:versionName="0.4">
 
-
-	<uses-sdk android:targetSdkVersion="3" android:minSdkVersion="4"></uses-sdk>
+	<uses-sdk android:targetSdkVersion="5" android:minSdkVersion="5"></uses-sdk>
 	
 	
      <supports-screens android:largeScreens="true"
@@ -45,7 +44,8 @@
         
         <activity android:name="org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity"></activity>
         <activity android:name="org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsListActivity">
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectsListActivity"
+       		android:launchMode="singleTop">
         	<intent-filter>
                 <action android:name="PICK_UAVOBJECT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -66,11 +66,11 @@
                    android:resource="@xml/searchable"/>
             
         </activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldListActivity"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectFieldArrayListActivity"></activity>
-        <activity android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefsActivity"></activity>
-	    <provider android:name="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsSearchSuggestions"
-              android:authorities="org.ligi.android.dubwise_uavtalk.uavtalk.UAVObjectsSearchSuggestions" />
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectFieldListActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectFieldArrayListActivity"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefsActivity"></activity>
+	    <provider android:name="org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectsSearchSuggestions"
+              android:authorities="UAVObjectsSearchSuggestions" />
 
     </application>
     

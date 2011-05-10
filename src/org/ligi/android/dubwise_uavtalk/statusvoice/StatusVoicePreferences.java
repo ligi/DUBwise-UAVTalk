@@ -191,7 +191,7 @@ public class StatusVoicePreferences {
             out.close();
             profile_writer.close();
         } catch (IOException e) {
-            Log.i(""+e);
+            Log.i("Probem writing profile ( " + getProfileFullFileName() +")\n"+e);
         }
 
 

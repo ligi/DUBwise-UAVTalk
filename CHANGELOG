@@ -12,3 +12,7 @@
  - searchable UAVObjects
  - improved workflow around UAVObjects
  - show a warning when no RC is connected @ ChannelViewAcitivity
+
+0.4
+ - search suggestions
+ - usability fixes

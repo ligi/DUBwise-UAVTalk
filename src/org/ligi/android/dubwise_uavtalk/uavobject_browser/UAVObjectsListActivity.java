@@ -17,7 +17,7 @@
  *
  **************************************************************************/
 
-package org.ligi.android.dubwise_uavtalk.uavtalk;
+package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import java.util.Vector;
 
@@ -55,29 +55,40 @@ import android.widget.TextView;
  *
  * TODO - implement a better way for marking recently updated ones other tan invalidating the adapter
  *  
- * @author ligi the UAVObjects
+ * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
 public class UAVObjectsListActivity extends ListActivity {
 
     public final static int ACTION_PICK_UAVOBJECT=0;
     public final static int ACTION_EDIT_UAVOBJECT=1;
+
+    private static int last_action=ACTION_EDIT_UAVOBJECT;
     
     private int myAction=ACTION_EDIT_UAVOBJECT; // default
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handleIntent(getIntent());
+     }
+    
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+    
+    public void handleIntent(Intent myIntent) {
+    	myAction=last_action;
         
-        Intent myIntent = getIntent();
         String action_str=myIntent.getAction();
-
         
         UAVObject[] uavobjects=UAVObjects.getUAVObjectArray();
         
-        if (Intent.ACTION_SEARCH.equals(myIntent.getAction())) {
+        if (Intent.ACTION_SEARCH.equals(action_str)) {
           String query = myIntent.getStringExtra(SearchManager.QUERY);
-
+          Log.i("ACTION_SEARCH in UAVOBjectsListActivity with query" + query);
           Vector<UAVObject> obj_vector =new Vector<UAVObject>();
           Vector<UAVObject> founds_vector =new Vector<UAVObject>();
           for (int i=0;i<uavobjects.length;i++)
@@ -90,6 +101,10 @@ public class UAVObjectsListActivity extends ListActivity {
           Log.i("found " + founds_vector.size());
           for (UAVObject obj:founds_vector)
         	  Log.i("found " + obj.getObjName());
+
+          if (founds_vector.size()==1) 
+        	  doActionOnObj(((UAVObject)founds_vector.get(0)));
+          
           uavobjects=new UAVObject[founds_vector.size()];
           founds_vector.copyInto(uavobjects);
         }
@@ -103,15 +118,15 @@ public class UAVObjectsListActivity extends ListActivity {
             this.setTitle(R.string.title_edit_uavobj);
             myAction=ACTION_EDIT_UAVOBJECT;
         }else Log.w("I do not know that action " + action_str + " using fallback");
-        
+    
+        last_action=myAction;
         
         UAVObjectsArrayAdapter adapter=new UAVObjectsArrayAdapter(this, android.R.layout.simple_list_item_1, uavobjects);
         this.setListAdapter( adapter);
-        //new PeriodicallyInvalidateAdapter(this,adapter);
-
-    }
     
-    /**
+    }
+
+	/**
      * just passes the result to the next activity down the line when there was a result
      */
     @Override
@@ -124,6 +139,19 @@ public class UAVObjectsListActivity extends ListActivity {
         }
     }
 
+
+    public void doActionOnObj(UAVObject obj) {
+        switch (myAction) {
+        case ACTION_EDIT_UAVOBJECT:
+        case ACTION_PICK_UAVOBJECT:
+            Intent fieldListActivity=new Intent(this,UAVObjectFieldListActivity.class);
+            fieldListActivity.putExtra("objid", obj.getObjID());
+            fieldListActivity.putExtra("action", myAction);
+            startActivityForResult(fieldListActivity, 0);
+            break;
+        }
+    }
+    
     class UAVObjectsArrayAdapter extends ArrayAdapter<UAVObject> implements OnTouchListener,OnClickListener,OnLongClickListener {
 
         private Context context;
@@ -197,13 +225,6 @@ public class UAVObjectsListActivity extends ListActivity {
             lin.addView(tv);
             lin.addView(active);
             
-            /*if (System.currentTimeMillis()-act_obj.getMetaData().getLastDeserialize()<2550)
-                row.setBackgroundColor(Color.argb( 255- (int) (System.currentTimeMillis()-act_obj.getMetaData().getLastDeserialize())/10 , 0x23,0x23,0xFF));
-
-            
-            row.setOnClickListener(this);
-            row.setOnTouchListener(this);
-*/
             lin.setTag(act_obj);
             lin.setOnClickListener(this);
          
@@ -215,16 +236,7 @@ public class UAVObjectsListActivity extends ListActivity {
         }
 
         public void onClick(View v) {
-            act_obj=((UAVObject)(v.getTag()));
-            switch (myAction) {
-            case ACTION_EDIT_UAVOBJECT:
-            case ACTION_PICK_UAVOBJECT:
-                Intent fieldListActivity=new Intent(context,UAVObjectFieldListActivity.class);
-                fieldListActivity.putExtra("objid", act_obj.getObjID());
-                fieldListActivity.putExtra("action", myAction);
-                startActivityForResult(fieldListActivity, 0);
-                break;
-            }
+        	doActionOnObj((UAVObject)(v.getTag()));
         }
         
         public boolean onTouch(View v, MotionEvent arg1) {

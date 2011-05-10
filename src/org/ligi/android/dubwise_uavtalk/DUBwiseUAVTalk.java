@@ -33,7 +33,7 @@ import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
-import org.ligi.android.dubwise_uavtalk.uavtalk.UAVTalkPrefs;
+import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;

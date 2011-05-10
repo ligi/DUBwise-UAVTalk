@@ -74,6 +74,14 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
         no_rc_alert=new AlertDialog.Builder(this)
 	        .setMessage(R.string.no_rc_warning)
 	        .setTitle(R.string.no_rc_title)
+	        .setOnCancelListener(new OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					finish();
+				}
+	        	
+	        })
 	        .create();
 	        
         new Thread(this).start();
@@ -175,7 +183,6 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
             frame_minmax.addView(neutral_tv);
             lin.addView(frame_minmax);
 
-            //UAVObjects.getManualControlSettings().
             return(lin); 
         }
 
