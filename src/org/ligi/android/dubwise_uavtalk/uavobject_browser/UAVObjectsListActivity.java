@@ -174,13 +174,13 @@ public class UAVObjectsListActivity extends ListActivity {
             
             TextView tv=new TextView(context);
             
-            class ActivityUpdater implements Runnable {
+            class SetVisibilityOfViewByLastDeserializeUAVObjectClass implements Runnable {
             	
             	private UAVObject uavobject;
             	private View v;
             	Handler h=new Handler();
             	
-            	public ActivityUpdater(UAVObject uavobject,View view) {
+            	public SetVisibilityOfViewByLastDeserializeUAVObjectClass(UAVObject uavobject,View view) {
             		
             		this.v=view;
             		
@@ -217,7 +217,7 @@ public class UAVObjectsListActivity extends ListActivity {
             
 
             
-            new ActivityUpdater(((UAVObject)(objects[position])),active);
+            new SetVisibilityOfViewByLastDeserializeUAVObjectClass(((UAVObject)(objects[position])),active);
             tv.setText(((UAVObject)(objects[position])).getObjName());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_MM, 15.0f);
             lin.addView(tv);
