@@ -39,6 +39,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -300,5 +302,24 @@ public class UAVObjectsListActivity extends ListActivity {
 		}
 
     }
+    
+    private final static int MENU_PREFERENCES=0;
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0,MENU_PREFERENCES,0,R.string.settings)
+			.setIcon(android.R.drawable.ic_menu_preferences);
+		
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case MENU_PREFERENCES:
+	    	startActivity(new Intent(this, UAVTalkPrefsActivity.class));
+	    	break;
+	    }
+	    return false;
+	}
+
 
 }
