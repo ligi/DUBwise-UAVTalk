@@ -32,6 +32,8 @@ import org.openpilot.uavtalk.uavobjects.ManualControlCommand;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
