@@ -39,6 +39,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,8 +55,6 @@ import android.widget.TextView;
 /**
  * Activity to List all UAVObjecs
  *
- * TODO - implement a better way for marking recently updated ones other tan invalidating the adapter
- *  
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
@@ -141,15 +141,18 @@ public class UAVObjectsListActivity extends ListActivity {
 
 
     public void doActionOnObj(UAVObject obj) {
-        switch (myAction) {
-        case ACTION_EDIT_UAVOBJECT:
-        case ACTION_PICK_UAVOBJECT:
-            Intent fieldListActivity=new Intent(this,UAVObjectFieldListActivity.class);
-            fieldListActivity.putExtra("objid", obj.getObjID());
-            fieldListActivity.putExtra("action", myAction);
-            startActivityForResult(fieldListActivity, 0);
-            break;
-        }
+    	switch (myAction) {
+    	case ACTION_EDIT_UAVOBJECT:
+    	case ACTION_PICK_UAVOBJECT:
+    		Intent fieldListActivity=new Intent(this,UAVObjectFieldListActivity.class);
+    		fieldListActivity.putExtra("objid", obj.getObjID());
+    		fieldListActivity.putExtra("action", myAction);
+    		startActivityForResult(fieldListActivity, 0);
+    		break;
+    	default:
+    		Log.w("unknown action @ doActionOnObj " + myAction );
+    		break;
+    	}
     }
     
     class UAVObjectsArrayAdapter extends ArrayAdapter<UAVObject> implements OnTouchListener,OnClickListener,OnLongClickListener {
@@ -176,13 +179,13 @@ public class UAVObjectsListActivity extends ListActivity {
             
             TextView tv=new TextView(context);
             
-            class ActivityUpdater implements Runnable {
+            class SetVisibilityOfViewByLastDeserializeUAVObjectClass implements Runnable {
             	
             	private UAVObject uavobject;
             	private View v;
             	Handler h=new Handler();
             	
-            	public ActivityUpdater(UAVObject uavobject,View view) {
+            	public SetVisibilityOfViewByLastDeserializeUAVObjectClass(UAVObject uavobject,View view) {
             		
             		this.v=view;
             		
@@ -219,7 +222,7 @@ public class UAVObjectsListActivity extends ListActivity {
             
 
             
-            new ActivityUpdater(((UAVObject)(objects[position])),active);
+            new SetVisibilityOfViewByLastDeserializeUAVObjectClass(((UAVObject)(objects[position])),active);
             tv.setText(((UAVObject)(objects[position])).getObjName());
             tv.setTextSize(TypedValue.COMPLEX_UNIT_MM, 15.0f);
             lin.addView(tv);
@@ -299,5 +302,24 @@ public class UAVObjectsListActivity extends ListActivity {
 		}
 
     }
+    
+    private final static int MENU_PREFERENCES=0;
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0,MENU_PREFERENCES,0,R.string.settings)
+			.setIcon(android.R.drawable.ic_menu_preferences);
+		
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case MENU_PREFERENCES:
+	    	startActivity(new Intent(this, UAVTalkPrefsActivity.class));
+	    	break;
+	    }
+	    return false;
+	}
+
 
 }
