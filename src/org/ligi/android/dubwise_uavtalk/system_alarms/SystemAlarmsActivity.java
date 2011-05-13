@@ -57,6 +57,7 @@ public class SystemAlarmsActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        refreshAlarmVector();
 		
         adapter=new myArrayAdapter(this);
         this.setListAdapter(adapter);
@@ -71,7 +72,8 @@ public class SystemAlarmsActivity extends ListActivity {
 
     public void refreshAlarmVector() {
         myAlarmVector=new Vector<myAlarm>();
-        
+
+        // interesting ones first
         byte[] level_order_arr={SystemAlarms.ALARM_CRITICAL,SystemAlarms.ALARM_ERROR,SystemAlarms.ALARM_WARNING,SystemAlarms.ALARM_OK,SystemAlarms.ALARM_UNINITIALISED};
 		
         for (int lvl_i=0;lvl_i<level_order_arr.length;lvl_i++)
@@ -119,11 +121,13 @@ public class SystemAlarmsActivity extends ListActivity {
             	lin.setBackgroundColor(Color.GRAY);
             	label_tv.setTextColor(Color.BLACK);
             	break;
+            
+            case SystemAlarms.ALARM_CRITICAL:
+            	label_tv.setText(label_tv.getText()+"(!)"); // ;-)
+            	// no break wanted
             case SystemAlarms.ALARM_ERROR:
             	label_tv.setTextColor(Color.WHITE);
             	lin.setBackgroundColor(Color.RED);
-            case SystemAlarms.ALARM_CRITICAL:
-            	label_tv.setText(label_tv.getText()+"(!"); // ;-)
             	break;
             	
             case SystemAlarms.ALARM_WARNING:
