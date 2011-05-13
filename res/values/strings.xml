@@ -34,5 +34,6 @@
     <string name="meta_data">Meta Data</string>
     <string name="no_rc_warning">Please switch on RC!</string>
     <string name="no_rc_title">NO RC!</string>
+    <string name="system_alarms">Alarms</string>
 
 </resources>

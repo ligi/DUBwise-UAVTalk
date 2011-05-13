@@ -24,9 +24,12 @@
 
 package org.ligi.android.dubwise_uavtalk.system_alarms;
 
+import java.util.Vector;
+
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.SystemAlarms;
+
 import android.app.Activity;
 import android.app.ListActivity;
 import android.graphics.Color;
@@ -54,17 +57,48 @@ public class SystemAlarmsActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+		
         adapter=new myArrayAdapter(this);
         this.setListAdapter(adapter);
-
+        this.setTitle("UAV-SystemAlarms");
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_ONCHANGE);
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryUpdatePeriod(100);
 		UAVObjects.getActuatorCommand().getMetaData().setFlightTelemetryUpdateMode(UAVObjectMetaData.UPDATEMODE_ONCHANGE);
 		UAVObjects.getActuatorCommand().getMetaData().setGCSTelemetryAcked(false);
 		UAVObjects.getActuatorCommand().getMetaData().setFlightAccess(UAVObjectMetaData.ACCESS_READONLY);
-        
+		
     }
 
+    public void refreshAlarmVector() {
+        myAlarmVector=new Vector<myAlarm>();
+        
+        byte[] level_order_arr={SystemAlarms.ALARM_CRITICAL,SystemAlarms.ALARM_ERROR,SystemAlarms.ALARM_WARNING,SystemAlarms.ALARM_OK,SystemAlarms.ALARM_UNINITIALISED};
+		
+        for (int lvl_i=0;lvl_i<level_order_arr.length;lvl_i++)
+        	for (int i=0;i<UAVObjects.getSystemAlarms().getAlarm().length;i++)
+        		if (level_order_arr[lvl_i]==UAVObjects.getSystemAlarms().getAlarm()[i])
+        			myAlarmVector.add(new myAlarm(SystemAlarms.getAlarmElementNames()[i],UAVObjects.getSystemAlarms().getAlarm()[i]));
+
+    }
+    private Vector<myAlarm> myAlarmVector;
+    
+    class myAlarm {
+    	private String label;
+    	private byte level;
+    	public myAlarm(String label,byte level) {
+    		this.label=label;
+    		this.level=level;
+    	}
+		
+		public String getLabel() {
+			return label;
+		}
+		
+		public byte getLevel() {
+			return level;
+		}
+    	
+    }
     class myArrayAdapter extends BaseAdapter { 
 
         private Activity context; 
@@ -74,12 +108,13 @@ public class SystemAlarmsActivity extends ListActivity {
             this.context=context;
         } 
         
-        public View getView(int position, View convertView, ViewGroup parent) { 
+        public View getView(int position, View convertView, ViewGroup parent) {
+        	myAlarm act_alarm=myAlarmVector.get(position);
             LinearLayout lin=new LinearLayout(context);
             lin.setOrientation(LinearLayout.VERTICAL);
             TextView label_tv=new TextView(context);
-            label_tv.setText(SystemAlarms.getAlarmElementNames()[position]);
-            switch (UAVObjects.getSystemAlarms().getAlarm()[position]) {
+            label_tv.setText(act_alarm.getLabel());
+            switch (act_alarm.getLevel()) {
             case SystemAlarms.ALARM_UNINITIALISED:
             	lin.setBackgroundColor(Color.GRAY);
             	label_tv.setTextColor(Color.BLACK);
@@ -108,7 +143,7 @@ public class SystemAlarmsActivity extends ListActivity {
         }
 
         public int getCount() {
-            return UAVObjects.getSystemAlarms().getAlarm().length;
+            return myAlarmVector.size();
         }
 
         /**
