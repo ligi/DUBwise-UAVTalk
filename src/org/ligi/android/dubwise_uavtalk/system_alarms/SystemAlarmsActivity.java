@@ -26,6 +26,7 @@ package org.ligi.android.dubwise_uavtalk.system_alarms;
 
 import java.util.Vector;
 
+import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.SystemAlarms;
@@ -118,7 +119,7 @@ public class SystemAlarmsActivity extends ListActivity {
             label_tv.setText(act_alarm.getLabel());
             switch (act_alarm.getLevel()) {
             case SystemAlarms.ALARM_UNINITIALISED:
-            	lin.setBackgroundColor(Color.GRAY);
+            	lin.setBackgroundResource(R.drawable.sysalerts_grey_bg);
             	label_tv.setTextColor(Color.BLACK);
             	break;
             
@@ -126,17 +127,18 @@ public class SystemAlarmsActivity extends ListActivity {
             	label_tv.setText(label_tv.getText()+"(!)"); // ;-)
             	// no break wanted
             case SystemAlarms.ALARM_ERROR:
+            	lin.setBackgroundResource(R.drawable.sysalerts_red_bg);
             	label_tv.setTextColor(Color.WHITE);
-            	lin.setBackgroundColor(Color.RED);
+            	
             	break;
             	
             case SystemAlarms.ALARM_WARNING:
-            	lin.setBackgroundColor(Color.YELLOW);
+            	lin.setBackgroundResource(R.drawable.sysalerts_yellow_bg);
             	label_tv.setTextColor(Color.BLACK);
             	break;
 
             case SystemAlarms.ALARM_OK:
-            	lin.setBackgroundColor(Color.GREEN);
+            	lin.setBackgroundResource(R.drawable.sysalerts_green_bg);
             	label_tv.setTextColor(Color.BLACK);
             	break;
             }
