@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="base_theme" parent="android:Theme.NoTitleBar">
+	</style>
+	
+	<style name="default_frame" parent="android:Theme.NoTitleBar">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">fill_parent</item>
+	</style>
+	
+	<!-- ActionBar -->
+	<style name="actionbar_frame">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">@dimen/actionbar_height</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:background">@drawable/actionbar_bg</item>
+	</style>
+
+	<style name="actionbar_home">
+		<item name="android:src">@drawable/quad</item>
+		<item name="android:layout_width">@dimen/actionbar_height</item>
+		<item name="android:layout_height">@dimen/actionbar_height</item>
+		<item name="android:scaleType">fitXY</item>
+		<item name="android:gravity">center</item>
+		<item name="android:padding">3dip</item>
+	</style>
+	
+</resources>
