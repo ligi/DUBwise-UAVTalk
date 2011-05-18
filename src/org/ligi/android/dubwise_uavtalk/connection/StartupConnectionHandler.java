@@ -32,13 +32,10 @@ import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.util.TypedValue;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 /**
  * Handles automatic connecting on startup - like loading and saving connections
  * 
@@ -79,24 +76,13 @@ public class StartupConnectionHandler {
                         
                     }
                 }
-                LinearLayout lin=new LinearLayout(activity);
-                ProgressBar progress=new ProgressBar(activity);
-                progress.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
-                lin.setOrientation(LinearLayout.HORIZONTAL);
-                TextView tv=new TextView(activity);
-                tv.setText(R.string.switching_on_bt);
-                
-                tv.setTextSize(TypedValue.COMPLEX_UNIT_MM, 10);
-                lin.addView(progress);
-                lin.addView(tv);
-                
-                
-                AlertDialog  switch_alert=new AlertDialog.Builder(activity)
-                
-                .setView(lin)
-                .show();
-                
-                LocalDevice.getInstance().init(activity.getApplicationContext(), new myReadyListener(activity,name,url,switch_alert));
+
+                ProgressDialog pd=new ProgressDialog(activity);
+                pd.setTitle(activity.getResources().getString(R.string.please_wait));
+                pd.setMessage(activity.getResources().getString(R.string.switching_on_bt));
+                pd.show();
+
+                LocalDevice.getInstance().init(activity.getApplicationContext(), new myReadyListener(activity,name,url,pd));
 
             }
             else {
