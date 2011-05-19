@@ -26,6 +26,8 @@ package org.ligi.android.dubwise_uavtalk.instruments;
 
 import java.util.Vector;
 
+import org.ligi.android.dubwise_uavtalk.R;
+
 import android.app.Activity;
 import android.view.View;
 import android.graphics.*;
@@ -37,7 +39,8 @@ public class InstrumentDisplayView extends View
     public InstrumentDisplayView(Activity context) {
         super(context);
 
-        instruments.add(new ArtificialHorizon());
+        instruments.add(new ArtificialHorizon(this));
+        this.getResources().getDrawable(R.drawable.horizon_earth);
         // needed to get Key Events
         setFocusable(true);
     }
