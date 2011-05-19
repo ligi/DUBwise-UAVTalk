@@ -35,5 +35,6 @@
     <string name="no_rc_warning">Please switch on RC!</string>
     <string name="no_rc_title">NO RC!</string>
     <string name="system_alarms">Alarms</string>
+    <string name="please_wait">please wait</string>
 
 </resources>

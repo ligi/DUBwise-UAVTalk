@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="lib/juavobjects.jar"/>
 	<classpathentry kind="lib" path="lib/juavtalk.jar"/>
 	<classpathentry kind="lib" path="lib/ligi_java_commons.jar"/>
-	<classpathentry kind="src" path="LigiAndroidCommons_src"/>
 	<classpathentry kind="src" path="DUBwiseCommons_src"/>
+	<classpathentry kind="src" path="LigiAndroidCommons_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

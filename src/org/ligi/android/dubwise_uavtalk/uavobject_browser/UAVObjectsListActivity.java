@@ -70,6 +70,10 @@ public class UAVObjectsListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        this.setTheme(R.style.base_theme);
+        this.setContentView(R.layout.list);
+
         handleIntent(getIntent());
      }
     

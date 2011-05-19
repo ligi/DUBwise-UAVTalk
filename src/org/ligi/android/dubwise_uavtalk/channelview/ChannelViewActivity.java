@@ -65,6 +65,9 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.setTheme(R.style.base_theme);
+        this.setContentView(R.layout.list);
+
         adapter=new myArrayAdapter(this);
         this.setListAdapter(adapter);
 

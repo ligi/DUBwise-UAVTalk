@@ -20,6 +20,7 @@
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
+import org.ligi.android.dubwise_uavtalk.R;
 import org.ligi.tracedroid.Log;
 import org.openpilot.uavtalk.UAVObject;
 import org.openpilot.uavtalk.UAVObjectFieldDescription;
@@ -53,6 +54,9 @@ public class UAVObjectFieldListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.setTheme(R.style.base_theme);
+        this.setContentView(R.layout.list);
 
         objid=this.getIntent().getIntExtra("objid", 0);
         action=this.getIntent().getIntExtra("action", 0);

@@ -25,25 +25,32 @@
 package org.ligi.android.dubwise_uavtalk.instruments;
 
 import java.util.Vector;
-
-import org.ligi.android.dubwise_uavtalk.R;
-
 import android.app.Activity;
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.graphics.*;
 
 public class InstrumentDisplayView extends View 
 {
-    private Vector<InstrumentInterface> instruments=new Vector<InstrumentInterface>();
+	private Vector<InstrumentInterface> instruments=new Vector<InstrumentInterface>();
+	
+    public InstrumentDisplayView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init(context);
+	}
 
     public InstrumentDisplayView(Activity context) {
         super(context);
+        init(context);
+    }
 
-        instruments.add(new ArtificialHorizon(this));
-        this.getResources().getDrawable(R.drawable.horizon_earth);
+    public void init(Context context) {
+    	instruments.add(new ArtificialHorizon(this));
         // needed to get Key Events
         setFocusable(true);
     }
+	
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -52,10 +59,8 @@ public class InstrumentDisplayView extends View
 
         try {
             Thread.sleep(100);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } catch (InterruptedException e) {     }
+        
         invalidate();
     }
 }

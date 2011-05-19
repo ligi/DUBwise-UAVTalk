@@ -24,6 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
+import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.ListActivity;
@@ -51,6 +52,9 @@ public class UAVObjectFieldArrayListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.setTheme(R.style.base_theme);
+        this.setContentView(R.layout.list);
 
         objid=this.getIntent().getIntExtra("objid", 0);
         fieldid=this.getIntent().getIntExtra("fieldid", 0);

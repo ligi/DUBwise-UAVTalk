@@ -5,10 +5,9 @@
 	android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" >
 	<LinearLayout style="@style/actionbar_frame">
 		<ImageView style="@style/actionbar_home"/>
-		<TextView style="@style/actionbar_title"/>
 	</LinearLayout>
-	
-	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent">
-	</ListView>
+	<org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayView
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	 />
 		 
 </LinearLayout>

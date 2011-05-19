@@ -40,6 +40,7 @@ import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -96,7 +97,10 @@ public class DUBwiseUAVTalk extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+       
+        this.setTheme(R.style.base_theme);
+        this.setContentView(R.layout.list);
+       
         kickstart(this);
 
         myAdapter = new IconTextActionAdapter(this);
@@ -110,6 +114,7 @@ public class DUBwiseUAVTalk extends ListActivity {
         myAdapter.add(MENU_OUTPUTEST,android.R.drawable.ic_menu_edit, R.string.output_test);
         myAdapter.add(MENU_SYSTEMALARMS,android.R.drawable.ic_dialog_alert, R.string.system_alarms);
         this.setListAdapter(myAdapter);
+        
     }
 
     @Override

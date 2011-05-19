@@ -27,52 +27,53 @@ import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
 public class ArtificialHorizon implements InstrumentInterface{
 
-    private Paint mPaint;
     private View mParent;
     private Drawable ground_drawable;
     private Drawable sky_drawable;
     private Drawable nose_drawable;
+    private final static int bar_height=20;
     private int nick_bar_move;
     
     public ArtificialHorizon(View parent) {
     	mParent=parent;
-        mPaint=new Paint();
-        mPaint.setAntiAlias(true);
-        UAVObjects.getAttitudeActual().getMetaData().setFlightTelemetryUpdatePeriod(100);
+    	if (!mParent.isInEditMode())
+    		UAVObjects.getAttitudeActual().getMetaData().setFlightTelemetryUpdatePeriod(100);
         ground_drawable=mParent.getResources().getDrawable(R.drawable.horizon_earth);
         sky_drawable=mParent.getResources().getDrawable(R.drawable.horizon_sky);
         nose_drawable=mParent.getResources().getDrawable(R.drawable.horizon_nose);
     }
     
+    private float getRoll() {
+    	if (!mParent.isInEditMode())
+    		return UAVObjects.getAttitudeActual().getRoll();
+    	
+    	return 0.0f;
+    }
+
+    private float getPitch() {
+    	if (!mParent.isInEditMode())
+    		return UAVObjects.getAttitudeActual().getPitch();
+    	
+    	return 0.0f;
+    }
+
     public void draw(Canvas canvas) {
-
-
-        /*        if (DUBwisePrefs.isArtificialHorizonInverted())
-            angle_roll*=-1;
-         */
-
-        canvas.rotate(UAVObjects.getAttitudeActual().getRoll()*-1,canvas.getWidth()/2,canvas.getHeight()/2);
-        
-        mPaint.setARGB(255,177,129,0);
-
-        // roll rect                                                                                                                       
+    	// TODO check direction
+        canvas.rotate(getRoll()*-1,canvas.getWidth()/2,canvas.getHeight()/2);
+                                                                                                            
         sky_drawable.setBounds(-canvas.getWidth(),-canvas.getHeight()*2,2*canvas.getWidth(),canvas.getHeight()/2);
         sky_drawable.draw(canvas);
     
         ground_drawable.setBounds(-canvas.getWidth(),canvas.getHeight()/2,2*canvas.getWidth(),(int)(canvas.getHeight()*1.3));
         ground_drawable.draw(canvas);
-        int bar_height=20;
 
         // pitch rect                                                                                                                       
-        mPaint.setARGB(200,0,200,0);
-        int nick_bar_move=(int)((UAVObjects.getAttitudeActual().getPitch()/90.0*canvas.getHeight()/3.0));
+        nick_bar_move=(int)((getPitch()/90.0*canvas.getHeight()/3.0));
         nose_drawable.setBounds(canvas.getWidth()/3,canvas.getHeight()/2 -bar_height/2 + nick_bar_move ,2*canvas.getWidth()/3, canvas.getHeight()/2+ nick_bar_move+bar_height);
         nose_drawable.draw(canvas);
         canvas.restore();

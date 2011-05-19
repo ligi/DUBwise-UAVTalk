@@ -55,7 +55,9 @@ public class ConnectionMenu extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UAVObjects.init();
+        this.setTheme(R.style.base_theme);
+        this.setContentView(R.layout.list);
+
         UAVTalkGCSThread.getInstance();
 
         this.setTitle(R.string.connection);

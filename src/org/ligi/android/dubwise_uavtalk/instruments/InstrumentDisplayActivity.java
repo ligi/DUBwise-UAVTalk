@@ -23,6 +23,8 @@
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.instruments;
 
+import org.ligi.android.dubwise_uavtalk.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,14 +42,13 @@ public class InstrumentDisplayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(new InstrumentDisplayView(this));
+        setContentView(R.layout.instruments);
     }
 
     /* Creates the menu items */
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuItem settings_menu=menu.add(0,MENU_SETTINGS,0,"Settings");
-        settings_menu.setIcon(android.R.drawable.ic_menu_preferences);
+        //menu.add(0,MENU_SETTINGS,0,"Settings").setIcon(android.R.drawable.ic_menu_preferences);
 
         return true;
     }
