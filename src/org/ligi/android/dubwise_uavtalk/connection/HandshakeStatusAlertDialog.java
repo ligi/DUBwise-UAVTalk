@@ -136,9 +136,10 @@ public class HandshakeStatusAlertDialog {
 
                                     addMsg("GCS status: " + UAVObjects.getGCSTelemetryStats().getStatus() +"=" +  GCSTelemetryStats.getStatusEnumOptions()[UAVObjects.getGCSTelemetryStats().getStatus()]);
                                     addMsg("Flight status: " + UAVObjects.getFlightTelemetryStats().getStatus() +"=" + FlightTelemetryStats.getStatusEnumOptions()[UAVObjects.getFlightTelemetryStats().getStatus()]);
+                                    addMsg("Bytes in: " + UAVTalkGCSThread.getInstance().getRCVByteCount());
                                     addMsg("RX Packets: " + UAVTalkGCSThread.getInstance().getRxPackets());
                                     addMsg("RX Failures: " + UAVObjects.getGCSTelemetryStats().getRxFailures());
-
+                                    
 
                                     addMsg("last RX Error: " + UAVTalkGCSThread.getInstance().getLastError());
                                 } catch (Exception e) { }

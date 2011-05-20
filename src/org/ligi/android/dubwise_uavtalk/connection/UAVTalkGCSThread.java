@@ -108,10 +108,15 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                 send_obj(obj,UAVTalkDefinitions.TYPE_OBJ_ACK);
         }
     }
-
+    private int bytes_rcv=0;
+    
+    public int getRCVByteCount() {
+    	return bytes_rcv;
+    }
+    
     public void run() {
 
-        int got=0;
+        
         int act_avail=0;
         byte[] rx_buff=new byte[255];
         int rx_read_count=0;
@@ -126,7 +131,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                     rx_read_count=ConnectionManager.getCommunicationAdapter().read(rx_buff,0, act_avail);
                     for (i=0;i<rx_read_count;i++)
                         process_byte(rx_buff[i]);
-                    got++;
+                    bytes_rcv++;
                 }
                 else {
                     checkForObjectActionPending(); // TODO find better place for that
