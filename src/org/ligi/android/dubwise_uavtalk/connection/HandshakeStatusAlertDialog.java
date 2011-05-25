@@ -57,10 +57,6 @@ public class HandshakeStatusAlertDialog {
         show(activity,false,null);
     }
 
-
-    public void onConnectionEstablished() {
-
-    }
     /**
      * 
      * @param activity
