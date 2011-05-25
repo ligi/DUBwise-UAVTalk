@@ -114,19 +114,30 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
     	return bytes_rcv;
     }
 
-    private void shakeHands() {                // handshaking section - if flight ( master here ) is not connected set gcs 
-	    if ((UAVObjects.getFlightTelemetryStats().getStatus()!=FlightTelemetryStats.STATUS_CONNECTED)
-	            &&(!UAVObjects.getGCSTelemetryStats().getMetaData().isAckPending())) // and not allready waiting for answer
-	        switch(UAVObjects.getFlightTelemetryStats().getStatus()) {
-	        case FlightTelemetryStats.STATUS_DISCONNECTED: 
-	            UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_HANDSHAKEREQ);
-	            break;	
-	
-	        case FlightTelemetryStats.STATUS_HANDSHAKEACK:
-	        case FlightTelemetryStats.STATUS_CONNECTED:
-	            UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_CONNECTED);
-	            break;
-	    }
+    /**
+     * HandShake as defined in the UAVTalk Protocol
+     */
+    private void shakeHands() {            
+
+    	// return if we are already shaked hands
+    	if (UAVObjects.getFlightTelemetryStats().getStatus()==FlightTelemetryStats.STATUS_CONNECTED)
+    		return;
+
+    	// return if we are waiting for an answer
+    	if (UAVObjects.getGCSTelemetryStats().getMetaData().isAckPending()) 
+    		return;
+
+    	// all OK -> now shake hands
+    	switch(UAVObjects.getFlightTelemetryStats().getStatus()) {
+    	case FlightTelemetryStats.STATUS_DISCONNECTED: 
+    		UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_HANDSHAKEREQ);
+    		break;	
+
+    	case FlightTelemetryStats.STATUS_HANDSHAKEACK:
+    	case FlightTelemetryStats.STATUS_CONNECTED:
+    		UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_CONNECTED);
+    		break;
+    	}
     }
     
     
