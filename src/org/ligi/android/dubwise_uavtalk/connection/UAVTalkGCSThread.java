@@ -113,6 +113,22 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
     public int getRCVByteCount() {
     	return bytes_rcv;
     }
+
+    private void shakeHands() {                // handshaking section - if flight ( master here ) is not connected set gcs 
+	    if ((UAVObjects.getFlightTelemetryStats().getStatus()!=FlightTelemetryStats.STATUS_CONNECTED)
+	            &&(!UAVObjects.getGCSTelemetryStats().getMetaData().isAckPending())) // and not allready waiting for answer
+	        switch(UAVObjects.getFlightTelemetryStats().getStatus()) {
+	        case FlightTelemetryStats.STATUS_DISCONNECTED: 
+	            UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_HANDSHAKEREQ);
+	            break;	
+	
+	        case FlightTelemetryStats.STATUS_HANDSHAKEACK:
+	        case FlightTelemetryStats.STATUS_CONNECTED:
+	            UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_CONNECTED);
+	            break;
+	    }
+    }
+    
     
     public void run() {
 
@@ -139,19 +155,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                     Thread.sleep(50); 
                 }
 
-                // handshaking section - if flight ( master here ) is not connected set gcs 
-                if ((UAVObjects.getFlightTelemetryStats().getStatus()!=FlightTelemetryStats.STATUS_CONNECTED)
-                        &&(!UAVObjects.getGCSTelemetryStats().getMetaData().isAckPending())) // and not allready waiting for answer
-                    switch(UAVObjects.getFlightTelemetryStats().getStatus()) {
-                    case FlightTelemetryStats.STATUS_DISCONNECTED: 
-                        UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_HANDSHAKEREQ);
-                        break;	
-
-                    case FlightTelemetryStats.STATUS_HANDSHAKEACK:
-                    case FlightTelemetryStats.STATUS_CONNECTED:
-                        UAVObjects.getGCSTelemetryStats().setStatus(GCSTelemetryStats.STATUS_CONNECTED);
-                        break;
-                    }
+                shakeHands();
 
             } catch (Exception e) {
                 Log.i("e" + e);
