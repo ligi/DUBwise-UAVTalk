@@ -36,7 +36,7 @@ public class ArtificialHorizon implements InstrumentInterface{
     private Drawable ground_drawable;
     private Drawable sky_drawable;
     private Drawable nose_drawable;
-    private final static int bar_height=20;
+    private int bar_height=20;
     private int nick_bar_move;
     
     public ArtificialHorizon(View parent) {
@@ -46,6 +46,7 @@ public class ArtificialHorizon implements InstrumentInterface{
         ground_drawable=mParent.getResources().getDrawable(R.drawable.horizon_earth);
         sky_drawable=mParent.getResources().getDrawable(R.drawable.horizon_sky);
         nose_drawable=mParent.getResources().getDrawable(R.drawable.horizon_nose);
+        
     }
     
     private float getRoll() {
@@ -63,18 +64,19 @@ public class ArtificialHorizon implements InstrumentInterface{
     }
 
     public void draw(Canvas canvas) {
+    	bar_height=mParent.getHeight()/17+1;
     	// TODO check direction
-        canvas.rotate(getRoll()*-1,canvas.getWidth()/2,canvas.getHeight()/2);
+        canvas.rotate(getRoll()*-1,mParent.getWidth()/2,mParent.getHeight()/2);
                                                                                                             
-        sky_drawable.setBounds(-canvas.getWidth(),-canvas.getHeight()*2,2*canvas.getWidth(),canvas.getHeight()/2);
+        sky_drawable.setBounds(-mParent.getWidth(),-mParent.getHeight()*2,2*mParent.getWidth(),mParent.getHeight()/2);
         sky_drawable.draw(canvas);
     
-        ground_drawable.setBounds(-canvas.getWidth(),canvas.getHeight()/2,2*canvas.getWidth(),(int)(canvas.getHeight()*1.3));
+        ground_drawable.setBounds(-mParent.getWidth(),mParent.getHeight()/2,2*mParent.getWidth(),(int)(mParent.getHeight()*1.3));
         ground_drawable.draw(canvas);
 
         // pitch rect                                                                                                                       
-        nick_bar_move=(int)((getPitch()/90.0*canvas.getHeight()/3.0));
-        nose_drawable.setBounds(canvas.getWidth()/3,canvas.getHeight()/2 -bar_height/2 + nick_bar_move ,2*canvas.getWidth()/3, canvas.getHeight()/2+ nick_bar_move+bar_height);
+        nick_bar_move=(int)((getPitch()/90.0*mParent.getHeight()/3.0));
+        nose_drawable.setBounds(mParent.getWidth()/3,mParent.getHeight()/2 -bar_height/2 + nick_bar_move ,2*mParent.getWidth()/3, mParent.getHeight()/2+ nick_bar_move+bar_height);
         nose_drawable.draw(canvas);
         canvas.restore();
     }
