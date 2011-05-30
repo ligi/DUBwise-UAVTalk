@@ -97,11 +97,13 @@ public class DUBwiseUAVTalk extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
+
+        kickstart(this);
+        
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
        
-        kickstart(this);
+
 
         myAdapter = new IconTextActionAdapter(this);
         myAdapter.style(R.layout.icon_and_text, R.id.text, R.id.image);
