@@ -28,7 +28,7 @@
 	</style>
 	
 	<style name="actionbar_title">
-		<item name="android:id">@+id/actionbar_title</item>
+		
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">@dimen/actionbar_height</item>
 	</style>
