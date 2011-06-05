@@ -21,7 +21,7 @@
 -->
 
 <LinearLayout android:id="@+id/LinearLayout01" android:layout_height="wrap_content" android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	<TextView android:text="@+id/TextView01" android:id="@+id/text" android:layout_width="wrap_content" android:textStyle="" android:layout_gravity="center_vertical" android:layout_height="wrap_content" android:textSize="12mm" >
+	<TextView android:text="@+id/TextView01" android:id="@+id/text" android:layout_width="wrap_content" android:textStyle="" android:layout_gravity="center_vertical" android:layout_height="wrap_content" android:textSize="42dip" >
 	</TextView>
 	<RelativeLayout android:id="@+id/RelativeLayout01" android:layout_width="wrap_content" android:layout_height="fill_parent">
 			<ImageView android:id="@+id/image" android:src="@drawable/icon" android:layout_alignParentRight="true" android:layout_width="wrap_content" android:layout_height="fill_parent" android:scaleType="centerInside">
