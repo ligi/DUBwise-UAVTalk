@@ -223,8 +223,8 @@ public class StatusVoiceBlockEditActivity extends ListActivity {
             name_edit.setText(StatusVoicePreferences.getProfileName());
             new AlertDialog.Builder(this).setMessage("please enter a name for the profile to save in " + StatusVoicePreferences.getProfilePath()).setTitle("save profile as")
             .setView(name_edit)
-            .setNegativeButton("cancel",new DialogDiscarder())
-            .setPositiveButton("OK",new SaveOnClick(name_edit))
+            .setNegativeButton(android.R.string.cancel,new DialogDiscarder())
+            .setPositiveButton(android.R.string.ok,new SaveOnClick(name_edit))
             .show();
 
 
