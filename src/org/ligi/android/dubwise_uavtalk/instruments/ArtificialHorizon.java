@@ -94,6 +94,7 @@ public class ArtificialHorizon extends View{
     
     public void draw(Canvas canvas) {
     	
+    	canvas.save();
     	bar_height=getHeight()/17+1;
     	// TODO check direction
     	
@@ -104,7 +105,7 @@ public class ArtificialHorizon extends View{
         sky_drawable.setBounds(-getWidth(),-getHeight()*2,2*getWidth(),getHeight()/2);
         sky_drawable.draw(canvas);
 
-        ground_drawable.setBounds(-getWidth(),getHeight()/2,2*getWidth(),(int)(getHeight()*1.3));
+        ground_drawable.setBounds(-getWidth(),getHeight()/2,2*getWidth(),(int)(getHeight()*2));
         ground_drawable.draw(canvas);
         //canvas.drawLine(0,(getHeight()-line_width)/2, getWidth(), (getHeight()-line_width)/2, mWhiteLinePaint);
         
@@ -141,9 +142,12 @@ public class ArtificialHorizon extends View{
         
         RectF arc_rect=new RectF(0,0,getWidth()/2f,getWidth()/2f);
         arc_rect.offset((getWidth()-arc_rect.width())/2f, (getHeight()-arc_rect.height())/2f);
-        canvas.drawArc(arc_rect,0,360,true,mWhiteLinePaint);
+        //canvas.drawArc(arc_rect,0,360,true,mBlackLinePaint);
         canvas.drawLine((getWidth())/5,y, 2*(getWidth())/5,y , mBlackLinePaint);
         canvas.drawLine(3*(getWidth())/5,y, 4*(getWidth())/5,y , mBlackLinePaint);
+        canvas.drawLine(3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y, 3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y+20 , mBlackLinePaint);
+        canvas.drawLine(2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y, 2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y+20 , mBlackLinePaint);
+        canvas.drawCircle(getWidth()/2,getHeight()/2, 3, mBlackLinePaint);
         invalidate();
     }
 }
