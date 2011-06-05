@@ -46,7 +46,7 @@ public class InstrumentDisplayView extends View
     }
 
     public void init(Context context) {
-    	instruments.add(new ArtificialHorizon(this));
+    	//instruments.add(new ArtificialHorizon(this));
         // needed to get Key Events
         setFocusable(true);
     }

@@ -26,58 +26,124 @@ package org.ligi.android.dubwise_uavtalk.instruments;
 import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjects;
 
+import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import android.view.View;
 
-public class ArtificialHorizon implements InstrumentInterface{
+public class ArtificialHorizon extends View{
 
-    private View mParent;
+    public ArtificialHorizon(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+	}
+
+	//private View mParent;
     private Drawable ground_drawable;
     private Drawable sky_drawable;
-    private Drawable nose_drawable;
     private int bar_height=20;
-    private int nick_bar_move;
     
-    public ArtificialHorizon(View parent) {
-    	mParent=parent;
-    	if (!mParent.isInEditMode())
+    @Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    	super.onSizeChanged(w, h, oldw, oldh);
+    	mWhiteLinePaint.setStrokeWidth(h/400+1);
+        mBlackLinePaint.setStrokeWidth(h/42+1);
+        mWhiteLinePaint.setTextSize(h/23);
+	}
+
+	private Paint mWhiteLinePaint;
+    private Paint mBlackLinePaint;
+
+    public void init() {
+    	if (!isInEditMode())
     		UAVObjects.getAttitudeActual().getMetaData().setFlightTelemetryUpdatePeriod(100);
-        ground_drawable=mParent.getResources().getDrawable(R.drawable.horizon_earth);
-        sky_drawable=mParent.getResources().getDrawable(R.drawable.horizon_sky);
-        nose_drawable=mParent.getResources().getDrawable(R.drawable.horizon_nose);
+        ground_drawable=getResources().getDrawable(R.drawable.horizon_earth);
+        sky_drawable=getResources().getDrawable(R.drawable.horizon_sky);
+        mWhiteLinePaint=new Paint();
         
+        mWhiteLinePaint.setStyle(Paint.Style.STROKE);
+        mWhiteLinePaint.setColor(Color.WHITE);
+        mBlackLinePaint=new Paint();
+        
+        mBlackLinePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mBlackLinePaint.setColor(Color.BLACK);
+        
+        mBlackLinePaint.setAntiAlias(true);
+        mWhiteLinePaint.setAntiAlias(true);
     }
     
     private float getRoll() {
-    	if (!mParent.isInEditMode())
+    	if (!isInEditMode())
     		return UAVObjects.getAttitudeActual().getRoll();
     	
     	return 0.0f;
     }
 
     private float getPitch() {
-    	if (!mParent.isInEditMode())
+    	if (!isInEditMode())
     		return UAVObjects.getAttitudeActual().getPitch();
     	
     	return 0.0f;
     }
 
-    public void draw(Canvas canvas) {
-    	bar_height=mParent.getHeight()/17+1;
-    	// TODO check direction
-        canvas.rotate(getRoll()*-1,mParent.getWidth()/2,mParent.getHeight()/2);
-                                                                                                            
-        sky_drawable.setBounds(-mParent.getWidth(),-mParent.getHeight()*2,2*mParent.getWidth(),mParent.getHeight()/2);
-        sky_drawable.draw(canvas);
+    private final static float line_width=3;
     
-        ground_drawable.setBounds(-mParent.getWidth(),mParent.getHeight()/2,2*mParent.getWidth(),(int)(mParent.getHeight()*1.3));
-        ground_drawable.draw(canvas);
+    public void draw(Canvas canvas) {
+    	
+    	bar_height=getHeight()/17+1;
+    	// TODO check direction
+    	
+    	float line_dist=getHeight()/20f;
+    	canvas.translate(0,getPitch()*line_dist/20);
+    	canvas.rotate(getRoll()*-1,getWidth()/2,getHeight()/2);
+                                                                                                            
+        sky_drawable.setBounds(-getWidth(),-getHeight()*2,2*getWidth(),getHeight()/2);
+        sky_drawable.draw(canvas);
 
+        ground_drawable.setBounds(-getWidth(),getHeight()/2,2*getWidth(),(int)(getHeight()*1.3));
+        ground_drawable.draw(canvas);
+        //canvas.drawLine(0,(getHeight()-line_width)/2, getWidth(), (getHeight()-line_width)/2, mWhiteLinePaint);
+        
+        float y,w=0;
+        int absi=0;
+        for (int i=-20;i<20;i++) {
+        	absi=Math.abs(i);
+        	y=(getHeight()-line_width)/2+line_dist*i;
+        	if (i==0)
+        		w=getWidth();
+        	else if ((i%2)!=0)
+        		w=getWidth()/10;
+        	else  if ((absi%4)==2)
+        		w=getWidth()/6;
+        	else {
+        		w=getWidth()/3;
+        		mWhiteLinePaint.setTextAlign(Paint.Align.RIGHT);
+        		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2-3,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
+        		mWhiteLinePaint.setTextAlign(Paint.Align.LEFT);
+        		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2+w+3,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
+        	}
+        	
+        	canvas.drawLine((getWidth()-w)/2,y, (getWidth()-w)/2+w,y , mWhiteLinePaint);
+        	
+    	
+        }
+        y=getHeight()/2;
+    	
         // pitch rect                                                                                                                       
-        nick_bar_move=(int)((getPitch()/90.0*mParent.getHeight()/3.0));
-        nose_drawable.setBounds(mParent.getWidth()/3,mParent.getHeight()/2 -bar_height/2 + nick_bar_move ,2*mParent.getWidth()/3, mParent.getHeight()/2+ nick_bar_move+bar_height);
-        nose_drawable.draw(canvas);
+        /*nick_bar_move=(int)((getPitch()/90.0*getHeight()/3.0));
+        nose_drawable.setBounds(getWidth()/3,getHeight()/2 -bar_height/2 + nick_bar_move ,2*getWidth()/3, getHeight()/2+ nick_bar_move+bar_height);
+        nose_drawable.draw(canvas); */
         canvas.restore();
+        
+        RectF arc_rect=new RectF(0,0,getWidth()/2f,getWidth()/2f);
+        arc_rect.offset((getWidth()-arc_rect.width())/2f, (getHeight()-arc_rect.height())/2f);
+        canvas.drawArc(arc_rect,0,360,true,mWhiteLinePaint);
+        canvas.drawLine((getWidth())/5,y, 2*(getWidth())/5,y , mBlackLinePaint);
+        canvas.drawLine(3*(getWidth())/5,y, 4*(getWidth())/5,y , mBlackLinePaint);
+        invalidate();
     }
 }
