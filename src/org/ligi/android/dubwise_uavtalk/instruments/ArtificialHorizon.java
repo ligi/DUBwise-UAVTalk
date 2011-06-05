@@ -27,12 +27,14 @@ import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class ArtificialHorizon extends View{
@@ -153,4 +155,10 @@ public class ArtificialHorizon extends View{
         //drawCircle(getWidth()/2,getHeight()/2, getHeight()/200+1, mBlackLinePaint);
         invalidate();
     }
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		this.getContext().startActivity(new Intent(this.getContext(),InstrumentDisplayActivity.class));
+		return super.onTouchEvent(event);
+	}
 }
