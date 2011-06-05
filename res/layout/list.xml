@@ -9,12 +9,14 @@
 		<org.ligi.android.dubwise_uavtalk.connection.ConnStatusView 
 		android:layout_height="@dimen/actionbar_height" android:layout_width="@dimen/actionbar_height"/>
 		
-		<org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayView 
+		<org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon 
 		android:layout_height="@dimen/actionbar_height" android:layout_width="@dimen/actionbar_height"/>
 		
 		<org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActionBarThingy
 		android:layout_height="@dimen/actionbar_height" android:layout_width="@dimen/actionbar_height"/>
+		
 	</LinearLayout>
+	
 	
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent">
 	</ListView>
