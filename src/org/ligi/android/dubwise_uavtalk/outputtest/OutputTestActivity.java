@@ -135,7 +135,7 @@ public class OutputTestActivity extends ListActivity {
 				public void onProgressChanged(SeekBar seekBar, int progress,
 						boolean fromUser) {
 					int[] chan_arr=UAVObjects.getActuatorCommand().getChannel();
-					chan_arr[(Integer)seekBar.getTag()]=progress+min;
+					chan_arr[(Integer)seekBar.getTag()]=seekBar.getProgress();
 					UAVObjects.getActuatorCommand().setChannel(chan_arr);
 					value_tv.setText(""+UAVObjects.getActuatorCommand().getChannel()[(Integer)seekBar.getTag()]);
 				}
@@ -179,7 +179,7 @@ public class OutputTestActivity extends ListActivity {
 
 
             value_tv.setGravity(Gravity.CENTER);
-            value_tv.setText(""+UAVObjects.getManualControlSettings().getChannelNeutral()[position]);
+            value_tv.setText(""+val);
             value_tv.setPadding(7, 0, 0,0);
 
             frame_minmax.addView(min_tv);
