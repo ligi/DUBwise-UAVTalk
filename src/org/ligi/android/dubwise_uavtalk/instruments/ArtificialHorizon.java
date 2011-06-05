@@ -51,13 +51,15 @@ public class ArtificialHorizon extends View{
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     	super.onSizeChanged(w, h, oldw, oldh);
     	mWhiteLinePaint.setStrokeWidth(h/400+1);
-        mBlackLinePaint.setStrokeWidth(h/42+1);
+    	mBlackLinePaint.setStrokeWidth(h/42+1);
+    	
         mWhiteLinePaint.setTextSize(h/23);
 	}
 
 	private Paint mWhiteLinePaint;
     private Paint mBlackLinePaint;
-
+    
+    
     public void init() {
     	if (!isInEditMode())
     		UAVObjects.getAttitudeActual().getMetaData().setFlightTelemetryUpdatePeriod(100);
@@ -65,13 +67,13 @@ public class ArtificialHorizon extends View{
         sky_drawable=getResources().getDrawable(R.drawable.horizon_sky);
         mWhiteLinePaint=new Paint();
         
-        mWhiteLinePaint.setStyle(Paint.Style.STROKE);
+        mWhiteLinePaint.setStyle(Paint.Style.FILL);
         mWhiteLinePaint.setColor(Color.WHITE);
         mBlackLinePaint=new Paint();
         
         mBlackLinePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mBlackLinePaint.setColor(Color.BLACK);
-        
+
         mBlackLinePaint.setAntiAlias(true);
         mWhiteLinePaint.setAntiAlias(true);
     }
@@ -123,9 +125,9 @@ public class ArtificialHorizon extends View{
         	else {
         		w=getWidth()/3;
         		mWhiteLinePaint.setTextAlign(Paint.Align.RIGHT);
-        		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2-3,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
+        		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2-getWidth()/23-1,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
         		mWhiteLinePaint.setTextAlign(Paint.Align.LEFT);
-        		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2+w+3,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
+        		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2+w+getWidth()/23+1,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
         	}
         	
         	canvas.drawLine((getWidth()-w)/2,y, (getWidth()-w)/2+w,y , mWhiteLinePaint);
@@ -140,14 +142,15 @@ public class ArtificialHorizon extends View{
         nose_drawable.draw(canvas); */
         canvas.restore();
         
-        RectF arc_rect=new RectF(0,0,getWidth()/2f,getWidth()/2f);
-        arc_rect.offset((getWidth()-arc_rect.width())/2f, (getHeight()-arc_rect.height())/2f);
         //canvas.drawArc(arc_rect,0,360,true,mBlackLinePaint);
+        
         canvas.drawLine((getWidth())/5,y, 2*(getWidth())/5,y , mBlackLinePaint);
         canvas.drawLine(3*(getWidth())/5,y, 4*(getWidth())/5,y , mBlackLinePaint);
-        canvas.drawLine(3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y, 3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y+20 , mBlackLinePaint);
-        canvas.drawLine(2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y, 2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y+20 , mBlackLinePaint);
-        canvas.drawCircle(getWidth()/2,getHeight()/2, 3, mBlackLinePaint);
+        canvas.drawLine(3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y, 3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y+getHeight()/20+1 , mBlackLinePaint);
+        canvas.drawLine(2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y, 2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y+getHeight()/20+1 , mBlackLinePaint);
+        canvas.drawPoint(getWidth()/2,getHeight()/2, mBlackLinePaint);
+        
+        //drawCircle(getWidth()/2,getHeight()/2, getHeight()/200+1, mBlackLinePaint);
         invalidate();
     }
 }
