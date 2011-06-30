@@ -38,15 +38,18 @@ import android.view.View;
 
 public class ArtificialHorizon extends View{
 
+    private Drawable ground_drawable;
+    private Drawable sky_drawable;
+
+    private final static float line_width=3;
+
+	private Paint mWhiteLinePaint;
+    private Paint mBlackLinePaint;
+    
     public ArtificialHorizon(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
-
-	//private View mParent;
-    private Drawable ground_drawable;
-    private Drawable sky_drawable;
-    private int bar_height=20;
     
     @Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -56,10 +59,6 @@ public class ArtificialHorizon extends View{
     	
         mWhiteLinePaint.setTextSize(h/23);
 	}
-
-	private Paint mWhiteLinePaint;
-    private Paint mBlackLinePaint;
-    
     
     public void init() {
     	if (!isInEditMode())
@@ -93,13 +92,10 @@ public class ArtificialHorizon extends View{
     	return 0.0f;
     }
 
-    private final static float line_width=3;
     
     public void draw(Canvas canvas) {
     	
     	canvas.save();
-    	bar_height=getHeight()/17+1;
-    	// TODO check direction
     	
     	float line_dist=getHeight()/20f;
     	canvas.translate(0,getPitch()*line_dist/20);
@@ -110,7 +106,6 @@ public class ArtificialHorizon extends View{
 
         ground_drawable.setBounds(-getWidth(),getHeight()/2,2*getWidth(),(int)(getHeight()*2));
         ground_drawable.draw(canvas);
-        //canvas.drawLine(0,(getHeight()-line_width)/2, getWidth(), (getHeight()-line_width)/2, mWhiteLinePaint);
         
         float y,w=0;
         int absi=0;
@@ -137,10 +132,6 @@ public class ArtificialHorizon extends View{
         }
         y=getHeight()/2;
     	
-        // pitch rect                                                                                                                       
-        /*nick_bar_move=(int)((getPitch()/90.0*getHeight()/3.0));
-        nose_drawable.setBounds(getWidth()/3,getHeight()/2 -bar_height/2 + nick_bar_move ,2*getWidth()/3, getHeight()/2+ nick_bar_move+bar_height);
-        nose_drawable.draw(canvas); */
         canvas.restore();
         
         //canvas.drawArc(arc_rect,0,360,true,mBlackLinePaint);
@@ -151,7 +142,6 @@ public class ArtificialHorizon extends View{
         canvas.drawLine(2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y, 2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y+getHeight()/20+1 , mBlackLinePaint);
         canvas.drawPoint(getWidth()/2,getHeight()/2, mBlackLinePaint);
         
-        //drawCircle(getWidth()/2,getHeight()/2, getHeight()/200+1, mBlackLinePaint);
         invalidate();
     }
 
