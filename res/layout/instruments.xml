@@ -6,7 +6,7 @@
 	<LinearLayout style="@style/actionbar_frame">
 		<ImageView style="@style/actionbar_home"/>
 	</LinearLayout>
-	<FrameLayout android:id="@+id/frameLayout1" android:layout_width="match_parent" android:layout_height="match_parent">
+	<FrameLayout android:id="@+id/frameLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent">
 		<org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon android:id="@+id/ligiandroiddubwiseuavtalkinstrumentsInstrumentDisplayView1" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
 		<!--  <org.ligi.android.dubwise_uavtalk.instruments.UAVTextView  android:text="foo" android:id="@+id/textView1" android:layout_height="10mm" android:layout_gravity="bottom|right" android:layout_width="wrap_content"/>
 		 -->
