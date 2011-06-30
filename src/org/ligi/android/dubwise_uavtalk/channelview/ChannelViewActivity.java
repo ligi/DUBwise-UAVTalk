@@ -121,11 +121,11 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
                 res+=context.getString(R.string.roll);
             if (chan==UAVObjects.getManualControlSettings().getThrottle())
                 res+=context.getString(R.string.throttle);
-            if (chan==UAVObjects.getManualControlSettings().getAccessory1())
+            if (chan==UAVObjects.getManualControlSettings().getAccessory0())
                 res+=context.getString(R.string.accessory)+"1";
-            if (chan==UAVObjects.getManualControlSettings().getAccessory2())
+            if (chan==UAVObjects.getManualControlSettings().getAccessory1())
                 res+=context.getString(R.string.accessory)+"2";
-            if (chan==UAVObjects.getManualControlSettings().getAccessory3())
+            if (chan==UAVObjects.getManualControlSettings().getAccessory2())
                 res+=context.getString(R.string.accessory)+"3";
 
             if (res.equals(""))
