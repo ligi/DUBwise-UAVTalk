@@ -193,7 +193,7 @@ public class UAVObjectsListActivity extends ListActivity {
             		new Thread(this).start();
             	}
             	
-				@Override
+
 				public void run() {
 					while (v.getVisibility()!=View.GONE) {
 						
@@ -249,7 +249,6 @@ public class UAVObjectsListActivity extends ListActivity {
         }
 
         UAVObject act_obj;
-		@Override
 		public boolean onLongClick(View v) {
 			act_obj=(UAVObject)v.getTag();
 			final int LONGCLICK_ACTION_HELP=0;
@@ -261,7 +260,6 @@ public class UAVObjectsListActivity extends ListActivity {
 			new AlertDialog.Builder(context)
 			
 			.setItems(longclick_menu_items,new android.content.DialogInterface.OnClickListener() {
-					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						switch(which) {
 							case LONGCLICK_ACTION_HELP:

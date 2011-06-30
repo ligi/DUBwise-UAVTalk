@@ -78,7 +78,6 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
 	        .setTitle(R.string.no_rc_title)
 	        .setOnCancelListener(new OnCancelListener() {
 
-				@Override
 				public void onCancel(DialogInterface dialog) {
 					finish();
 				}
