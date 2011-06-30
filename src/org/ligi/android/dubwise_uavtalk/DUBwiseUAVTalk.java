@@ -40,7 +40,6 @@ import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
