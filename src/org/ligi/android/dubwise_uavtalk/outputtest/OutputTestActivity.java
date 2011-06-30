@@ -81,12 +81,11 @@ public class OutputTestActivity extends ListActivity {
         .setMessage(R.string.outputtest_warning)
         .setIcon(android.R.drawable.ic_dialog_alert)
         .setPositiveButton("OK",new OnClickListener() {
-			@Override
+
 			public void onClick(DialogInterface dialog, int which) {
 			}
         })        
         .setNegativeButton("BACK!",new OnClickListener() {
-			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				finish();
 			}
@@ -131,7 +130,6 @@ public class OutputTestActivity extends ListActivity {
             
             seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 
-				@Override
 				public void onProgressChanged(SeekBar seekBar, int progress,
 						boolean fromUser) {
 					int[] chan_arr=UAVObjects.getActuatorCommand().getChannel();
@@ -140,11 +138,9 @@ public class OutputTestActivity extends ListActivity {
 					value_tv.setText(""+UAVObjects.getActuatorCommand().getChannel()[(Integer)seekBar.getTag()]);
 				}
 
-				@Override
 				public void onStartTrackingTouch(SeekBar seekBar) {
 				}
 
-				@Override
 				public void onStopTrackingTouch(SeekBar seekBar) {
 				} });
             
