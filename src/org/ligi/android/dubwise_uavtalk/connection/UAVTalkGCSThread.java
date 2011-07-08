@@ -211,6 +211,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
 
     private int objId;
     private int data_length;
+    private int instance_id ;
     private final static int MAX_DATA_LENGTH=255;
     private byte[] data_buff=new byte[MAX_DATA_LENGTH];
     private UAVObject act_uavobject;
@@ -302,7 +303,9 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
 
             state_byte_pos=0;
 
-            if (data_length==0)
+            if (!act_uavobject.isSingleInstance())
+            		state=STATE_INSTANCEID;
+            else if (data_length==0)
                 // no data to process - direct jump to CRC
                 state= STATE_CRC;
             else
@@ -334,20 +337,41 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                     break;
             }
              */
-
+//if (act_uavobject.iss)
+            
             break;
 
         case STATE_DATA:
             //Log.i("get data " + in_byte + " state_byte pos " + state_byte_pos + "data len:" + data_length);
-            act_crc=CRC8.byteUpdate(act_crc, in_byte); // update crc
+        	act_crc=CRC8.byteUpdate(act_crc, in_byte); // update crc
             data_buff[state_byte_pos++]=in_byte;
 
+            
             if (state_byte_pos>=data_length) // last
                 state=STATE_CRC;
 
             break;
 
         case STATE_INSTANCEID:
+        	act_crc=CRC8.byteUpdate(act_crc, in_byte); // update crc
+        	
+            if (state_byte_pos == 0)  {
+                instance_id = in_byte;
+                state_byte_pos++;
+                break;
+            }
+
+            instance_id  += in_byte << 8;
+
+        	
+        	state_byte_pos=0;
+
+        	if (data_length==0)
+                // no data to process - direct jump to CRC
+                state= STATE_CRC;
+            else
+                // need to process data
+                state = STATE_DATA; // TODO implement instanceid stuff but not needed now
 
             break;
         case STATE_CRC:
@@ -360,7 +384,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                     act_uavobject.deserialize(data_buff);
                 rxPackets++;
             } else {
-                rxError("CRC ERR" + data_length);
+                rxError("CRC ERR data_length=" + data_length + " objid=0x" + String.format("0x%X",act_uavobject.getObjID()));
             }
 
             state=STATE_SYNC;

@@ -152,13 +152,16 @@ public class HandshakeStatusAlertDialog {
                                 &&(UAVObjects.getFlightTelemetryStats().getStatus()==FlightTelemetryStats.STATUS_CONNECTED)) {
 
                             StartupConnectionHandler.save(ConnectionManager.getConnectionName(),ConnectionManager.getConnectionURL());
-                            if (myAutoCloseAlert!=null)  
+                            if (myAutoCloseAlert!=null)  {
                                 myAutoCloseAlert.dismiss();
+                                running=false;
+                                
+                                if (after_connection_intent!=null)
+                                    myActivity.startActivity(after_connection_intent);
 
-                            if (after_connection_intent!=null)
-                                myActivity.startActivity(after_connection_intent);
-
-                            running=false;
+                            }
+                            
+                            
                         }
 
                     } catch (Exception e) {	Log.w(e.toString());}
