@@ -282,7 +282,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                 break;
 
             if (!UAVObjects.hasObjectWithID(objId)) {
-                rxError("got unknown object with id  " + String.format("%X",objId) );
+                rxError("got unknown object with id=" + String.format("0x%X",objId) + " ( one reason for that is a firmware-version<>GCS-version missmatch) " + UAVObjects.getUAVObjectArray().length);
                 break;
             }
 

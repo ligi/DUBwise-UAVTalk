@@ -27,7 +27,7 @@ package org.ligi.android.dubwise_uavtalk.connection;
 import it.gerdavax.easybluetooth.LocalDevice;
 import it.gerdavax.easybluetooth.ReadyListener;
 
-import org.ligi.android.dubwise_uavtalk.R;
+import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 
 import android.app.Activity;

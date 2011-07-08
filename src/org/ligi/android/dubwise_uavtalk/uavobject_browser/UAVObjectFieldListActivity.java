@@ -20,7 +20,7 @@
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
-import org.ligi.android.dubwise_uavtalk.R;
+import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.tracedroid.Log;
 import org.openpilot.uavtalk.UAVObject;
 import org.openpilot.uavtalk.UAVObjectFieldDescription;

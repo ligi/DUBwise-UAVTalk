@@ -22,7 +22,7 @@ package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 import java.util.Vector;
 
 import org.ligi.android.common.dialogs.DialogDiscarder;
-import org.ligi.android.dubwise_uavtalk.R;
+import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;

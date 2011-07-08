@@ -24,6 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk;
 
+import org.ligi.android.R;
 import org.ligi.android.common.adapter.IconTextActionAdapter;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;

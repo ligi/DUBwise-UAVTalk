@@ -24,7 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
-import org.ligi.android.dubwise_uavtalk.R;
+import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.ListActivity;

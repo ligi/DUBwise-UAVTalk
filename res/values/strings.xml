@@ -15,7 +15,7 @@
     <string name="connection_details">Connection Details</string>
     <string name="handshake_status">Handshake Status</string>
     <string name="connection">Connection</string>
-    <string name="app_name">DUBwise UAVTalk</string>
+    <string name="app_name">DUBwise UAVTalk Beta</string>
     <string name="channels">Channels</string>
     <string name="nick">Nick</string>
     <string name="roll">Roll</string>

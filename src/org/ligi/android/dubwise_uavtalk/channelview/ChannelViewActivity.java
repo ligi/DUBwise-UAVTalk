@@ -24,7 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.channelview;
 
-import org.ligi.android.dubwise_uavtalk.R;
+import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.ManualControlCommand;

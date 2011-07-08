@@ -23,8 +23,7 @@
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.instruments;
 
-import org.ligi.android.dubwise_uavtalk.R;
-
+import org.ligi.android.uavtalk.dubwise.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
