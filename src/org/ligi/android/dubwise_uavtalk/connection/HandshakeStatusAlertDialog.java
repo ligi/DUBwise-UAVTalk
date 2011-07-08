@@ -32,6 +32,7 @@ import org.openpilot.uavtalk.uavobjects.GCSTelemetryStats;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.widget.LinearLayout;
@@ -63,7 +64,7 @@ public class HandshakeStatusAlertDialog {
      * @param autoclose - if the alert should close when connection is established
      * 
      */
-    public static void show(Activity activity,boolean autoclose,Intent after_connection_intent ) {
+    public static void show(Context activity,boolean autoclose,Intent after_connection_intent ) {
 
         LinearLayout lin=new LinearLayout(activity);
         lin.setOrientation(LinearLayout.VERTICAL);
@@ -102,9 +103,9 @@ public class HandshakeStatusAlertDialog {
             private AlertDialog myAutoCloseAlert;
             private boolean running;
             private Intent after_connection_intent;
-            private Activity myActivity;
+            private Context myActivity;
 
-            public AlertDialogUpdater(Activity myActivity,TextView ab,ProgressBar progress,AlertDialog autoclose_alert,Intent after_connection_intent) {
+            public AlertDialogUpdater(Context myActivity,TextView ab,ProgressBar progress,AlertDialog autoclose_alert,Intent after_connection_intent) {
                 this.myActivity=myActivity;
                 myTextView=ab;
                 myProgress=progress;
