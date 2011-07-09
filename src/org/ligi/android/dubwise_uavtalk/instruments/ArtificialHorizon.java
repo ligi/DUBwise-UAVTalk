@@ -23,6 +23,7 @@
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.instruments;
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActionBar;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
@@ -49,8 +50,12 @@ public class ArtificialHorizon extends View{
     public ArtificialHorizon(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
-	}
+    }
     
+    public ArtificialHorizon(Context context) {
+		super(context);
+		init();
+	}
     @Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     	super.onSizeChanged(w, h, oldw, oldh);
@@ -61,6 +66,8 @@ public class ArtificialHorizon extends View{
 	}
     
     public void init() {
+    	
+    	
     	if (!isInEditMode())
     		UAVObjects.getAttitudeActual().getMetaData().setFlightTelemetryUpdatePeriod(100);
         ground_drawable=getResources().getDrawable(R.drawable.horizon_earth);

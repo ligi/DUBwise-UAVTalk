@@ -23,43 +23,22 @@
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.instruments;
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActionBar;
 import org.ligi.android.uavtalk.dubwise.R;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 /**
  * 
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
 public class InstrumentDisplayActivity extends Activity {
-
-    private static final int MENU_SETTINGS = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.instruments);
+        ((DUBwiseUAVTalkActionBar)(this.findViewById(R.id.DUBwiseUAVTalkActionBar))).setProfile("hori");
     }
 
-    /* Creates the menu items */
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        //menu.add(0,MENU_SETTINGS,0,"Settings").setIcon(android.R.drawable.ic_menu_preferences);
-
-        return true;
-    }
-    /* Handles item selections */
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-        case MENU_SETTINGS:
-            //startActivity(new Intent(this, CockpitPrefsActivity.class));
-            return true;
-        }
-        return false;
-    }
 }
