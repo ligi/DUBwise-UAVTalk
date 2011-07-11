@@ -4,21 +4,6 @@
 	
 	android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" >
 
-		<!-- 
-	<LinearLayout style="@style/actionbar_frame">
-		<ImageView style="@style/actionbar_home"/>
-		<TextView style="@style/actionbar_title"/>
-		<org.ligi.android.dubwise_uavtalk.connection.ConnStatusView 
-		android:layout_height="@dimen/actionbar_height" android:layout_width="@dimen/actionbar_height"/>
-
-		<org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon 
-		android:layout_height="@dimen/actionbar_height" android:layout_width="@dimen/actionbar_height"/>
-		 
-		<org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActionBarThingy
-		android:layout_height="@dimen/actionbar_height" android:layout_width="@dimen/actionbar_height"/>
-		
-	</LinearLayout>
-	-->
 	<org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActionBar android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
 	
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent">

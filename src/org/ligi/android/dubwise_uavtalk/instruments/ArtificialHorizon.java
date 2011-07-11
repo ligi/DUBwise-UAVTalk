@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -42,11 +43,14 @@ public class ArtificialHorizon extends View{
     private Drawable ground_drawable;
     private Drawable sky_drawable;
 
-    private final static float line_width=3;
-
-	private Paint mWhiteLinePaint;
-    private Paint mBlackLinePaint;
+    private Path crossHairPath;
     
+    private final static float line_width=3;
+    private float black_line_width=3;
+    
+	private Paint mWhiteLinePaint;
+	private Paint mBlackLinePaint;
+	
     public ArtificialHorizon(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
@@ -60,9 +64,23 @@ public class ArtificialHorizon extends View{
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     	super.onSizeChanged(w, h, oldw, oldh);
     	mWhiteLinePaint.setStrokeWidth(h/400+1);
-    	mBlackLinePaint.setStrokeWidth(h/42+1);
     	
-        mWhiteLinePaint.setTextSize(h/23);
+    	float sw=h/42+1;
+    	float y=(h-sw)/2;
+    	
+    	mWhiteLinePaint.setTextSize(h/23);
+        mBlackLinePaint.setShadowLayer(sw/3+1, 0, 0, Color.YELLOW);
+        
+        crossHairPath=new Path();
+        crossHairPath.addRect((getWidth())/5,y, 2*(getWidth())/5,y+sw,Path.Direction.CCW);
+        crossHairPath.addRect(2*(getWidth())/5-sw,y+sw, 2*(getWidth())/5,y+2*sw,Path.Direction.CCW);
+        
+        crossHairPath.addRect(3*(getWidth())/5,y, 4*(getWidth())/5,y+sw,Path.Direction.CCW);
+        crossHairPath.addRect(3*(getWidth())/5,y+sw, 3*(getWidth())/5+sw,y+2*sw,Path.Direction.CCW);
+        
+        
+        crossHairPath.addRect(getWidth()/2-sw/2,getHeight()/2-sw/2,getWidth()/2+sw/2,getHeight()/2+sw/2,Path.Direction.CCW);
+        
 	}
     
     public void init() {
@@ -76,9 +94,12 @@ public class ArtificialHorizon extends View{
         
         mWhiteLinePaint.setStyle(Paint.Style.FILL);
         mWhiteLinePaint.setColor(Color.WHITE);
+        
+        
+                
         mBlackLinePaint=new Paint();
         
-        mBlackLinePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mBlackLinePaint.setStyle(Paint.Style.FILL);
         mBlackLinePaint.setColor(Color.BLACK);
 
         mBlackLinePaint.setAntiAlias(true);
@@ -137,17 +158,11 @@ public class ArtificialHorizon extends View{
         	
     	
         }
-        y=getHeight()/2;
+        
     	
         canvas.restore();
         
-        //canvas.drawArc(arc_rect,0,360,true,mBlackLinePaint);
-        
-        canvas.drawLine((getWidth())/5,y, 2*(getWidth())/5,y , mBlackLinePaint);
-        canvas.drawLine(3*(getWidth())/5,y, 4*(getWidth())/5,y , mBlackLinePaint);
-        canvas.drawLine(3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y, 3*(getWidth())/5+mBlackLinePaint.getStrokeWidth()/2,y+getHeight()/20+1 , mBlackLinePaint);
-        canvas.drawLine(2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y, 2*(getWidth())/5-mBlackLinePaint.getStrokeWidth()/2,y+getHeight()/20+1 , mBlackLinePaint);
-        canvas.drawPoint(getWidth()/2,getHeight()/2, mBlackLinePaint);
+        canvas.drawPath(crossHairPath, mBlackLinePaint);
         
         invalidate();
     }

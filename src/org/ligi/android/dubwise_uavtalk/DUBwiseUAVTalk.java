@@ -63,7 +63,6 @@ public class DUBwiseUAVTalk extends ListActivity {
     public final static int MENU_VIEW_INSTRUMENTS=5;
     public final static int MENU_OUTPUTEST=6;
 	private static final int MENU_SYSTEMALARMS = 7;
-
     
     private IconTextActionAdapter myAdapter;
 
@@ -102,8 +101,6 @@ public class DUBwiseUAVTalk extends ListActivity {
         
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
-       
-
 
         myAdapter = new IconTextActionAdapter(this);
         myAdapter.style(R.layout.icon_and_text, R.id.text, R.id.image);

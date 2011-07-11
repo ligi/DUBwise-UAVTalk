@@ -171,8 +171,6 @@ public class UAVObjectsListActivity extends ListActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) { 
-        	
-
             UAVObject act_obj=(UAVObject)(objects[position]);
 
             LinearLayout lin=new LinearLayout(context);
