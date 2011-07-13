@@ -83,7 +83,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
             obj.getMetaData().setLastSendTime(System.currentTimeMillis());
             //byte type=(do_ack)?UAVTalkDefinitions.TYPE_OBJ_ACK:UAVTalkDefinitions.TYPE_OBJ;
             ConnectionManager.getCommunicationAdapter().write(UAVTalkHelper.generateUAVTalkPackage(type, obj));
-        } catch (IOException e) {
+        } catch (Exception e) {
             txError("problem sending object " + e);
         }
 
