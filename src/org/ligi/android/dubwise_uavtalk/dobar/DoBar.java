@@ -1,31 +1,35 @@
-package org.ligi.android.dubwise_uavtalk;
+package org.ligi.android.dubwise_uavtalk.dobar;
 
 import org.ligi.android.common.intents.IntentHelper;
-import org.ligi.android.dubwise_uavtalk.connection.ConnStatusView;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalk;
 import org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon;
 import org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActionBarThingy;
 import org.ligi.android.uavtalk.dubwise.R;
+
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.view.View.OnTouchListener;
 
-public class DUBwiseUAVTalkActionBar extends LinearLayout {
+public class DoBar extends LinearLayout implements OnTouchListener {
 	private Context context;
 	private String profile="default";
-	
 	
 	public void setProfile(String profile) {
 		this.profile=profile;
 		layout();
 	}
 	
-	public DUBwiseUAVTalkActionBar(Context context, AttributeSet attrs) {
+	public DoBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context=context;
 		layout();
+		this.setOnTouchListener(this);
 	}
 
 	private void layout() {
@@ -54,7 +58,7 @@ public class DUBwiseUAVTalkActionBar extends LinearLayout {
 		home.setOnClickListener(new MyHomeOnClick(context));
 		this.addView(home);
 		
-		ConnStatusView csv=new ConnStatusView(context);
+		ConnectionStatusDoBarGadget csv=new ConnectionStatusDoBarGadget(context);
 		csv.setLayoutParams(lp);
 		this.addView(csv);
 		
@@ -67,6 +71,15 @@ public class DUBwiseUAVTalkActionBar extends LinearLayout {
 			instr.setLayoutParams(lp);
 			this.addView(instr);
 		}
+		
+	}
+
+	public boolean onTouch(View v, MotionEvent event) {
+		
+		//new AlertDialog.Builder(this.getContext()).setTitle("Add Gadgets")
+		//.setAdapter(new All, listener)
+		//.show();
+		return false;
 	}
 
 }

@@ -4,7 +4,7 @@
 	
 	android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" >
 
-	<org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActionBar android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
+	<org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
 	
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent">
 	</ListView>

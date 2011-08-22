@@ -50,6 +50,16 @@ public class ConnectionManager {
         return myCommunicationAdapter;
     }
 
+    public static boolean reconnect() {
+    	if (myCommunicationAdapter==null)
+    		return false;
+    	
+    	myCommunicationAdapter.disconnect();
+    	myCommunicationAdapter.connect();
+    	
+    	return true; 
+    }
+    
     private static void setCommunicationAdapter(CommunicationAdapterInterface new_ca) {
         if (myCommunicationAdapter!=null)
             myCommunicationAdapter.disconnect();

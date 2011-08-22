@@ -138,7 +138,7 @@ public class HandshakeStatusAlertDialog {
                                     addMsg("RX Failures: " + UAVObjects.getGCSTelemetryStats().getRxFailures());
                                     
 
-                                    addMsg("last RX Error: " + UAVTalkGCSThread.getInstance().getLastError());
+                                    addMsg("last RX Error: " +  UAVObjects.getUAVObjectArray().length+" " + UAVTalkGCSThread.getInstance().getLastError());
                                 } catch (Exception e) { }
 
                                 myTextView.setText(myMessage);

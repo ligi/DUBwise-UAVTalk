@@ -1,5 +1,6 @@
-package org.ligi.android.dubwise_uavtalk.connection;
+package org.ligi.android.dubwise_uavtalk.dobar;
 
+import org.ligi.android.dubwise_uavtalk.connection.HandshakeStatusAlertDialog;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.FlightTelemetryStats;
 
@@ -16,7 +17,7 @@ import android.view.View;
  * @author ligi
  *
  */
-public class ConnStatusView extends View implements Runnable {
+public class ConnectionStatusDoBarGadget extends View implements Runnable,DoBarGadget {
 
 	private boolean running;
 	
@@ -27,13 +28,12 @@ public class ConnStatusView extends View implements Runnable {
 		return super.onTouchEvent(event);
 	}
 
-
-	public ConnStatusView(Context context) {
+	public ConnectionStatusDoBarGadget(Context context) {
 		super(context);
 		start();
 	}
 	
-	public ConnStatusView(Context context,AttributeSet attrs) {
+	public ConnectionStatusDoBarGadget(Context context,AttributeSet attrs) {
 		super(context,attrs);
 		start();
 	}
@@ -68,6 +68,11 @@ public class ConnStatusView extends View implements Runnable {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {	}
 		}
+	}
+
+
+	public View getView() {
+		return this;
 	}
 
 }

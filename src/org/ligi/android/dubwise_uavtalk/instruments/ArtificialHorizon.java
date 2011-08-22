@@ -23,7 +23,6 @@
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.instruments;
 
-import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActionBar;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 

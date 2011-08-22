@@ -22,8 +22,6 @@
  *
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.connection;
-
-import java.io.IOException;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.CRC8;
 import org.openpilot.uavtalk.UAVObject;
@@ -188,9 +186,8 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
     private void txError(String what) {
         Log.w("tx error: " + what);
         UAVObjects.getGCSTelemetryStats().setTxFailures(UAVObjects.getGCSTelemetryStats().getTxFailures()+1);
-        ConnectionManager.getCommunicationAdapter().disconnect();
         UAVObjects.getFlightTelemetryStats().setStatus(FlightTelemetryStats.STATUS_DISCONNECTED);
-        ConnectionManager.getCommunicationAdapter().connect();
+        ConnectionManager.reconnect();
     }
 
     private final static byte STATE_SYNC=0;

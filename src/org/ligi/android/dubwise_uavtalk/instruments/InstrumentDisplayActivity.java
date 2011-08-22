@@ -23,7 +23,8 @@
  **************************************************************************/
 package org.ligi.android.dubwise_uavtalk.instruments;
 
-import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActionBar;
+
+import org.ligi.android.dubwise_uavtalk.dobar.DoBar;
 import org.ligi.android.uavtalk.dubwise.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class InstrumentDisplayActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.instruments);
-        ((DUBwiseUAVTalkActionBar)(this.findViewById(R.id.DUBwiseUAVTalkActionBar))).setProfile("hori");
+        ((DoBar)(this.findViewById(R.id.DoBar))).setProfile("hori");
     }
 
 }

@@ -79,6 +79,7 @@ public class DUBwiseUAVTalk extends ListActivity {
 
         kickstarted=true;
 
+        UAVObjects.init();
         Log.setTAG("DUBwiseUAVTalk"); // It's all about DUBwise for UAVTalk from here ;-)
         TraceDroid.init(activity);
         TraceDroidEmailSender.sendStackTraces("ligi@ligi.de", activity);
