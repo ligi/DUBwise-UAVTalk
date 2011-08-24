@@ -25,7 +25,6 @@
 package org.ligi.android.dubwise_uavtalk;
 
 import org.ligi.android.R;
-import org.ligi.android.common.adapter.IconTextActionAdapter;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;
 import org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu;
@@ -45,6 +44,8 @@ import org.openpilot.uavtalk.UAVObjects;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -61,10 +62,6 @@ import android.widget.Button;
 public class DUBwiseUAVTalk extends Activity {
 
 	private Context ctx;
-	
- 
-    
-    private IconTextActionAdapter myAdapter;
 
     public static boolean kickstarted=false;
 
@@ -102,22 +99,6 @@ public class DUBwiseUAVTalk extends Activity {
         kickstart(this);
         
         this.setTheme(R.style.base_theme);
-        
-       /* this.setContentView(R.layout.list);
-
-        myAdapter = new IconTextActionAdapter(this);
-        myAdapter.style(R.layout.icon_and_text, R.id.text, R.id.image);
-
-        myAdapter.add(MENU_CONNECT,android.R.drawable.ic_menu_share, R.string.connection);
-        myAdapter.add(MENU_BROWSE_SETTINGS,android.R.drawable.ic_menu_preferences, R.string.settings);
-        myAdapter.add(MENU_BROWSE_UAVOBJECTS,android.R.drawable.ic_menu_agenda, R.string.uavobjects);
-        myAdapter.add(MENU_VIEW_CHANNELS,android.R.drawable.ic_menu_directions, R.string.channels);
-        myAdapter.add(MENU_VIEW_INSTRUMENTS,android.R.drawable.ic_menu_view, R.string.view_instruments);
-        
-        myAdapter.add(MENU_PITUNE,android.R.drawable.ic_dialog_alert, R.string.pitune);
-        */
-     //   this.setListAdapter(myAdapter);
-       
         this.setContentView(R.layout.dashboard);
         
         ((Button)this.findViewById(R.id.dashboard_btn_output)).setOnClickListener(new OnClickListener() {
@@ -170,23 +151,24 @@ public class DUBwiseUAVTalk extends Activity {
         });
         
     }
-/*
+    
+    private final static int MENU_SAVE_EDIT=0;
+    
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        switch(myAdapter.getAction(position)) {
-        case MENU_CONNECT:
-            IntentHelper.startActivityClass(this, ConnectionMenu.class);
-            break;
-        case MENU_BROWSE_UAVOBJECTS:
-        	// TODO check if good default
-        	IntentHelper.action(this, "EDIT_UAVOBJECT");
-            break;
-        case MENU_BROWSE_SETTINGS:
-            IntentHelper.startActivityClass(this,SettingsListActivity.class);
-            break;
-      
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        menu.add(0,MENU_SAVE_EDIT,0,"Edit UAVObjects").setIcon(android.R.drawable.ic_menu_edit);
+        return super.onCreateOptionsMenu(menu);
     }
-*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+        case MENU_SAVE_EDIT:
+        	IntentHelper.action(this, "EDIT_UAVOBJECT");
+        	break;
+        }
+        return true;
+    }
+
 }
