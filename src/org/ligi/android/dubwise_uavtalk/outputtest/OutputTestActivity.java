@@ -52,6 +52,8 @@ import android.widget.TextView;
  * Activity to test the outputs of the UAV
  * based on the channelView
  * 
+ * TODO show short movie clip with rotors cutting fingers before start to ensure "special awareness" 
+ * 
  * @author ligi
  *
  */
