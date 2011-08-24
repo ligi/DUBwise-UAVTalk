@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="lib/ligi_java_commons.jar"/>
 	<classpathentry kind="src" path="LigiAndroidCommons_src"/>
 	<classpathentry kind="src" path="DUBwiseCommons_src"/>
+	<classpathentry kind="lib" path="/home/ligi/bin/android-sdk-linux_x86/extras/android/compatibility/v13/android-support-v13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
