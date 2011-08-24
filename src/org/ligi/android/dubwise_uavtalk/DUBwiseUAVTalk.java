@@ -34,8 +34,8 @@ import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
+import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
-import org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActivity;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
 import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
@@ -43,27 +43,26 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 /**
- * MainMenu/Entry Activity for DUBwise UAVTalk
+ * MainMenu/Entry/DashBoard Activity for DUBwise UAVTalk
  * 
+ * TODO add FragmentPager to page between flight and garage dashboard
+ *  
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
 
-public class DUBwiseUAVTalk extends ListActivity {
+public class DUBwiseUAVTalk extends Activity {
 
-    public final static int MENU_CONNECT=1;
-    public final static int MENU_BROWSE_SETTINGS=2;
-    public final static int MENU_BROWSE_UAVOBJECTS=3;
-    public final static int MENU_VIEW_CHANNELS=4;
-    public final static int MENU_VIEW_INSTRUMENTS=5;
-    public final static int MENU_OUTPUTEST=6;
-	private static final int MENU_PITUNE = 7;
+	private Context ctx;
+	
+ 
     
     private IconTextActionAdapter myAdapter;
 
@@ -99,10 +98,12 @@ public class DUBwiseUAVTalk extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ctx=this;
         kickstart(this);
         
         this.setTheme(R.style.base_theme);
-        this.setContentView(R.layout.list);
+        
+       /* this.setContentView(R.layout.list);
 
         myAdapter = new IconTextActionAdapter(this);
         myAdapter.style(R.layout.icon_and_text, R.id.text, R.id.image);
@@ -112,12 +113,64 @@ public class DUBwiseUAVTalk extends ListActivity {
         myAdapter.add(MENU_BROWSE_UAVOBJECTS,android.R.drawable.ic_menu_agenda, R.string.uavobjects);
         myAdapter.add(MENU_VIEW_CHANNELS,android.R.drawable.ic_menu_directions, R.string.channels);
         myAdapter.add(MENU_VIEW_INSTRUMENTS,android.R.drawable.ic_menu_view, R.string.view_instruments);
-        myAdapter.add(MENU_OUTPUTEST,android.R.drawable.ic_menu_edit, R.string.output_test);
+        
         myAdapter.add(MENU_PITUNE,android.R.drawable.ic_dialog_alert, R.string.pitune);
-        this.setListAdapter(myAdapter);
+        */
+     //   this.setListAdapter(myAdapter);
+       
+        this.setContentView(R.layout.dashboard);
+        
+        ((Button)this.findViewById(R.id.dashboard_btn_output)).setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				  IntentHelper.startActivityClass(ctx,OutputTestActivity.class);
+			}
+        	
+        });
+
+        
+        ((Button)this.findViewById(R.id.dashboard_btn_channels)).setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				IntentHelper.startActivityClass(ctx,ChannelViewActivity.class);
+			}
+        	
+        });
+
+        ((Button)this.findViewById(R.id.dashboard_btn_pfd)).setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				IntentHelper.startActivityClass(ctx,InstrumentDisplayActivity.class);
+			}
+        	
+        });
+
+        ((Button)this.findViewById(R.id.dashboard_btn_tune)).setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+			    IntentHelper.startActivityClass(ctx,PITuneActivity.class);
+			}
+        	
+        });
+        
+        ((Button)this.findViewById(R.id.dashboard_btn_connection)).setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				IntentHelper.startActivityClass(ctx, ConnectionMenu.class);
+			}
+        	
+        });
+        
+        ((Button)this.findViewById(R.id.dashboard_btn_sound)).setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				IntentHelper.startActivityClass(ctx, StatusVoicePreferencesActivity.class);
+			}
+        	
+        });
         
     }
-
+/*
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -132,19 +185,8 @@ public class DUBwiseUAVTalk extends ListActivity {
         case MENU_BROWSE_SETTINGS:
             IntentHelper.startActivityClass(this,SettingsListActivity.class);
             break;
-        case MENU_VIEW_CHANNELS:
-            IntentHelper.startActivityClass(this,ChannelViewActivity.class);
-            break;
-        case MENU_VIEW_INSTRUMENTS:
-            IntentHelper.startActivityClass(this,InstrumentDisplayActivity.class);
-            break;
-        case MENU_OUTPUTEST:
-            IntentHelper.startActivityClass(this,OutputTestActivity.class);
-            break;
-        case MENU_PITUNE:
-            IntentHelper.startActivityClass(this,PITuneActivity.class);
-            break;
+      
         }
     }
-
+*/
 }

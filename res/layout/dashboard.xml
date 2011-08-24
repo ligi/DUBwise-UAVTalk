@@ -1,0 +1,58 @@
+<!--
+  Copyright 2011 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<LinearLayout     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical">
+     
+<org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
+	
+
+<com.google.android.apps.iosched.ui.widget.DashboardLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <Button android:id="@+id/dashboard_btn_connection"
+        style="@style/DashboardButton"
+        android:text="connection"
+        android:drawableTop="@drawable/antenna_square" />
+   
+	<Button android:id="@+id/dashboard_btn_sound"
+        style="@style/DashboardButton"
+        android:text="sound"
+        android:drawableTop="@drawable/sound_square" />
+
+    <Button android:id="@+id/dashboard_btn_channels"
+        style="@style/DashboardButton"
+        android:text="channels"
+        android:drawableTop="@drawable/rc_square" />
+   
+	<Button android:id="@+id/dashboard_btn_output"
+        style="@style/DashboardButton"
+        android:text="output test"
+        android:drawableTop="@drawable/engine_square" />
+        
+    <Button android:id="@+id/dashboard_btn_pfd"
+        style="@style/DashboardButton"
+        android:text="PFD"
+        android:drawableTop="@drawable/pfd_square" />
+
+   <Button android:id="@+id/dashboard_btn_tune"
+        style="@style/DashboardButton"
+        android:text="tune"
+        android:drawableTop="@drawable/tune_square" />
+</com.google.android.apps.iosched.ui.widget.DashboardLayout>
+</LinearLayout>
