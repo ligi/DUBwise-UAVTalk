@@ -36,7 +36,9 @@
         android:launchMode="singleTop"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity"/>
         
+        <activity android:name="org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceBlockEditActivity"/>
+        
         <activity android:name="org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceDebugActivity"/>
         

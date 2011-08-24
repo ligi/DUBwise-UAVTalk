@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<TableRow android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/tableRow1">
+		<TextView android:text="Nick" android:layout_weight="0.3"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+		<TextView android:text="Roll" android:layout_weight="0.3"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+		<TextView android:text="Yaw" android:layout_weight="0.3"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+	</TableRow>
+
+	<ScrollView android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+		<LinearLayout android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:orientation="vertical">
+			
+				<TextView  android:text="Kp"  style="@style/pitune_spacer"/>
+
+			<TableRow android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				<include android:id="@+id/kp_nick" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+				<include android:id="@+id/kp_roll" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+				<include android:id="@+id/kp_yaw" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+			</TableRow>
+
+			<TextView  android:text="Ki"  style="@style/pitune_spacer"/>
+			
+			<TableRow android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:id="@+id/tableRow1">
+				<include android:id="@+id/ki_nick" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+				<include android:id="@+id/ki_roll" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+				<include android:id="@+id/ki_yaw" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+			</TableRow>
+
+			<TextView  android:text="ILimit"  style="@style/pitune_spacer"/>
+			
+			<TableRow android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:id="@+id/tableRow1">
+				<include android:id="@+id/ilimit_nick"
+					android:layout_weight="0.3" layout="@layout/pi_value" />
+				<include android:id="@+id/ilimit_roll"
+					android:layout_weight="0.3" layout="@layout/pi_value" />
+				<include android:id="@+id/ilimit_yaw" android:layout_weight="0.3"
+					layout="@layout/pi_value" />
+			</TableRow>
+		</LinearLayout>
+	</ScrollView>
+</TableLayout>

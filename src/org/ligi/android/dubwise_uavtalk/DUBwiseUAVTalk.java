@@ -32,6 +32,7 @@ import org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
+import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActivity;
@@ -62,7 +63,7 @@ public class DUBwiseUAVTalk extends ListActivity {
     public final static int MENU_VIEW_CHANNELS=4;
     public final static int MENU_VIEW_INSTRUMENTS=5;
     public final static int MENU_OUTPUTEST=6;
-	private static final int MENU_SYSTEMALARMS = 7;
+	private static final int MENU_PITUNE = 7;
     
     private IconTextActionAdapter myAdapter;
 
@@ -112,7 +113,7 @@ public class DUBwiseUAVTalk extends ListActivity {
         myAdapter.add(MENU_VIEW_CHANNELS,android.R.drawable.ic_menu_directions, R.string.channels);
         myAdapter.add(MENU_VIEW_INSTRUMENTS,android.R.drawable.ic_menu_view, R.string.view_instruments);
         myAdapter.add(MENU_OUTPUTEST,android.R.drawable.ic_menu_edit, R.string.output_test);
-        myAdapter.add(MENU_SYSTEMALARMS,android.R.drawable.ic_dialog_alert, R.string.system_alarms);
+        myAdapter.add(MENU_PITUNE,android.R.drawable.ic_dialog_alert, R.string.pitune);
         this.setListAdapter(myAdapter);
         
     }
@@ -140,8 +141,8 @@ public class DUBwiseUAVTalk extends ListActivity {
         case MENU_OUTPUTEST:
             IntentHelper.startActivityClass(this,OutputTestActivity.class);
             break;
-        case MENU_SYSTEMALARMS:
-            IntentHelper.startActivityClass(this,SystemAlarmsActivity.class);
+        case MENU_PITUNE:
+            IntentHelper.startActivityClass(this,PITuneActivity.class);
             break;
         }
     }

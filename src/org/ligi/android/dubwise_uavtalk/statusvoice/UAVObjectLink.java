@@ -25,6 +25,7 @@
 package org.ligi.android.dubwise_uavtalk.statusvoice;
 
 import org.openpilot.uavtalk.UAVObject;
+import org.openpilot.uavtalk.UAVObjectFieldDescription;
 import org.openpilot.uavtalk.UAVObjects;
 /**
  * class to represent a link to an UAVObject including a static function
@@ -50,7 +51,7 @@ public class UAVObjectLink {
     private final static String END_TAG="]";
     private String act_extract_str="";
 
-    public int extract(String start,String end) {
+    private int extract(String start,String end) {
         int objid_start_pos=act_extract_str.indexOf(start);
         if (objid_start_pos==-1) 
             return -2;
@@ -69,7 +70,13 @@ public class UAVObjectLink {
         this.fieldid=fieldid;
         this.arraypos=arraypos;
     }
-
+    
+    public  UAVObjectLink(UAVObjectFieldDescription d,int arr_pos) {
+        this.objid=d.getObjId();
+        this.fieldid=d.getFieldId();
+        this.arraypos=arr_pos;
+    }
+    
 
     public UAVObjectLink(String link) {
         link.replace(START_TAG, "");
@@ -105,16 +112,38 @@ public class UAVObjectLink {
         return res;
     }
 
-
+/*
     public float getFloatValue() {
         UAVObjects.getObjectByID(objid).getField(fieldid,arraypos);
         return 0.0f;
     }
-
+*/
+    
     public String getValueAsString() {
         return UAVObjects.getObjectByID(objid).getField(fieldid,arraypos).toString();
     }
 
+    public Integer getAsInt() {
+        return (Integer)UAVObjects.getObjectByID(objid).getField(fieldid,arraypos);
+    }
+
+    public Byte getAsByte() {
+        return (Byte)UAVObjects.getObjectByID(objid).getField(fieldid,arraypos);
+    }
+
+    public Long getAsLong() {
+        return (Long)UAVObjects.getObjectByID(objid).getField(fieldid,arraypos);
+    }
+    
+    public Float getAsFloat() {
+        return (Float)UAVObjects.getObjectByID(objid).getField(fieldid,arraypos);
+    }
+    
+    public void setField(Object obj) {
+    	UAVObjects.getObjectByID(objid).setField(fieldid,arraypos,obj);
+    }
+    
+    
     public final static byte REPLACE_MODE_HUMAN_DESCR=0;
     public final static byte REPLACE_MODE_VALUES=1;
     public static String replaceLinksInString(String in,byte replace_mode) {
