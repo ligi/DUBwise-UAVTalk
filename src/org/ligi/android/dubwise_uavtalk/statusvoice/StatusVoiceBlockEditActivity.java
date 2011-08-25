@@ -26,6 +26,7 @@ package org.ligi.android.dubwise_uavtalk.statusvoice;
 
 import java.util.Vector;
 
+import org.ligi.android.R;
 import org.ligi.android.common.dialogs.DialogDiscarder;
 import org.ligi.android.common.intents.IntentHelper;
 
@@ -190,6 +191,7 @@ public class StatusVoiceBlockEditActivity extends ListActivity {
 
         myAdapter=new StatusVoiceBlockListAdapter();
         this.setListAdapter(myAdapter);
+        this.setContentView(R.layout.list);
     }
 
 

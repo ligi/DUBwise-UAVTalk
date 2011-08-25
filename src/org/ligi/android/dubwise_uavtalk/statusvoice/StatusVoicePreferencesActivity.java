@@ -24,6 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.statusvoice;
 
+import org.ligi.android.R;
 import org.ligi.android.common.preferences.TimePreference;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class StatusVoicePreferencesActivity extends PreferenceActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         StatusVoicePreferences.init(this);
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.list);
     }
 
     @Override
