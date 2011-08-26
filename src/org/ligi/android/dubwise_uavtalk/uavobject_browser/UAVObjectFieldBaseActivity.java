@@ -35,11 +35,13 @@ import android.view.MenuItem;
 public abstract class UAVObjectFieldBaseActivity extends ListActivity {
 
 	public int objid; 
-	private final static int MENU_SAVE=0;
+	private final static int MENU_APPLY=0;
+	private final static int MENU_SAVE=1;
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
+        menu.add(0,MENU_APPLY,0,"Apply").setIcon(android.R.drawable.ic_menu_set_as);
         menu.add(0,MENU_SAVE,0,"Save").setIcon(android.R.drawable.ic_menu_save);
         return super.onCreateOptionsMenu(menu);
     }
@@ -49,6 +51,9 @@ public abstract class UAVObjectFieldBaseActivity extends ListActivity {
 	switch (item.getItemId()) {
 	case MENU_SAVE:
 		UAVObjectPersistHelper.persistWithDialog(this,UAVObjects.getObjectByID(objid));
+		return true;
+	case MENU_APPLY:
+		UAVObjectPersistHelper.apply(UAVObjects.getObjectByID(objid));
 		return true;
 	}
 	return false;
