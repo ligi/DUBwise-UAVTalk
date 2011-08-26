@@ -1,6 +1,6 @@
 package org.ligi.android.dubwise_uavtalk;
 
-import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
+import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 
 import android.content.Context;
 import android.content.Intent;
