@@ -17,12 +17,17 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class PITuneActivity extends FragmentActivity {
+public class PITuneActivity extends FragmentActivity implements Runnable{
 			
+	   private boolean running=true;
+		
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
+		    super.onCreate(savedInstanceState); 
 		    UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getStabilizationSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
-	        super.onCreate(savedInstanceState);
+	    
+		    running=true;
+		    new Thread(this).start();
 	        this.setContentView(R.layout.pitune_pager);
 	        
 	        PITuneFragmentPagerAdapter pituneAdapter = new PITuneFragmentPagerAdapter(getSupportFragmentManager());
@@ -30,7 +35,13 @@ public class PITuneActivity extends FragmentActivity {
 	        awesomePager.setAdapter(pituneAdapter);
 	   }
 
-	   private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter{
+	   @Override
+	protected void onDestroy() {
+		running=false;
+		super.onDestroy();
+	}
+
+	private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter{
            
            public PITuneFragmentPagerAdapter(FragmentManager fm) {
         	   super(fm);
@@ -74,6 +85,18 @@ public class PITuneActivity extends FragmentActivity {
 
 		}
 		return true;
+	}
+
+	public void run() {
+		while(running) {
+			try {
+				UAVObjectPersistHelper.apply(UAVObjects.getStabilizationSettings());
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
 	}
 
 
