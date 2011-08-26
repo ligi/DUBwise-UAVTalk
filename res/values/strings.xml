@@ -37,5 +37,8 @@
     <string name="system_alarms">Alarms</string>
     <string name="please_wait">please wait</string>
     <string name="pitune">Tune</string>
+    <string name="full_stick_angle">Full stick angle (deg)</string>
+    <string name="full_stick_rate">Flull stick rate(deg/s)</string>
+    <string name="max_rate_in_att">Maximum rate in attitude mode (deg/s)</string>
 
 </resources>

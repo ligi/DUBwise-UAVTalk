@@ -58,57 +58,95 @@ public class PITuneFragment extends Fragment {
 		case 0:
 			mod_base = 0.0001f;
 			middle_str="Rate / Inner loop";
-			connect(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 0),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 0),
 					v.findViewById(id.kp_nick), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 1),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 1),
 					v.findViewById(id.ki_nick), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 3),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 3),
 					v.findViewById(id.ilimit_nick), mod_base);
 
-			connect(new UAVObjectLink(fieldDescByName.get("RollRatePID"), 0),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("RollRatePID"), 0),
 					v.findViewById(id.kp_roll), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("RollRatePID"), 1),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("RollRatePID"), 1),
 					v.findViewById(id.ki_roll), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("RollRatePID"), 3),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("RollRatePID"), 3),
 					v.findViewById(id.ilimit_roll), mod_base);
 
-			connect(new UAVObjectLink(fieldDescByName.get("YawRatePID"), 0),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("YawRatePID"), 0),
 					v.findViewById(id.kp_yaw), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("YawRatePID"), 1),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("YawRatePID"), 1),
 					v.findViewById(id.ki_yaw), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("YawRatePID"), 3),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("YawRatePID"), 3),
 					v.findViewById(id.ilimit_yaw), mod_base);
 			break;
 		case 1:
 			mod_base = 0.1f;
 			middle_str="Attitude / Outer loop";
 			
-			connect(new UAVObjectLink(fieldDescByName.get("PitchPI"), 0),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchPI"), 0),
 					v.findViewById(id.kp_nick), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("PitchPI"), 1),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchPI"), 1),
 					v.findViewById(id.ki_nick), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("PitchPI"), 2),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchPI"), 2),
 					v.findViewById(id.ilimit_nick), mod_base);
 
-			connect(new UAVObjectLink(fieldDescByName.get("RollPI"), 0),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("RollPI"), 0),
 					v.findViewById(id.kp_roll), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("RollPI"), 1),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("RollPI"), 1),
 					v.findViewById(id.ki_roll), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("RollPI"), 2),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("RollPI"), 2),
 					v.findViewById(id.ilimit_roll), mod_base);
 
-			connect(new UAVObjectLink(fieldDescByName.get("YawPI"), 0),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("YawPI"), 0),
 					v.findViewById(id.kp_yaw), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("YawPI"), 1),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("YawPI"), 1),
 					v.findViewById(id.ki_yaw), mod_base);
-			connect(new UAVObjectLink(fieldDescByName.get("YawPI"), 2),
+			connectFloat(new UAVObjectLink(fieldDescByName.get("YawPI"), 2),
 					v.findViewById(id.ilimit_yaw), mod_base);
 			break;
+		case 2:
+			int mod_base_i = 1;
+			
+			connectInt(new UAVObjectLink(fieldDescByName.get("PitchMax"), 0),
+					v.findViewById(id.kp_nick), mod_base_i);
+			connectFloat(new UAVObjectLink(fieldDescByName.get("ManualRate"), 1),
+					v.findViewById(id.ki_nick), mod_base);
+			connectFloat(new UAVObjectLink(fieldDescByName.get("MaximumRate"), 1),
+					v.findViewById(id.ilimit_nick), mod_base);
+
+			connectInt(new UAVObjectLink(fieldDescByName.get("RollMax"), 0),
+					v.findViewById(id.kp_roll), mod_base_i);
+			connectFloat(new UAVObjectLink(fieldDescByName.get("ManualRate"), 0),
+					v.findViewById(id.ki_roll), mod_base);
+			connectFloat(new UAVObjectLink(fieldDescByName.get("MaximumRate"), 0),
+					v.findViewById(id.ilimit_roll), mod_base);
+
+			connectInt(new UAVObjectLink(fieldDescByName.get("YawMax"), 0),
+					v.findViewById(id.kp_yaw), mod_base_i);
+			connectFloat(new UAVObjectLink(fieldDescByName.get("ManualRate"), 2),
+					v.findViewById(id.ki_yaw), mod_base);
+			connectFloat(new UAVObjectLink(fieldDescByName.get("MaximumRate"), 2),
+					v.findViewById(id.ilimit_yaw), mod_base);
+
+			
+			break;
 		}
-		((TextView)v.findViewById(R.id.kp_spacerlabel)).setText("Kp " + middle_str +" Kp");
-		((TextView)v.findViewById(R.id.ki_spacerlabel)).setText("Ki " + middle_str +" Ki");
-		((TextView)v.findViewById(R.id.ilimit_spacerlabel)).setText("ILimit " + middle_str +" ILimit");
+		
+		switch(mNum) {
+				case 0:
+				case 1:
 				
+					((TextView)v.findViewById(R.id.kp_spacerlabel)).setText("Kp " + middle_str +" Kp");
+					((TextView)v.findViewById(R.id.ki_spacerlabel)).setText("Ki " + middle_str +" Ki");
+					((TextView)v.findViewById(R.id.ilimit_spacerlabel)).setText("ILimit " + middle_str +" ILimit");
+					break;
+					
+				case 2:
+					((TextView)v.findViewById(R.id.kp_spacerlabel)).setText(R.string.full_stick_angle);
+					((TextView)v.findViewById(R.id.ki_spacerlabel)).setText(R.string.full_stick_rate);
+					((TextView)v.findViewById(R.id.ilimit_spacerlabel)).setText(R.string.max_rate_in_att);
+					break;
+		}
 		
 
 		return v;
@@ -119,7 +157,7 @@ public class PITuneFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	private void connect(UAVObjectLink lnk, View v, float mod_base) {
+	private void connectFloat(UAVObjectLink lnk, View v, float mod_base) {
 
 		TextView tv = (TextView) v.findViewById(id.pival_val);
 		Button up = (Button) v.findViewById(id.pival_up);
@@ -151,4 +189,38 @@ public class PITuneFragment extends Fragment {
 		up.setOnClickListener(new ModOnClick(lnk, tv, mod_base));
 		down.setOnClickListener(new ModOnClick(lnk, tv, -mod_base));
 	}
+
+	private void connectInt(UAVObjectLink lnk, View v, int mod_base) {
+
+		TextView tv = (TextView) v.findViewById(id.pival_val);
+		Button up = (Button) v.findViewById(id.pival_up);
+		Button down = (Button) v.findViewById(id.pival_down);
+		class ModOnClick implements View.OnClickListener {
+
+			private TextView myTextView;
+			private UAVObjectLink myObjLnk;
+			private int mod_val;
+
+			public ModOnClick(UAVObjectLink lnk, TextView tv, int mod_val) {
+				myTextView = tv;
+				myObjLnk = lnk;
+				this.mod_val = mod_val;
+				setText();
+			}
+
+			private void setText() {
+				myTextView
+						.setText(""+myObjLnk.getAsInt());
+			}
+
+			public void onClick(View v) {
+				myObjLnk.setField(myObjLnk.getAsInt() + mod_val);
+				setText();
+			}
+
+		}
+		up.setOnClickListener(new ModOnClick(lnk, tv, mod_base));
+		down.setOnClickListener(new ModOnClick(lnk, tv, -mod_base));
+	}
+
 }

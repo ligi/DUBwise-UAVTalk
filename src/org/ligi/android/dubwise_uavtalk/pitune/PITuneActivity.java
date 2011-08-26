@@ -49,7 +49,7 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 
            @Override
            public int getCount() {
-        	   return 2;
+        	   return 3;
            }
 
 			@Override
