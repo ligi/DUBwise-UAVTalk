@@ -1,9 +1,10 @@
 package org.ligi.android.dubwise_uavtalk.pitune;
 
+import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
+import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
-import org.openpilot.uavtalk.uavobjects.ObjectPersistence;
-import org.openpilot.uavtalk.uavobjects.StabilizationSettings;
+import org.openpilot.uavtalk.UAVTalkDefinitions;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +21,7 @@ public class PITuneActivity extends FragmentActivity {
 			
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
+		    UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getStabilizationSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
 	        super.onCreate(savedInstanceState);
 	        this.setContentView(R.layout.pitune_pager);
 	        
@@ -45,27 +47,34 @@ public class PITuneActivity extends FragmentActivity {
 			}
 	   }
 
-	    private final static int MENU_VIDEO=0;
+	   private final static int MENU_VIDEO=0;
+	   private final static int MENU_SAVE=1;
 	    
 	    @Override
 	    public boolean onCreateOptionsMenu(Menu menu) {
 	        menu.clear();
 	        menu.add(0,MENU_VIDEO,0,"Help (Online-Video)").setIcon(android.R.drawable.ic_menu_help);
+	        menu.add(0,MENU_SAVE,0,"Save").setIcon(android.R.drawable.ic_menu_save);
 	        return super.onCreateOptionsMenu(menu);
 	    }
 
-	    @Override
-	    public boolean onOptionsItemSelected(MenuItem item) {
-	        switch(item.getItemId()) {
-	        case MENU_VIDEO:
-	        	Intent i= new Intent( "android.intent.action.VIEW",
-	        			Uri.parse( "http://www.openpilot.org/pid-tuning"));
-	        
-	        	this.startActivity(i);
-	        	break;
-	        }
-	        return true;
-	    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_VIDEO:
+			Intent i = new Intent("android.intent.action.VIEW",
+					Uri.parse("http://www.openpilot.org/pid-tuning"));
+
+			this.startActivity(i);
+			break;
+
+		case MENU_SAVE:
+			UAVObjectPersistHelper.persistWithDialog(this,UAVObjects.getStabilizationSettings());
+			break;
+
+		}
+		return true;
+	}
 
 
 }
