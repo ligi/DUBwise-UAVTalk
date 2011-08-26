@@ -27,7 +27,6 @@ package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
-import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,9 +42,8 @@ import android.widget.TextView;
  * @author ligi the UAVObjects
  *
  */
-public class UAVObjectFieldArrayListActivity extends ListActivity {
+public class UAVObjectFieldArrayListActivity extends UAVObjectFieldBaseActivity {
 
-    private int objid; 
     private int fieldid; 
     private myArrayAdapter ma;
 

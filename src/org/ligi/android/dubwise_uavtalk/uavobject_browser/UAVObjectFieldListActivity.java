@@ -44,9 +44,8 @@ import android.widget.TextView;
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
  */
-public class UAVObjectFieldListActivity extends ListActivity {
-
-    private int objid; 
+public class UAVObjectFieldListActivity extends UAVObjectFieldBaseActivity {
+    
     private int action;
     private UAVObjectsFieldDescriptionArrayAdapter my_adapter;
 
