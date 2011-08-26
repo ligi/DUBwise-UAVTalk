@@ -28,6 +28,7 @@ import it.gerdavax.easybluetooth.LocalDevice;
 import it.gerdavax.easybluetooth.ReadyListener;
 
 import org.ligi.android.uavtalk.dubwise.R;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkDevSettings;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 
 import android.app.Activity;
@@ -72,7 +73,7 @@ public class StartupConnectionHandler {
                     public void ready() {
                         ConnectionManager.connect(name,url);
                         alert2close.dismiss();
-                        HandshakeStatusAlertDialog.show(myActivity,true,new Intent(myActivity,InstrumentDisplayActivity.class));
+                        HandshakeStatusAlertDialog.show(myActivity,true,DUBwiseUAVTalkDevSettings.getStartIntent(myActivity));
                         
                     }
                 }
