@@ -58,6 +58,9 @@ public class DoBar extends LinearLayout implements OnTouchListener {
 		home.setOnClickListener(new MyHomeOnClick(context));
 		this.addView(home);
 		
+		if (this.isInEditMode())
+			return;
+		
 		ConnectionStatusDoBarGadget csv=new ConnectionStatusDoBarGadget(context);
 		csv.setLayoutParams(lp);
 		this.addView(csv);
