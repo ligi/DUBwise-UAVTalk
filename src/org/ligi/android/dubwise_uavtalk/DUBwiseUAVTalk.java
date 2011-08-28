@@ -26,7 +26,8 @@ package org.ligi.android.dubwise_uavtalk;
 
 import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper;
-import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;
+import org.ligi.android.common.intents.IntentHelper.IntentStartOnClick;
+import org.ligi.android.dubwise_uavtalk.channelview.CurveEditActivity;
 import org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
@@ -42,13 +43,11 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+
 
 /**
  * MainMenu/Entry/DashBoard Activity for DUBwise UAVTalk
@@ -60,8 +59,6 @@ import android.widget.Button;
  */
 
 public class DUBwiseUAVTalk extends Activity {
-
-	private Context ctx;
 
     public static boolean kickstarted=false;
 
@@ -95,61 +92,24 @@ public class DUBwiseUAVTalk extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ctx=this;
         kickstart(this);
         
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.dashboard);
         
-        ((Button)this.findViewById(R.id.dashboard_btn_output)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				  IntentHelper.startActivityClass(ctx,OutputTestActivity.class);
-			}
-        	
-        });
-
-        
-        ((Button)this.findViewById(R.id.dashboard_btn_channels)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				IntentHelper.startActivityClass(ctx,ChannelViewActivity.class);
-			}
-        	
-        });
-
-        ((Button)this.findViewById(R.id.dashboard_btn_pfd)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				IntentHelper.startActivityClass(ctx,InstrumentDisplayActivity.class);
-			}
-        	
-        });
-
-        ((Button)this.findViewById(R.id.dashboard_btn_tune)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-			    IntentHelper.startActivityClass(ctx,PITuneActivity.class);
-			}
-        	
-        });
-        
-        ((Button)this.findViewById(R.id.dashboard_btn_connection)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				IntentHelper.startActivityClass(ctx, ConnectionMenu.class);
-			}
-        	
-        });
-        
-        ((Button)this.findViewById(R.id.dashboard_btn_sound)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				IntentHelper.startActivityClass(ctx, StatusVoicePreferencesActivity.class);
-			}
-        	
-        });
-        
+        new IntentStartOnClick(new Intent(this,OutputTestActivity.class),this)
+        	.bind2view(R.id.dashboard_btn_output);
+        new IntentStartOnClick(new Intent(this,CurveEditActivity.class),this)
+        	.bind2view(R.id.dashboard_btn_channels);
+        new IntentStartOnClick(new Intent(this,InstrumentDisplayActivity.class),this)
+    		.bind2view(R.id.dashboard_btn_pfd);
+        new IntentStartOnClick(new Intent(this,PITuneActivity.class),this)
+    		.bind2view(R.id.dashboard_btn_tune);
+        new IntentStartOnClick(new Intent(this,ConnectionMenu.class),this)
+    		.bind2view(R.id.dashboard_btn_connection);
+        new IntentStartOnClick(new Intent(this,StatusVoicePreferencesActivity.class),this)
+        	.bind2view(R.id.dashboard_btn_sound);
+                           
     }
     
     private final static int MENU_SAVE_EDIT=0;
