@@ -41,5 +41,10 @@
 			<type>2</type>
 			<locationURI>_android_LigiAndroidCommons_1e40ff98/src</locationURI>
 		</link>
+		<link>
+			<name>android-viewpagerindicator_src</name>
+			<type>2</type>
+			<locationURI>_android_android_viewpagerindicator_35ca3baf/src</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

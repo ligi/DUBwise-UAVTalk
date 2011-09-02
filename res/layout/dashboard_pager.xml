@@ -18,9 +18,15 @@
     android:layout_height="fill_parent" 
     android:orientation="vertical">
      
-<org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
-	
-		<android.support.v4.view.ViewPager 
+     <org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
+     
+     <com.jakewharton.android.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+        />
+		
+	 <android.support.v4.view.ViewPager 
 		        android:id="@+id/dashboard_pager" 
 		        android:layout_width="fill_parent"
 		        android:layout_height="fill_parent"

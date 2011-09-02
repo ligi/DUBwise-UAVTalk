@@ -36,7 +36,7 @@ import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 import org.ligi.android.dubwise_uavtalk.map.DUBwiseMapActivity;
 import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
-import org.ligi.android.dubwise_uavtalk.pitune.PITuneFragment;
+
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
@@ -45,6 +45,10 @@ import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
+
+import com.jakewharton.android.viewpagerindicator.CirclePageIndicator;
+import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
+import com.jakewharton.android.viewpagerindicator.TitleProvider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -113,7 +117,12 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         ViewPager awesomePager = (ViewPager) findViewById(R.id.dashboard_pager);
         awesomePager.setAdapter(pituneAdapter);
         
+        TitlePageIndicator indicator =
+                (TitlePageIndicator)findViewById( R.id.indicator );
 
+        indicator.setViewPager(awesomePager);
+        
+        
     }
     
     private final static int MENU_SAVE_EDIT=0;
@@ -135,7 +144,7 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         return true;
     }
     
-    private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter{
+    private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider{
         
         public PITuneFragmentPagerAdapter(FragmentManager fm) {
      	   super(fm);
@@ -197,6 +206,19 @@ public class DUBwiseUAVTalk extends FragmentActivity {
 					}
 				}
 				return new DashboardFragment(arg0);			}
+
+			@Override
+			public String getTitle(int position) {
+				switch(position) {
+				/*case 0:
+					return "check"; */
+				case 0:
+					return "fly";
+				case 1:
+					return "setup";
+				}
+				return null;
+			}
 	   }
 
 }
