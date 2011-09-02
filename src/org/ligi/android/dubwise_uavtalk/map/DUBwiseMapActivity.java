@@ -30,6 +30,9 @@ import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -57,7 +60,11 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
-		this.setContentView(R.layout.map);
+		
+		if (isDebugBuild())
+			this.setContentView(R.layout.map_debug);
+		else
+			this.setContentView(R.layout.map_release);
 		 
 		mapView=(MapView)findViewById(R.id.mapview);
 
@@ -90,12 +97,23 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 		
 		if ((UAVObjects.getGPSPosition().getLatitude()==0)&&
 			(UAVObjects.getGPSPosition().getLongitude()==0))
-		(new AlertDialog.Builder(this)).setTitle(R.string.no_gps_title)
+		(new AlertDialog.Builder(this)).setTitle(R.string.no_gps_title) 
 			.setMessage(R.string.no_gps_msg)
 			.setIcon(android.R.drawable.ic_dialog_alert)
 			.setPositiveButton(R.string.understood, new DialogDiscarder())
 		.show();
 	
+	}
+	
+	public boolean isDebugBuild() {
+		try {
+			PackageManager pm = this.getPackageManager();
+			PackageInfo pi = pm.getPackageInfo(this.getPackageName(), 0);
+
+			return ((pi.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 	@Override
