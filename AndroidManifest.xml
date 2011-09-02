@@ -19,11 +19,13 @@
 		
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	
-	<uses-library android:name="com.google.android.maps"/>
+	
 
     <application android:icon="@drawable/icon"
 		android:theme="@style/base_theme"
 		android:label="@string/app_name">
+    
+    	<uses-library android:name="com.google.android.maps"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalk"
                   android:label="@string/app_name">
             <intent-filter>
@@ -34,6 +36,8 @@
         <activity android:name="org.ligi.android.dubwise_uavtalk.SettingsListActivity"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActivity" 
         android:launchMode="singleTop"/>
+        
+        <activity android:name="org.ligi.android.dubwise_uavtalk.channelview.CurveEditActivity"/>
         <activity android:name="org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity"/>
         
         <activity android:name="org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity"/>
@@ -45,6 +49,7 @@
         <activity android:name="org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity"></activity>
 
         <activity android:name="org.ligi.android.dubwise_uavtalk.PicturescMenu"></activity>
+        <activity android:name="org.ligi.android.dubwise_uavtalk.map.DUBwiseMapActivity"></activity>
         
         <activity android:name="org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity"
         	android:launchMode="singleTop"/>

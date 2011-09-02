@@ -27,12 +27,16 @@ package org.ligi.android.dubwise_uavtalk;
 import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.common.intents.IntentHelper.IntentStartOnClick;
+import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;
 import org.ligi.android.dubwise_uavtalk.channelview.CurveEditActivity;
 import org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
+
+import org.ligi.android.dubwise_uavtalk.map.DUBwiseMapActivity;
 import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
+import org.ligi.android.dubwise_uavtalk.pitune.PITuneFragment;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
@@ -45,8 +49,16 @@ import org.openpilot.uavtalk.UAVObjects;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 
 /**
@@ -58,7 +70,7 @@ import android.view.MenuItem;
  *
  */
 
-public class DUBwiseUAVTalk extends Activity {
+public class DUBwiseUAVTalk extends FragmentActivity {
 
     public static boolean kickstarted=false;
 
@@ -95,21 +107,13 @@ public class DUBwiseUAVTalk extends Activity {
         kickstart(this);
         
         this.setTheme(R.style.base_theme);
-        this.setContentView(R.layout.dashboard);
+        this.setContentView(R.layout.dashboard_pager);
         
-        new IntentStartOnClick(new Intent(this,OutputTestActivity.class),this)
-        	.bind2view(R.id.dashboard_btn_output);
-        new IntentStartOnClick(new Intent(this,CurveEditActivity.class),this)
-        	.bind2view(R.id.dashboard_btn_channels);
-        new IntentStartOnClick(new Intent(this,InstrumentDisplayActivity.class),this)
-    		.bind2view(R.id.dashboard_btn_pfd);
-        new IntentStartOnClick(new Intent(this,PITuneActivity.class),this)
-    		.bind2view(R.id.dashboard_btn_tune);
-        new IntentStartOnClick(new Intent(this,ConnectionMenu.class),this)
-    		.bind2view(R.id.dashboard_btn_connection);
-        new IntentStartOnClick(new Intent(this,StatusVoicePreferencesActivity.class),this)
-        	.bind2view(R.id.dashboard_btn_sound);
-                           
+        PITuneFragmentPagerAdapter pituneAdapter = new PITuneFragmentPagerAdapter(this.getSupportFragmentManager());
+        ViewPager awesomePager = (ViewPager) findViewById(R.id.dashboard_pager);
+        awesomePager.setAdapter(pituneAdapter);
+        
+
     }
     
     private final static int MENU_SAVE_EDIT=0;
@@ -130,5 +134,69 @@ public class DUBwiseUAVTalk extends Activity {
         }
         return true;
     }
+    
+    private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter{
+        
+        public PITuneFragmentPagerAdapter(FragmentManager fm) {
+     	   super(fm);
+        }
+
+        @Override
+        public int getCount() {
+     	   return 2;
+        }
+
+			@Override
+			public Fragment getItem(int arg0) {
+				class DashboardFragment extends Fragment {
+					int num=0;
+					
+					public DashboardFragment(int num) {
+						this.num=num;
+					}
+					@Override
+					public void onCreate(Bundle savedInstanceState) {
+						super.onCreate(savedInstanceState);
+					}
+					
+					@Override
+					public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							Bundle savedInstanceState) {
+						View v=null;
+						
+						switch (num) {
+						case 0:
+							v = inflater.inflate(R.layout.dashboard, container, false);
+							break;
+						case 1:
+							v = inflater.inflate(R.layout.dashboard_service, container, false);
+							break;
+						}
+						
+						Activity a=this.getActivity();
+					    new IntentStartOnClick(new Intent(a,OutputTestActivity.class),a)
+				        	.bind2view(R.id.dashboard_btn_output,v);
+				        new IntentStartOnClick(new Intent(a,CurveEditActivity.class),a)
+				        	.bind2view(R.id.dashboard_btn_curve,v);
+				        new IntentStartOnClick(new Intent(a,ChannelViewActivity.class),a)
+			        		.bind2view(R.id.dashboard_btn_channels,v);
+			        
+				        new IntentStartOnClick(new Intent(a,InstrumentDisplayActivity.class),a)
+				    		.bind2view(R.id.dashboard_btn_pfd,v);
+				        new IntentStartOnClick(new Intent(a,PITuneActivity.class),a)
+				    		.bind2view(R.id.dashboard_btn_tune,v);
+				        new IntentStartOnClick(new Intent(a,ConnectionMenu.class),a)
+				    		.bind2view(R.id.dashboard_btn_connection,v);
+				        new IntentStartOnClick(new Intent(a,StatusVoicePreferencesActivity.class),a)
+				        	.bind2view(R.id.dashboard_btn_sound,v);
+
+				        new IntentStartOnClick(new Intent(a,DUBwiseMapActivity.class),a)
+			        	.bind2view(R.id.dashboard_btn_map,v);
+
+						return v;
+					}
+				}
+				return new DashboardFragment(arg0);			}
+	   }
 
 }
