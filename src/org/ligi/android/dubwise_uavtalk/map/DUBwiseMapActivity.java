@@ -90,10 +90,10 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 		
 		if ((UAVObjects.getGPSPosition().getLatitude()==0)&&
 			(UAVObjects.getGPSPosition().getLongitude()==0))
-		(new AlertDialog.Builder(this)).setTitle("No GPS-Position")
-			.setMessage("I get no coordinates from your UAS - You have a no sat-fix or a configuration problem and will not see much in this Activity!")
+		(new AlertDialog.Builder(this)).setTitle(R.string.no_gps_title)
+			.setMessage(R.string.no_gps_msg)
 			.setIcon(android.R.drawable.ic_dialog_alert)
-			.setPositiveButton("Understood", new DialogDiscarder())
+			.setPositiveButton(R.string.understood, new DialogDiscarder())
 		.show();
 	
 	}

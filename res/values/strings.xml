@@ -40,5 +40,8 @@
     <string name="full_stick_angle">Full stick angle (deg)</string>
     <string name="full_stick_rate">Flull stick rate(deg/s)</string>
     <string name="max_rate_in_att">Maximum rate in attitude mode (deg/s)</string>
+    <string name="no_gps_msg">I get no coordinates from your UAS - You have a no sat-fix or a configuration problem and will not see much in this Activity!</string>
+    <string name="no_gps_title">No GPS-Position</string>
+    <string name="understood">understood</string>
 
 </resources>
