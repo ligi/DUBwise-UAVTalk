@@ -113,15 +113,15 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.dashboard_pager);
         
-        PITuneFragmentPagerAdapter pituneAdapter = new PITuneFragmentPagerAdapter(this.getSupportFragmentManager());
+        DashBoardFragmentPagerAdapter pituneAdapter = new DashBoardFragmentPagerAdapter(this.getSupportFragmentManager());
         ViewPager awesomePager = (ViewPager) findViewById(R.id.dashboard_pager);
         awesomePager.setAdapter(pituneAdapter);
         
         TitlePageIndicator indicator =
                 (TitlePageIndicator)findViewById( R.id.indicator );
 
-        indicator.setViewPager(awesomePager);
-        
+        if (indicator!=null)
+        	indicator.setViewPager(awesomePager);
         
     }
     
@@ -144,9 +144,9 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         return true;
     }
     
-    private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider{
+    private class DashBoardFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider{
         
-        public PITuneFragmentPagerAdapter(FragmentManager fm) {
+        public DashBoardFragmentPagerAdapter(FragmentManager fm) {
      	   super(fm);
         }
 
@@ -155,70 +155,22 @@ public class DUBwiseUAVTalk extends FragmentActivity {
      	   return 2;
         }
 
-			@Override
-			public Fragment getItem(int arg0) {
-				class DashboardFragment extends Fragment {
-					int num=0;
-					
-					public DashboardFragment(int num) {
-						this.num=num;
-					}
-					@Override
-					public void onCreate(Bundle savedInstanceState) {
-						super.onCreate(savedInstanceState);
-					}
-					
-					@Override
-					public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							Bundle savedInstanceState) {
-						View v=null;
-						
-						switch (num) {
-						case 0:
-							v = inflater.inflate(R.layout.dashboard, container, false);
-							break;
-						case 1:
-							v = inflater.inflate(R.layout.dashboard_service, container, false);
-							break;
-						}
-						
-						Activity a=this.getActivity();
-					    new IntentStartOnClick(new Intent(a,OutputTestActivity.class),a)
-				        	.bind2view(R.id.dashboard_btn_output,v);
-				        new IntentStartOnClick(new Intent(a,CurveEditActivity.class),a)
-				        	.bind2view(R.id.dashboard_btn_curve,v);
-				        new IntentStartOnClick(new Intent(a,ChannelViewActivity.class),a)
-			        		.bind2view(R.id.dashboard_btn_channels,v);
-			        
-				        new IntentStartOnClick(new Intent(a,InstrumentDisplayActivity.class),a)
-				    		.bind2view(R.id.dashboard_btn_pfd,v);
-				        new IntentStartOnClick(new Intent(a,PITuneActivity.class),a)
-				    		.bind2view(R.id.dashboard_btn_tune,v);
-				        new IntentStartOnClick(new Intent(a,ConnectionMenu.class),a)
-				    		.bind2view(R.id.dashboard_btn_connection,v);
-				        new IntentStartOnClick(new Intent(a,StatusVoicePreferencesActivity.class),a)
-				        	.bind2view(R.id.dashboard_btn_sound,v);
+		@Override
+		public Fragment getItem(int arg0) {
+			return DashboardFragment.newInstance(arg0);		
+		}
 
-				        new IntentStartOnClick(new Intent(a,DUBwiseMapActivity.class),a)
-			        	.bind2view(R.id.dashboard_btn_map,v);
-
-						return v;
-					}
-				}
-				return new DashboardFragment(arg0);			}
-
-			@Override
-			public String getTitle(int position) {
-				switch(position) {
-				/*case 0:
-					return "check"; */
-				case 0:
-					return "fly";
-				case 1:
-					return "setup";
-				}
-				return null;
+		@Override
+		public String getTitle(int position) {
+			switch(position) {
+			/*case 0:
+				return "check"; */
+			case 0:
+				return "fly";
+			case 1:
+				return "setup";
 			}
-	   }
-
+			return null;
+		}
+    }
 }
