@@ -26,19 +26,8 @@ package org.ligi.android.dubwise_uavtalk;
 
 import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper;
-import org.ligi.android.common.intents.IntentHelper.IntentStartOnClick;
-import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;
-import org.ligi.android.dubwise_uavtalk.channelview.CurveEditActivity;
-import org.ligi.android.dubwise_uavtalk.connection.ConnectionMenu;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
-import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
-
-import org.ligi.android.dubwise_uavtalk.map.DUBwiseMapActivity;
-import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
-import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
-
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
-import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
 import org.ligi.tracedroid.TraceDroid;
@@ -46,23 +35,18 @@ import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
-import com.jakewharton.android.viewpagerindicator.CirclePageIndicator;
 import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
 import com.jakewharton.android.viewpagerindicator.TitleProvider;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 
 /**
