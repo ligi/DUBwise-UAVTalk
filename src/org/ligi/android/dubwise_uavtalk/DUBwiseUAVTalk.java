@@ -27,6 +27,7 @@ package org.ligi.android.dubwise_uavtalk;
 import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
+import org.ligi.android.dubwise_uavtalk.gps.LocationUpdater;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
@@ -47,7 +48,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-
 
 /**
  * MainMenu/Entry/DashBoard Activity for DUBwise UAVTalk
@@ -86,6 +86,10 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         StatusVoicePreferences.init(activity);
         StatusVoiceTTSFeederThread.init(activity);
         StartupConnectionHandler.init(activity);
+        
+        // TODO Settings definition
+        new Thread(new LocationUpdater(activity)).start();
+        
     }
 
     @Override
