@@ -1,5 +1,8 @@
 package org.ligi.android.dubwise_uavtalk;
 
+import java.io.File;
+import java.net.URL;
+
 import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper.IntentStartOnClick;
 import org.ligi.android.dubwise_uavtalk.channelview.ChannelViewActivity;
@@ -11,13 +14,21 @@ import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 
+import com.google.android.apps.iosched.ui.widget.DashboardLayout;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class DashboardFragment extends Fragment {
 	private int num=0;
@@ -37,40 +48,45 @@ public class DashboardFragment extends Fragment {
 		num = getArguments() != null ? getArguments().getInt(ARGUMENT_KEY) : 0;
 	}
 	
+	public Button createDashboardButton(int string_resID,int image_resID,Intent i,String tag) {
+		Button b=new Button(this.getActivity());
+		b.setText(string_resID);
+		
+		String base_path=Environment.getExternalStorageDirectory().getAbsolutePath()+"/DUBwise/images/";
+        Drawable img = Drawable.createFromPath(base_path+tag+".png"); 
+        if (img==null)
+        	img=this.getResources().getDrawable(image_resID);
+        
+		int img_size=this.getResources().getDimensionPixelSize(R.dimen.dashboard_image_size);
+		img.setBounds(new Rect(0,0,img_size,img_size));
+		
+		b.setCompoundDrawables(null,img, null,null);
+		b.setBackgroundDrawable(null);
+		b.setTextColor(Color.GRAY);
+		new IntentStartOnClick(i,this.getActivity())
+      		.bind2view(b);
+		return b;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View v=null;
+		DashboardLayout v=new DashboardLayout(this.getActivity());
 		
 		switch (num) {
 		case 0:
-			v = inflater.inflate(R.layout.dashboard, container, false);
+			v.addView(createDashboardButton(R.string.pfd,R.drawable.pfd_square,new Intent(this.getActivity(),InstrumentDisplayActivity.class),"pfd"));
+			v.addView(createDashboardButton(R.string.map,R.drawable.map_square,new Intent(this.getActivity(),DUBwiseMapActivity.class),"map"));
 			break;
 		case 1:
-			v = inflater.inflate(R.layout.dashboard_service, container, false);
+			v.addView(createDashboardButton(R.string.connection,R.drawable.antenna_square,new Intent(this.getActivity(),ConnectionMenu.class),"con"));
+			v.addView(createDashboardButton(R.string.output_test,R.drawable.engine_square,new Intent(this.getActivity(),OutputTestActivity.class),"out"));
+			v.addView(createDashboardButton(R.string.curves,R.drawable.curve_square,new Intent(this.getActivity(),CurveEditActivity.class),"curve"));
+			v.addView(createDashboardButton(R.string.channels,R.drawable.rc_square,new Intent(this.getActivity(),ChannelViewActivity.class),"chan"));
+			v.addView(createDashboardButton(R.string.pitune,R.drawable.tune_square,new Intent(this.getActivity(),PITuneActivity.class),"tune"));
+			v.addView(createDashboardButton(R.string.status_voice,R.drawable.sound_square,new Intent(this.getActivity(),StatusVoicePreferencesActivity.class),"voice"));
 			break;
 		}
-		
-		Activity a=this.getActivity();
-	    new IntentStartOnClick(new Intent(a,OutputTestActivity.class),a)
-        	.bind2view(R.id.dashboard_btn_output,v);
-        new IntentStartOnClick(new Intent(a,CurveEditActivity.class),a)
-        	.bind2view(R.id.dashboard_btn_curve,v);
-        new IntentStartOnClick(new Intent(a,ChannelViewActivity.class),a)
-    		.bind2view(R.id.dashboard_btn_channels,v);
-    
-        new IntentStartOnClick(new Intent(a,InstrumentDisplayActivity.class),a)
-    		.bind2view(R.id.dashboard_btn_pfd,v);
-        new IntentStartOnClick(new Intent(a,PITuneActivity.class),a)
-    		.bind2view(R.id.dashboard_btn_tune,v);
-        new IntentStartOnClick(new Intent(a,ConnectionMenu.class),a)
-    		.bind2view(R.id.dashboard_btn_connection,v);
-        new IntentStartOnClick(new Intent(a,StatusVoicePreferencesActivity.class),a)
-        	.bind2view(R.id.dashboard_btn_sound,v);
-
-        new IntentStartOnClick(new Intent(a,DUBwiseMapActivity.class),a)
-    	.bind2view(R.id.dashboard_btn_map,v);
-
 		return v;
 	}
 }
