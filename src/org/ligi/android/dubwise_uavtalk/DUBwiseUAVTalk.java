@@ -27,6 +27,7 @@ package org.ligi.android.dubwise_uavtalk;
 import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
+import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
 import org.ligi.android.dubwise_uavtalk.gps.LocationUpdater;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
@@ -37,14 +38,10 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
 import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
-import com.jakewharton.android.viewpagerindicator.TitleProvider;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -132,33 +129,5 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         return true;
     }
     
-    private class DashBoardFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider{
-        
-        public DashBoardFragmentPagerAdapter(FragmentManager fm) {
-     	   super(fm);
-        }
-
-        @Override
-        public int getCount() {
-     	   return 2;
-        }
-
-		@Override
-		public Fragment getItem(int arg0) {
-			return DashboardFragment.newInstance(arg0);		
-		}
-
-		@Override
-		public String getTitle(int position) {
-			switch(position) {
-			/*case 0:
-				return "check"; */
-			case 0:
-				return "fly";
-			case 1:
-				return "setup";
-			}
-			return null;
-		}
-    }
+   
 }
