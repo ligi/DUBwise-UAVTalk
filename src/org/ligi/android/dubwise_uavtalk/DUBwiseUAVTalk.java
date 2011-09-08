@@ -48,8 +48,6 @@ import android.view.MenuItem;
 
 /**
  * MainMenu/Entry/DashBoard Activity for DUBwise UAVTalk
- * 
- * TODO add FragmentPager to page between flight and garage dashboard
  *  
  * @author ligi ( aka: Marcus Bueschleb | mail: ligi at ligi dot de )
  *
@@ -128,6 +126,4 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         }
         return true;
     }
-    
-   
 }
