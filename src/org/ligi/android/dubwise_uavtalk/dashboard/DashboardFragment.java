@@ -50,13 +50,14 @@ public class DashboardFragment extends Fragment {
 		Button b=new Button(this.getActivity());
 		b.setText(string_resID);
 		
-		String base_path=Environment.getExternalStorageDirectory().getAbsolutePath()+"/DUBwise/images/";
+		String base_path=Environment.getExternalStorageDirectory().getAbsolutePath()+"/DUBwise/images/dashboard/";
         Drawable img = Drawable.createFromPath(base_path+tag+".png"); 
         if (img==null)
         	img=this.getResources().getDrawable(image_resID);
         
 		int img_size=this.getResources().getDimensionPixelSize(R.dimen.dashboard_image_size);
-		img.setBounds(new Rect(0,0,img_size,img_size));
+		
+		img.setBounds(new Rect(0,0,img_size*img.getIntrinsicWidth()/img.getIntrinsicHeight(),img_size));
 		
 		b.setCompoundDrawables(null,img, null,null);
 		b.setBackgroundDrawable(null);
