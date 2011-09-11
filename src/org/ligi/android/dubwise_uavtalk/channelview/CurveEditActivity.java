@@ -24,10 +24,10 @@
 
 package org.ligi.android.dubwise_uavtalk.channelview;
 
-
 import org.ligi.android.dubwise.rc.CurveEditView;
 import org.ligi.android.dubwise.rc.CurveEditView.OnChangeListener;
 import org.ligi.android.uavtalk.dubwise.R;
+import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -37,14 +37,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * activity to edit a curve
+ * Activity to edit a curve
  * 
  * @author ligi
  *
  */
 public class CurveEditActivity extends Activity implements OnChangeListener {
 
-	private TextView val1,val2,val3,val4,val5;
+	private TextView[] val_tv;
 	private CurveEditView cev;
 	
     @Override
@@ -62,25 +62,22 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
 			}
         	
         });        
-        
-        val1=  ((TextView)this.findViewById(R.id.curve_val1));
-        val2=  ((TextView)this.findViewById(R.id.curve_val2));
-        val3=  ((TextView)this.findViewById(R.id.curve_val3));
-        val4=  ((TextView)this.findViewById(R.id.curve_val4));
-        val5=  ((TextView)this.findViewById(R.id.curve_val5));
+        val_tv=new TextView[] { ((TextView)this.findViewById(R.id.curve_val1)),
+						         ((TextView)this.findViewById(R.id.curve_val2)),
+						         ((TextView)this.findViewById(R.id.curve_val3)),
+						         ((TextView)this.findViewById(R.id.curve_val4)),
+						         ((TextView)this.findViewById(R.id.curve_val5)) };
         
         cev.setOnChangeListener(this);
-        cev.setCurve(new float[] { 0.0f,0.25f,0.5f,0.75f,1f });
+        
+        float[] f=UAVObjects.getMixerSettings().getThrottleCurve1();
+        cev.setCurve(f);
     }
 
 	public void notifyChange() {
+		for (int i=0;i<5;i++)
+			val_tv[i].setText(String.format("%.3f", cev.getCurvePoint(i)));
 		
-		val1.setText(String.format("%.3f", cev.getCurvePoint(0)));
-		val2.setText(String.format("%.3f", cev.getCurvePoint(1)));
-		val3.setText(String.format("%.3f", cev.getCurvePoint(2)));
-		val4.setText(String.format("%.3f", cev.getCurvePoint(3)));
-		val5.setText(String.format("%.3f", cev.getCurvePoint(4)));
+		UAVObjects.getMixerSettings().setThrottleCurve1(cev.getCurve());
 	}
-
-
 }
