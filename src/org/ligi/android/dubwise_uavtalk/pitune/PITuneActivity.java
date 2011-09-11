@@ -6,6 +6,9 @@ import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.UAVTalkDefinitions;
 
+import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
+import com.jakewharton.android.viewpagerindicator.TitleProvider;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +36,12 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 	        PITuneFragmentPagerAdapter pituneAdapter = new PITuneFragmentPagerAdapter(getSupportFragmentManager());
 	        ViewPager awesomePager = (ViewPager) findViewById(R.id.pitune_pager);
 	        awesomePager.setAdapter(pituneAdapter);
+	        
+	        TitlePageIndicator indicator =
+	                (TitlePageIndicator)findViewById( R.id.indicator );
+
+	        if (indicator!=null)
+	        	indicator.setViewPager(awesomePager);
 	   }
 
 	   @Override
@@ -41,7 +50,7 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 		super.onDestroy();
 	}
 
-	private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter{
+	private class PITuneFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider{
            
            public PITuneFragmentPagerAdapter(FragmentManager fm) {
         	   super(fm);
@@ -55,6 +64,19 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 			@Override
 			public Fragment getItem(int arg0) {
 				return PITuneFragment.newInstance(arg0) ;
+			}
+
+			@Override
+			public String getTitle(int position) {
+				switch (position) {
+				case 0:
+					return "inner loop";
+				case 1:
+					return "outer loop";
+				case 2:
+					return "stick limits";
+				}
+				return "null";
 			}
 	   }
 

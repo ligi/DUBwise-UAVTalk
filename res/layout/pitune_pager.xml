@@ -8,9 +8,30 @@
    
       	<org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
 	
+			
+	<com.jakewharton.android.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+        />
+		
+	
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/tableRow1">
+		<TextView android:text="Nick" android:layout_weight="0.3" android:gravity="center"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+		<TextView android:text="Roll" android:layout_weight="0.3" android:gravity="center"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+		<TextView android:text="Yaw" android:layout_weight="0.3" android:gravity="center"
+			android:layout_width="wrap_content" android:id="@+id/textView1"
+			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+	</LinearLayout>
 		<android.support.v4.view.ViewPager 
 		        android:id="@+id/pitune_pager" 
 		        android:layout_width="fill_parent"
 		        android:layout_height="fill_parent"
 		/>
+
 </LinearLayout>

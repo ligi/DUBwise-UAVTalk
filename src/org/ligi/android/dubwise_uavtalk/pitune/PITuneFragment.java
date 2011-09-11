@@ -110,23 +110,23 @@ public class PITuneFragment extends Fragment {
 			connectInt(new UAVObjectLink(fieldDescByName.get("PitchMax"), 0),
 					v.findViewById(id.kp_nick), mod_base_i);
 			connectFloat(new UAVObjectLink(fieldDescByName.get("ManualRate"), 1),
-					v.findViewById(id.ki_nick), mod_base);
+					v.findViewById(id.ki_nick), mod_base_i,"%.0f");
 			connectFloat(new UAVObjectLink(fieldDescByName.get("MaximumRate"), 1),
-					v.findViewById(id.ilimit_nick), mod_base);
+					v.findViewById(id.ilimit_nick), mod_base_i,"%.0f");
 
 			connectInt(new UAVObjectLink(fieldDescByName.get("RollMax"), 0),
 					v.findViewById(id.kp_roll), mod_base_i);
 			connectFloat(new UAVObjectLink(fieldDescByName.get("ManualRate"), 0),
-					v.findViewById(id.ki_roll), mod_base);
+					v.findViewById(id.ki_roll), mod_base_i,"%.0f");
 			connectFloat(new UAVObjectLink(fieldDescByName.get("MaximumRate"), 0),
-					v.findViewById(id.ilimit_roll), mod_base);
+					v.findViewById(id.ilimit_roll), mod_base_i,"%.0f");
 
 			connectInt(new UAVObjectLink(fieldDescByName.get("YawMax"), 0),
 					v.findViewById(id.kp_yaw), mod_base_i);
 			connectFloat(new UAVObjectLink(fieldDescByName.get("ManualRate"), 2),
-					v.findViewById(id.ki_yaw), mod_base);
+					v.findViewById(id.ki_yaw), mod_base_i,"%.0f");
 			connectFloat(new UAVObjectLink(fieldDescByName.get("MaximumRate"), 2),
-					v.findViewById(id.ilimit_yaw), mod_base);
+					v.findViewById(id.ilimit_yaw), mod_base_i,"%.0f");
 
 			
 			break;
@@ -136,9 +136,9 @@ public class PITuneFragment extends Fragment {
 				case 0:
 				case 1:
 				
-					((TextView)v.findViewById(R.id.kp_spacerlabel)).setText("Kp " + middle_str +" Kp");
-					((TextView)v.findViewById(R.id.ki_spacerlabel)).setText("Ki " + middle_str +" Ki");
-					((TextView)v.findViewById(R.id.ilimit_spacerlabel)).setText("ILimit " + middle_str +" ILimit");
+					((TextView)v.findViewById(R.id.kp_spacerlabel)).setText("Kp");
+					((TextView)v.findViewById(R.id.ki_spacerlabel)).setText("KiKi");
+					((TextView)v.findViewById(R.id.ilimit_spacerlabel)).setText("ILimit");
 					break;
 					
 				case 2:
@@ -158,6 +158,10 @@ public class PITuneFragment extends Fragment {
 	}
 
 	private void connectFloat(UAVObjectLink lnk, View v, float mod_base) {
+		connectFloat(lnk, v, mod_base,"%.6f");
+	}
+	
+	private void connectFloat(UAVObjectLink lnk, View v, float mod_base,String formater) {
 
 		TextView tv = (TextView) v.findViewById(id.pival_val);
 		Button up = (Button) v.findViewById(id.pival_up);
@@ -167,17 +171,19 @@ public class PITuneFragment extends Fragment {
 			private TextView myTextView;
 			private UAVObjectLink myObjLnk;
 			private float mod_val;
+			private String formater;
 
-			public ModOnClick(UAVObjectLink lnk, TextView tv, float mod_val) {
+			public ModOnClick(UAVObjectLink lnk, TextView tv, float mod_val, String formater) {
 				myTextView = tv;
 				myObjLnk = lnk;
 				this.mod_val = mod_val;
+				this.formater=formater;
 				setText();
 			}
 
 			private void setText() {
 				myTextView
-						.setText(String.format("%.6f", myObjLnk.getAsFloat()));
+						.setText(String.format(formater, myObjLnk.getAsFloat()));
 			}
 
 			public void onClick(View v) {
@@ -186,8 +192,8 @@ public class PITuneFragment extends Fragment {
 			}
 
 		}
-		up.setOnClickListener(new ModOnClick(lnk, tv, mod_base));
-		down.setOnClickListener(new ModOnClick(lnk, tv, -mod_base));
+		up.setOnClickListener(new ModOnClick(lnk, tv, mod_base,formater));
+		down.setOnClickListener(new ModOnClick(lnk, tv, -mod_base,formater));
 	}
 
 	private void connectInt(UAVObjectLink lnk, View v, int mod_base) {
