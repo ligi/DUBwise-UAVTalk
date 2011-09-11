@@ -137,7 +137,7 @@ public class PITuneFragment extends Fragment {
 				case 1:
 				
 					((TextView)v.findViewById(R.id.kp_spacerlabel)).setText("Kp");
-					((TextView)v.findViewById(R.id.ki_spacerlabel)).setText("KiKi");
+					((TextView)v.findViewById(R.id.ki_spacerlabel)).setText("Ki");
 					((TextView)v.findViewById(R.id.ilimit_spacerlabel)).setText("ILimit");
 					break;
 					

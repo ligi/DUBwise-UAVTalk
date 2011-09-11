@@ -5,7 +5,7 @@
 			android:background="@drawable/pi_value_bg"
 			android:layout_margin="3px">
         
-            <Button android:text="+" android:id="@+id/pival_up" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+            <Button android:text="+" android:layout_marginTop="3px" android:id="@+id/pival_up" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
             <TextView android:layout_gravity="center" android:layout_height="wrap_content" android:id="@+id/pival_val" android:layout_width="wrap_content" android:text="TextView" android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
             <Button android:text="-" android:id="@+id/pival_down" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
                

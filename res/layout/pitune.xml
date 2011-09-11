@@ -10,7 +10,7 @@
 		<LinearLayout android:layout_width="fill_parent" 
 			android:layout_height="fill_parent" android:orientation="vertical">
 			
-			<TextView  android:text="Kp"  android:id="@+id/kp_spacerlabel" style="@style/pitune_spacer"/>
+			<TextView  android:paddingRight="20px" android:text="Kp"  android:id="@+id/kp_spacerlabel" style="@style/pitune_spacer"/>
 
 			<LinearLayout android:layout_width="fill_parent"
 				android:layout_height="wrap_content">
@@ -22,7 +22,7 @@
 					layout="@layout/pi_value" />
 			</LinearLayout>
 
-			<TextView  android:text="Ki" android:id="@+id/ki_spacerlabel" style="@style/pitune_spacer"/>
+			<TextView android:paddingRight="20px"  android:text="Ki" android:id="@+id/ki_spacerlabel" style="@style/pitune_spacer"/>
 			
 			<LinearLayout android:layout_width="fill_parent"
 				android:layout_height="wrap_content"  >
@@ -34,7 +34,7 @@
 					layout="@layout/pi_value" />
 			</LinearLayout>
 
-			<TextView  android:text="ILimit"  android:id="@+id/ilimit_spacerlabel" style="@style/pitune_spacer"/>
+			<TextView  android:paddingRight="20px" android:text="ILimit"  android:id="@+id/ilimit_spacerlabel" style="@style/pitune_spacer"/>
 			
 			<LinearLayout android:layout_width="fill_parent"
 				android:layout_height="wrap_content"  >
