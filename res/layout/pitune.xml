@@ -3,18 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical">
-	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/tableRow1">
-		<TextView android:text="Nick" android:layout_weight="0.3"
-			android:layout_width="wrap_content" android:id="@+id/textView1"
-			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-		<TextView android:text="Roll" android:layout_weight="0.3"
-			android:layout_width="wrap_content" android:id="@+id/textView1"
-			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-		<TextView android:text="Yaw" android:layout_weight="0.3"
-			android:layout_width="wrap_content" android:id="@+id/textView1"
-			android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
-	</LinearLayout>
+	
 
 	<ScrollView android:layout_width="fill_parent"
 		android:layout_height="fill_parent">
