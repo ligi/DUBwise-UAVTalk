@@ -48,5 +48,6 @@
     <string name="map">Map</string>
     <string name="curves">curves</string>
     <string name="throttle_curve">ThrottleCurve</string>
+    <string name="error_title">Problem</string>
 
 </resources>
