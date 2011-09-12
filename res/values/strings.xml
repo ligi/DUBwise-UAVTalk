@@ -44,8 +44,9 @@
     <string name="no_gps_title">No GPS-Position</string>
     <string name="understood">understood</string>
     <string name="pfd">PFD</string>
-    <string name="sound">sound</string>
-    <string name="map">map</string>
+    <string name="sound">Sound</string>
+    <string name="map">Map</string>
     <string name="curves">curves</string>
+    <string name="throttle_curve">ThrottleCurve</string>
 
 </resources>

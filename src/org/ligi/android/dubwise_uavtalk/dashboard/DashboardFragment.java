@@ -80,7 +80,7 @@ public class DashboardFragment extends Fragment {
 		case 1:
 			v.addView(createDashboardButton(R.string.connection,R.drawable.antenna_square,new Intent(this.getActivity(),ConnectionMenu.class),"con"));
 			v.addView(createDashboardButton(R.string.output_test,R.drawable.engine_square,new Intent(this.getActivity(),OutputTestActivity.class),"out"));
-			v.addView(createDashboardButton(R.string.curves,R.drawable.curve_square,new Intent(this.getActivity(),CurveEditActivity.class),"curve"));
+			v.addView(createDashboardButton(R.string.throttle_curve,R.drawable.curve_square,new Intent(this.getActivity(),CurveEditActivity.class),"curve"));
 			v.addView(createDashboardButton(R.string.channels,R.drawable.rc_square,new Intent(this.getActivity(),ChannelViewActivity.class),"chan"));
 			v.addView(createDashboardButton(R.string.pitune,R.drawable.tune_square,new Intent(this.getActivity(),PITuneActivity.class),"tune"));
 			v.addView(createDashboardButton(R.string.status_voice,R.drawable.sound_square,new Intent(this.getActivity(),StatusVoicePreferencesActivity.class),"voice"));
