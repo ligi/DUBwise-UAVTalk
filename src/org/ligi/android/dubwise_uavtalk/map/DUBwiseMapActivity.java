@@ -29,7 +29,10 @@ import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -81,17 +84,12 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 	
 		mapView.getController().setZoom(19);
 		 
-		GeoPoint kopterPoint=new GeoPoint( UAVObjects.getGPSPosition().getLatitude()/10
-										   ,UAVObjects.getGPSPosition().getLongitude()/10);
-
-		mapView.getController().setCenter(kopterPoint);
-		 
+		centerToUAV();
+		
 		//mapView.getZoomButtonsController().setVisible(true);
 
-		/*overlay=new DUBwiseMapOverlay(this);
+		DUBwiseMapOverlay overlay=new DUBwiseMapOverlay(this);
 		mapView.getOverlays().add(overlay);
-		 */
-		
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 5.0f, this);
 		
@@ -101,8 +99,19 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 			.setMessage(R.string.no_gps_msg)
 			.setIcon(android.R.drawable.ic_dialog_alert)
 			.setPositiveButton(R.string.understood, new DialogDiscarder())
-		.show();
-	
+			.setNeutralButton("Fake position", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					
+					UAVObjects.getGPSPosition().setLatitude(523047070);
+					UAVObjects.getGPSPosition().setLongitude(8657280);
+					centerToUAV();
+				}
+				
+			})
+			.show();
+		
 	}
 	
 	public boolean isDebugBuild() {
@@ -127,7 +136,7 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 			double lng = location.getLongitude();
 			GeoPoint p = new GeoPoint((int) (lat * 1000000), (int)( lng * 1000000));
 			//overlay.phonePoint=p;
-			mapView.getController().animateTo(p);
+			//mapView.getController().animateTo(p);
 		}
 	}
 
@@ -137,6 +146,14 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 
 	public void onStatusChanged(String provider, int status, Bundle extras) {}
 
+	public void centerToUAV() {
+		 
+		GeoPoint kopterPoint=new GeoPoint( UAVObjects.getGPSPosition().getLatitude()/10
+										   ,UAVObjects.getGPSPosition().getLongitude()/10);
+
+		mapView.getController().setCenter(kopterPoint);
+		
+	}
 
 	public MapView getMapView() {
 		return mapView;	
