@@ -26,18 +26,18 @@ package org.ligi.android.dubwise_uavtalk.channelview;
 
 import org.ligi.android.dubwise.rc.CurveEditView;
 import org.ligi.android.dubwise.rc.CurveEditView.OnChangeListener;
+import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- * Activity to edit a curve
+ * Activity to edit a curve ( e.g. ThrottleCurve )
  * 
  * @author ligi
  *
@@ -54,15 +54,7 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
         this.setContentView(R.layout.curve_edit);
         cev=((CurveEditView)this.findViewById(R.id.curve_edit));
 
-        ((Button)this.findViewById(R.id.reset_btn)).setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				cev.setCurve(new float[] { 0.0f,0.25f,0.5f,0.75f,1f });
-				cev.invalidate();
-			}
-        	
-        });        
-        val_tv=new TextView[] { ((TextView)this.findViewById(R.id.curve_val1)),
+         val_tv=new TextView[] { ((TextView)this.findViewById(R.id.curve_val1)),
 						         ((TextView)this.findViewById(R.id.curve_val2)),
 						         ((TextView)this.findViewById(R.id.curve_val3)),
 						         ((TextView)this.findViewById(R.id.curve_val4)),
@@ -79,5 +71,31 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
 			val_tv[i].setText(String.format("%.3f", cev.getCurvePoint(i)));
 		
 		UAVObjects.getMixerSettings().setThrottleCurve1(cev.getCurve());
+	}
+
+	private final static int MENU_RESET=0;
+	private final static int MENU_SAVE=1;
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.clear();
+		menu.addSubMenu(0,MENU_RESET, 0,"Reset").setIcon(android.R.drawable.ic_menu_revert);
+		menu.addSubMenu(0,MENU_SAVE, 0,"Save").setIcon(android.R.drawable.ic_menu_save);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case MENU_RESET:
+			cev.setCurve(new float[] { 0.0f,0.25f,0.5f,0.75f,1f });
+			cev.invalidate();
+			break;
+			
+		case MENU_SAVE:
+			UAVObjectPersistHelper.persistWithDialog(this,UAVObjects.getMixerSettings());
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

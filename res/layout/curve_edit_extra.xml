@@ -14,5 +14,4 @@
         
 </LinearLayout>               
             
-            <Button android:id="@+id/reset_btn" android:text="Reset" android:layout_width="107dp" android:layout_height="wrap_content"></Button>        
 </LinearLayout>
