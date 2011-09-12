@@ -12,8 +12,6 @@ import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 
 import com.google.android.apps.iosched.ui.widget.DashboardLayout;
-import com.jakewharton.android.viewpagerindicator.TitleProvider;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -21,8 +19,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
