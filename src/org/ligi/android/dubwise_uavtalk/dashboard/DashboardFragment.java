@@ -20,7 +20,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
@@ -57,6 +59,25 @@ public class DashboardFragment extends Fragment {
 		
 		b.setCompoundDrawables(null,img, null,null);
 		b.setBackgroundDrawable(null);
+		
+		b.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					view.setBackgroundResource(R.drawable.dashboard_bg);
+					break;
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					view.setBackgroundDrawable(null);
+					break;
+				}
+					
+				return false;
+			}
+			
+		});
 		b.setTextColor(Color.GRAY);
 		new IntentStartOnClick(i,this.getActivity())
       		.bind2view(b);
