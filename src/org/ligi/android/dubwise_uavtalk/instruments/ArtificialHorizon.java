@@ -125,7 +125,7 @@ public class ArtificialHorizon extends View{
     	canvas.save();
     	
     	float line_dist=getHeight()/20f;
-    	canvas.translate(0,getPitch()*line_dist/20);
+    	canvas.translate(0,(int)(getPitch()*line_dist*0.25));
     	canvas.rotate(getRoll()*-1,getWidth()/2,getHeight()/2);
                                                                                                             
         sky_drawable.setBounds(-getWidth(),-getHeight()*2,2*getWidth(),getHeight()/2);
@@ -152,9 +152,7 @@ public class ArtificialHorizon extends View{
         		mWhiteLinePaint.setTextAlign(Paint.Align.LEFT);
         		canvas.drawText(""+(absi/4)*10,(getWidth()-w)/2+w+getWidth()/23+1,y-mWhiteLinePaint.ascent()-mWhiteLinePaint.getTextSize()/2, mWhiteLinePaint);
         	}
-        	
         	canvas.drawLine((getWidth()-w)/2,y, (getWidth()-w)/2+w,y , mWhiteLinePaint);
-        	
     	
         }
         
