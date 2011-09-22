@@ -13,13 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<LinearLayout     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/default_activity_main"	
     android:orientation="vertical">
-     
-     <org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
-     
+                
+     <include layout="@layout/do_bar_include"/>
+	 
      <com.jakewharton.android.viewpagerindicator.TitlePageIndicator
         android:id="@+id/indicator"
         android:layout_width="fill_parent"

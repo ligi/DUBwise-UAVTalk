@@ -3,11 +3,13 @@ package org.ligi.android.dubwise_uavtalk.dobar;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalk;
 import org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon;
+import org.ligi.android.dubwise_uavtalk.system_alarms.IconicSystemAlarmsActionBarThingy;
 import org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActionBarThingy;
 import org.ligi.android.uavtalk.dubwise.R;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,10 +36,12 @@ public class DoBar extends LinearLayout implements OnTouchListener {
 
 	private void layout() {
 		this.removeAllViews();
+		
 		LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams( (int) getResources().getDimension(R.dimen.actionbar_height),(int) getResources().getDimension(R.dimen.actionbar_height));
 		this.setOrientation(LinearLayout.HORIZONTAL);
-		this.setBackgroundResource(R.drawable.actionbar_bg);
-
+		//this.setBackgroundResource(R.drawable.dashboard_metal_top_bg);
+		//this.setBackgroundColor(Color.TRANSPARENT);
+		this.setBackgroundColor(Color.argb(20, 0, 0, 0));
 		ImageView home=new ImageView(context);
 		home.setLayoutParams(lp);
 		home.setImageResource(R.drawable.icon);
@@ -60,20 +64,21 @@ public class DoBar extends LinearLayout implements OnTouchListener {
 		
 		if (this.isInEditMode())
 			return;
-		
+
 		ConnectionStatusDoBarGadget csv=new ConnectionStatusDoBarGadget(context);
 		csv.setLayoutParams(lp);
 		this.addView(csv);
-		
-		SystemAlarmsActionBarThingy alv=new SystemAlarmsActionBarThingy(context);
+
+		IconicSystemAlarmsActionBarThingy alv=new IconicSystemAlarmsActionBarThingy(context);
 		alv.setLayoutParams(lp);
 		this.addView(alv);
 		
-		if (!profile.equals("hori")) {
+		
+		/*if (!profile.equals("hori")) {
 			ArtificialHorizon instr=new ArtificialHorizon(context);
 			instr.setLayoutParams(lp);
 			this.addView(instr);
-		}
+		}*/
 		
 	}
 

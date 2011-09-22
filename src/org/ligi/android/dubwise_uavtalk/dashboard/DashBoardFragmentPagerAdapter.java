@@ -28,9 +28,11 @@ public class DashBoardFragmentPagerAdapter extends FragmentPagerAdapter implemen
 		/*case 0:
 			return "check"; */
 		case 0:
-			return "fly";
+			return "FLY";
 		case 1:
-			return "setup";
+			return "SETUP";
+		case 2:
+			return "WTF";
 		}
 		return null;
 	}

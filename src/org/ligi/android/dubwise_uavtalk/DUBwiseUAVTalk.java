@@ -83,7 +83,7 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         StartupConnectionHandler.init(activity);
         
         // TODO Settings definition
-        new Thread(new LocationUpdater(activity)).start();
+        //new Thread(new LocationUpdater(activity)).start();
         
     }
 

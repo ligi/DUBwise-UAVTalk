@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/default_activity_main"	
+	android:orientation="vertical" >
 	
-	android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="wrap_content">
-	<org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
+	<include layout="@layout/do_bar_include"/>
 	
 	<FrameLayout android:id="@+id/frameLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent">
 		<org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon android:id="@+id/ligiandroiddubwiseuavtalkinstrumentsInstrumentDisplayView1" android:layout_width="fill_parent" android:layout_height="fill_parent"/>

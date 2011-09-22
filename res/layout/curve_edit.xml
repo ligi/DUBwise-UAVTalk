@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/default_activity_main"
+	android:orientation="vertical">
+	    
+<include layout="@layout/do_bar_include"/>
 	
-	android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
-	
-	     	     
-<org.ligi.android.dubwise_uavtalk.dobar.DoBar android:id="@+id/DoBar" android:layout_height="@dimen/actionbar_height" android:layout_width="fill_parent"/>
-	
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	
 	android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:weightSum="1">

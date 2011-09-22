@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class DashboardFragment extends Fragment {
 	private int num=0;
@@ -44,18 +46,34 @@ public class DashboardFragment extends Fragment {
 		num = getArguments() != null ? getArguments().getInt(ARGUMENT_KEY) : 0;
 	}
 	
-	public Button createDashboardButton(int string_resID,int image_resID,Intent i,String tag) {
-		Button b=new Button(this.getActivity());
+	public Button createDashboardButton(int string_resID,int image_resID,int image_sel_resID,Intent i,String tag) {
+		final Button b=new Button(this.getActivity());
 		b.setText(string_resID);
 		
-		String base_path=Environment.getExternalStorageDirectory().getAbsolutePath()+"/DUBwise/images/dashboard/";
-        Drawable img = Drawable.createFromPath(base_path+tag+".png"); 
-        if (img==null)
-        	img=this.getResources().getDrawable(image_resID);
+		String base_path=Environment.getExternalStorageDirectory().getAbsolutePath()+"/DUBwise/images/dashboard2/";
+        Drawable d = Drawable.createFromPath(base_path+tag+".png"); 
+        if (d==null)
+        	d=this.getResources().getDrawable(image_resID);
+        final Drawable img=d;
+        
+        if (image_sel_resID!=0)
+        	d=this.getResources().getDrawable(image_sel_resID);
+        else
+        	d=null;
+        /*
+        if (image_sel_resID==0)
+        	d=null;
+        else
+        	
+       */
+        
+        final Drawable sel_img=(d);
         
 		int img_size=this.getResources().getDimensionPixelSize(R.dimen.dashboard_image_size);
-		
-		img.setBounds(new Rect(0,0,img_size*img.getIntrinsicWidth()/img.getIntrinsicHeight(),img_size));
+		Rect img_bounds=new Rect(0,0,img_size*img.getIntrinsicWidth()/img.getIntrinsicHeight(),img_size);
+		img.setBounds(img_bounds);
+		if (sel_img!=null)
+			sel_img.setBounds(img_bounds);
 		
 		b.setCompoundDrawables(null,img, null,null);
 		b.setBackgroundDrawable(null);
@@ -66,11 +84,17 @@ public class DashboardFragment extends Fragment {
 			public boolean onTouch(View view, MotionEvent event) {
 				switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
-					view.setBackgroundResource(R.drawable.dashboard_bg);
+					if (sel_img==null)
+						view.setBackgroundResource(R.drawable.dashboard_bg);
+					else
+						b.setCompoundDrawables(null,sel_img, null,null);
 					break;
 				case MotionEvent.ACTION_UP:
 				case MotionEvent.ACTION_CANCEL:
-					view.setBackgroundDrawable(null);
+					if (sel_img==null)
+						view.setBackgroundDrawable(null);
+					else
+						b.setCompoundDrawables(null,img, null,null);
 					break;
 				}
 					
@@ -78,7 +102,8 @@ public class DashboardFragment extends Fragment {
 			}
 			
 		});
-		b.setTextColor(Color.GRAY);
+		b.setTextColor(Color.WHITE);
+		
 		new IntentStartOnClick(i,this.getActivity())
       		.bind2view(b);
 		return b;
@@ -91,20 +116,19 @@ public class DashboardFragment extends Fragment {
 		
 		switch (num) {
 		case 0:
-			v.addView(createDashboardButton(R.string.pfd,R.drawable.pfd_square,new Intent(this.getActivity(),InstrumentDisplayActivity.class),"pfd"));
-			v.addView(createDashboardButton(R.string.map,R.drawable.map_square,new Intent(this.getActivity(),DUBwiseMapActivity.class),"map"));
+			v.addView(createDashboardButton(R.string.pfd,R.drawable.dashboard_pfd_norm,R.drawable.dashboard_pfd_sel,new Intent(this.getActivity(),InstrumentDisplayActivity.class),"pfd"));
+			v.addView(createDashboardButton(R.string.map,R.drawable.dashboard_map_norm,R.drawable.dashboard_map_sel,new Intent(this.getActivity(),DUBwiseMapActivity.class),"map"));
 			break;
 		case 1:
-			v.addView(createDashboardButton(R.string.connection,R.drawable.antenna_square,new Intent(this.getActivity(),ConnectionMenu.class),"con"));
-			v.addView(createDashboardButton(R.string.output_test,R.drawable.engine_square,new Intent(this.getActivity(),OutputTestActivity.class),"out"));
-			v.addView(createDashboardButton(R.string.throttle_curve,R.drawable.curve_square,new Intent(this.getActivity(),CurveEditActivity.class),"curve"));
-			v.addView(createDashboardButton(R.string.channels,R.drawable.rc_square,new Intent(this.getActivity(),ChannelViewActivity.class),"chan"));
-			v.addView(createDashboardButton(R.string.pitune,R.drawable.tune_square,new Intent(this.getActivity(),PITuneActivity.class),"tune"));
-			v.addView(createDashboardButton(R.string.status_voice,R.drawable.sound_square,new Intent(this.getActivity(),StatusVoicePreferencesActivity.class),"voice"));
+			v.addView(createDashboardButton(R.string.connection,R.drawable.dashboard_con_norm,R.drawable.dashboard_con_sel,new Intent(this.getActivity(),ConnectionMenu.class),"con"));
+			v.addView(createDashboardButton(R.string.output_test,R.drawable.dashboard_out_norm,R.drawable.dashboard_out_sel,new Intent(this.getActivity(),OutputTestActivity.class),"out"));
+			v.addView(createDashboardButton(R.string.throttle_curve,R.drawable.dashboard_curves_norm,R.drawable.dashboard_curves_sel,new Intent(this.getActivity(),CurveEditActivity.class),"curve"));
+			v.addView(createDashboardButton(R.string.channels,R.drawable.dashboard_chan_norm,R.drawable.dashboard_chan_sel,new Intent(this.getActivity(),ChannelViewActivity.class),"chan"));
+			v.addView(createDashboardButton(R.string.pitune,R.drawable.dashboard_tune_norm,R.drawable.dashboard_tune_sel,new Intent(this.getActivity(),PITuneActivity.class),"tune"));
+			v.addView(createDashboardButton(R.string.status_voice,R.drawable.dashboard_voice_norm,R.drawable.dashboard_voice_sel,new Intent(this.getActivity(),StatusVoicePreferencesActivity.class),"voice"));
 			break;
 		}
+		
 		return v;
 	}
-	
-	
 }

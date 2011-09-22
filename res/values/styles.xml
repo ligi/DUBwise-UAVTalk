@@ -2,12 +2,11 @@
 <resources>
 	<style name="base_theme" parent="android:Theme.NoTitleBar">
 	</style>
-	
-	<style name="default_frame" parent="android:Theme.NoTitleBar">
+
+	<style name="default_activity_main" parent="android:Theme.NoTitleBar">
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">fill_parent</item>
-		<item name="android:orientation">vertical</item>
-		
+		<item name="android:background">@drawable/dashboard_metal</item>
 	</style>
 	
 	<!-- ActionBar -->
