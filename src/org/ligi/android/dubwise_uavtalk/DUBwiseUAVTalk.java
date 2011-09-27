@@ -29,7 +29,6 @@ import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
 import org.ligi.android.dubwise_uavtalk.dashboard.DownloadDashboardImagesStatusAlertDialog;
-import org.ligi.android.dubwise_uavtalk.gps.LocationUpdater;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
