@@ -123,7 +123,7 @@ public class UAVObjectFieldEdit {
     private static EditText edit_number(Context ctx,UAVObjectFieldDescription descr,final byte pos,int flags) {
         EditText txt=new EditText(ctx);
         txt.setInputType(InputType.TYPE_CLASS_NUMBER | flags);
-        txt.setText(UAVObjectFieldHelper.getFieldValueStr(descr));
+        txt.setText(UAVObjectFieldHelper.getFieldValueStr(descr,pos));
 
         class myTxtWatcher implements TextWatcher {
 
