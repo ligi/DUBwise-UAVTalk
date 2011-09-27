@@ -28,7 +28,6 @@ import org.ligi.android.R;
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
-import org.ligi.android.dubwise_uavtalk.dashboard.DownloadDashboardImagesStatusAlertDialog;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
@@ -108,13 +107,11 @@ public class DUBwiseUAVTalk extends FragmentActivity {
     }
     
     private final static int MENU_SAVE_EDIT=0;
-    private final static int MENU_NICEUP=1;
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.clear();
         menu.add(0,MENU_SAVE_EDIT,0,"Edit UAVObjects").setIcon(android.R.drawable.ic_menu_edit);
-        menu.add(0,MENU_NICEUP,0,"nice up").setIcon(android.R.drawable.ic_menu_gallery);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -123,9 +120,6 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         switch(item.getItemId()) {
         case MENU_SAVE_EDIT:
         	IntentHelper.action(this, "EDIT_UAVOBJECT");
-        	break;
-        case MENU_NICEUP:
-        	DownloadDashboardImagesStatusAlertDialog.show(this);
         	break;
         }
         return true;
