@@ -50,4 +50,7 @@
         <item name="android:textColor">#EEEEEEEE</item>
         <item name="android:background">@null</item>
     </style>
+	<style name="dashboard_button_textappearance">
+		<item name="android:textSize">@dimen/dashboard_text_size</item>
+	</style>
 </resources>

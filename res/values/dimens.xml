@@ -2,4 +2,5 @@
 <resources>
     <dimen name="actionbar_height">42dip</dimen>
     <dimen name="dashboard_image_size">140px</dimen>
+    <dimen name="dashboard_text_size">14sp</dimen>
 </resources>
