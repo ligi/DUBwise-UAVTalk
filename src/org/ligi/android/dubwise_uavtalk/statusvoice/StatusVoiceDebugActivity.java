@@ -25,6 +25,10 @@
 package org.ligi.android.dubwise_uavtalk.statusvoice;
 
 import org.ligi.android.common.activitys.RefreshingStringListActivity;
+import org.ligi.android.uavtalk.dubwise.R;
+
+
+import android.os.Bundle;
 
 /**
  * show some status info for the StatusVoice - to debug what is going wrong
@@ -36,6 +40,12 @@ import org.ligi.android.common.activitys.RefreshingStringListActivity;
 public class StatusVoiceDebugActivity extends RefreshingStringListActivity {
 
     @Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.list);
+    }
+
+	@Override
     public String getStringByPosition(int pos) {
         switch (pos) {
         case 0:
