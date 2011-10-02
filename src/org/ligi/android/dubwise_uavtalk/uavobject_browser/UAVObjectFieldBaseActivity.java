@@ -20,6 +20,7 @@
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
+import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 

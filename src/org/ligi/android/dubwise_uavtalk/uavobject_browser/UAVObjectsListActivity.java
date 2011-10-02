@@ -71,10 +71,8 @@ public class UAVObjectsListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         DUBwiseUAVTalkActivityCommons.before_content(this);
         
-        this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
 
         handleIntent(getIntent());

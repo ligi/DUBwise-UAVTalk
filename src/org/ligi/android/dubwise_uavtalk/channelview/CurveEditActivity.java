@@ -27,14 +27,14 @@ package org.ligi.android.dubwise_uavtalk.channelview;
 import org.ligi.android.dubwise.rc.CurveEditView;
 import org.ligi.android.dubwise.rc.CurveEditView.OnChangeListener;
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
-import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
-import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectPersistHelper;
+import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectLoadHelper;
+import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
-import org.openpilot.uavtalk.UAVTalkDefinitions;
-
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -55,8 +55,6 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
         super.onCreate(savedInstanceState);
 
         DUBwiseUAVTalkActivityCommons.before_content(this);
-        
-        UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getMixerSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
 
         this.setContentView(R.layout.curve_edit);
         cev=((CurveEditView)this.findViewById(R.id.curve_edit));
@@ -69,14 +67,23 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
         
         cev.setOnChangeListener(this);
         
-        float[] f=UAVObjects.getMixerSettings().getThrottleCurve1();
-        cev.setCurve(f);
+		Handler change_handler=new Handler() {
+			public void handleMessage(Message msg) {
+				cev.setCurve(UAVObjects.getMixerSettings().getThrottleCurve1());
+			}
+		};
+
+        UAVObjectLoadHelper.loadWithDialog(this, UAVObjects.getMixerSettings(),change_handler);
+        
+    }
+    
+    public void updateTextFields() {
+    	for (int i=0;i<val_tv.length;i++)
+			val_tv[i].setText(String.format("%.3f", cev.getCurvePoint(i)));
     }
 
 	public void notifyChange() {
-		for (int i=0;i<5;i++)
-			val_tv[i].setText(String.format("%.3f", cev.getCurvePoint(i)));
-		
+		updateTextFields();
 		UAVObjects.getMixerSettings().setThrottleCurve1(cev.getCurve());
 	}
 

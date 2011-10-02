@@ -73,7 +73,6 @@ public class OutputTestActivity extends ListActivity {
         
         UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getActuatorSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
 
-        this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
 
         adapter=new myArrayAdapter(this);

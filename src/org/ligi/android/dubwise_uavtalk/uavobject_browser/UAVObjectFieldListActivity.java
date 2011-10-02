@@ -57,7 +57,6 @@ public class UAVObjectFieldListActivity extends UAVObjectFieldBaseActivity {
 
         DUBwiseUAVTalkActivityCommons.before_content(this);
             
-        this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
 
         objid=this.getIntent().getIntExtra("objid", 0);

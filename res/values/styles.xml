@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<style name="transparent_theme" parent="android:Theme.Holo.Wallpaper">
+		<item name="android:actionBarStyle">@style/ActionBar</item>
+		<item name="android:windowNoTitle">@bool/own_actionbar</item>
+		
+	</style>
+
 	<style name="base_theme" parent="android:Theme.Holo">
 		<item name="android:actionBarStyle">@style/ActionBar</item>
 		<item name="android:windowNoTitle">@bool/own_actionbar</item>
+		<item name="android:windowBackground">@drawable/dashboard_metal</item>
 	</style>
 
 	<style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">
@@ -11,10 +18,10 @@
     	<item name="android:customNavigationLayout">@layout/do_bar_for_actionbar</item>
 	</style>
 	
-	<style name="default_activity_main" parent="base_theme">
+	<style name="default_activity_main">
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">fill_parent</item>
-		<item name="android:background">@drawable/dashboard_metal</item>
+		<item name="android:windowBackground">@null</item>
 	</style>
 	
 	<!-- ActionBar -->

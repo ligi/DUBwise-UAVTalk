@@ -1,4 +1,4 @@
-package org.ligi.android.dubwise_uavtalk.uavobject_browser;
+package org.ligi.android.dubwise_uavtalk.uavobjects_helper;
 
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
 import org.openpilot.uavtalk.UAVObject;
@@ -23,14 +23,11 @@ public class UAVObjectPersistHelper {
 		
 		final int DIALOG_DISMISS = 0;
 
-
 		final AlertDialog dialog = ProgressDialog.show(ctx, "Saving",
 				"writing the values to your  board", true, true);
 		final Handler handler = new Handler() {
 			public void handleMessage(Message msg) {
-			
 					dialog.dismiss();
-
 			}
 		};
 

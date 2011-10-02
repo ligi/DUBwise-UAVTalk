@@ -88,9 +88,7 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         DUBwiseUAVTalkActivityCommons.before_content(this);
         kickstart(this);
         
-        this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.dashboard_pager);
-        
         
         DashBoardFragmentPagerAdapter pituneAdapter = new DashBoardFragmentPagerAdapter(this.getSupportFragmentManager());
         ViewPager awesomePager = (ViewPager) findViewById(R.id.dashboard_pager);

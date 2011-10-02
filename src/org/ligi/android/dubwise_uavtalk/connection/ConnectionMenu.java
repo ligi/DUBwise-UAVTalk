@@ -56,7 +56,6 @@ public class ConnectionMenu extends ListActivity {
 
         DUBwiseUAVTalkActivityCommons.before_content(this);
         
-        this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
 
         UAVTalkGCSThread.getInstance();
