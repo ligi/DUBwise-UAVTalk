@@ -50,4 +50,7 @@
     <string name="throttle_curve">ThrottleCurve</string>
     <string name="error_title">Problem</string>
     <string name="edit_uavobjects">edit UAVObjects</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_help">Help</string>
+
 </resources>

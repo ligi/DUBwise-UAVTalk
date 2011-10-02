@@ -84,28 +84,23 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 			}
 	   }
 
-	   private final static int MENU_HELP=0;
-	   private final static int MENU_SAVE=1;
-	    
-	    @Override
-	    public boolean onCreateOptionsMenu(Menu menu) {
-	        menu.clear();
-	        menu.add(0,MENU_HELP,0,"Help (wiki)").setIcon(android.R.drawable.ic_menu_help);
-	        menu.add(0,MENU_SAVE,0,"Save").setIcon(android.R.drawable.ic_menu_save);
-	        return super.onCreateOptionsMenu(menu);
-	    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	getMenuInflater().inflate(R.menu.pitune_menu, menu);
+    	return super.onCreateOptionsMenu(menu);
+    }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MENU_HELP:
+		case R.id.menu_help:
 			Intent i = new Intent("android.intent.action.VIEW",
 					Uri.parse("http://wiki.openpilot.org/display/Doc/Stabilization"));
 
 			this.startActivity(i);
 			break;
 
-		case MENU_SAVE:
+		case R.id.menu_save:
 			UAVObjectPersistHelper.persistWithDialog(this,UAVObjects.getStabilizationSettings());
 			break;
 
@@ -124,6 +119,4 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 			}
 		}
 	}
-
-
 }
