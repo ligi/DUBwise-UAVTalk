@@ -26,6 +26,8 @@ package org.ligi.android.dubwise_uavtalk.statusvoice;
 
 import org.ligi.android.R;
 import org.ligi.android.common.preferences.TimePreference;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -49,6 +51,7 @@ public class StatusVoicePreferencesActivity extends PreferenceActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StatusVoicePreferences.init(this);
+        DUBwiseUAVTalkActivityCommons.before_content(this);
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.list);
     }

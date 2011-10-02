@@ -24,6 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.channelview;
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
@@ -65,7 +66,8 @@ public class ChannelViewActivity extends ListActivity implements Runnable {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.setTheme(R.style.base_theme);
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         this.setContentView(R.layout.list);
 
         adapter=new myArrayAdapter(this);

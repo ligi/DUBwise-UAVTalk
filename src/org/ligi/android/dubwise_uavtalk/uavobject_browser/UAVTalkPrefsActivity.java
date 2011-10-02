@@ -24,6 +24,8 @@
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
+
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
@@ -43,6 +45,8 @@ public class UAVTalkPrefsActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         UAVTalkPrefs.init(this);
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         super.onCreate(savedInstanceState);
         setPreferenceScreen(createPreferenceHierarchy());
     }

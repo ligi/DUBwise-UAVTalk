@@ -25,6 +25,7 @@
 package org.ligi.android.dubwise_uavtalk.statusvoice;
 
 import org.ligi.android.common.activitys.RefreshingStringListActivity;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 
 
@@ -42,6 +43,7 @@ public class StatusVoiceDebugActivity extends RefreshingStringListActivity {
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		DUBwiseUAVTalkActivityCommons.before_content(this);
 		this.setContentView(R.layout.list);
     }
 

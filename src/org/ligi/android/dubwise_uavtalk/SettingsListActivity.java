@@ -52,6 +52,8 @@ public class SettingsListActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         myAdapter = new IconTextActionAdapter(this);
         myAdapter.style(R.layout.icon_and_text, R.id.text, R.id.image);
 

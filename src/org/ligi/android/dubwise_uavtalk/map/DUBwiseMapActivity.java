@@ -25,6 +25,7 @@
 package org.ligi.android.dubwise_uavtalk.map;
 
 import org.ligi.android.common.dialogs.DialogDiscarder;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
@@ -62,6 +63,7 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	
+		DUBwiseUAVTalkActivityCommons.before_content(this);
 		
 		if (isDebugBuild())
 			this.setContentView(R.layout.map_debug);

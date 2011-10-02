@@ -45,6 +45,8 @@ public class UAVTalkPrefsActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         UAVTalkPrefs.init(this);
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         super.onCreate(savedInstanceState);
         setPreferenceScreen(createPreferenceHierarchy());
     }

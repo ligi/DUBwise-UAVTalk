@@ -25,10 +25,9 @@ package org.ligi.android.dubwise_uavtalk.connection;
 
 import org.ligi.android.common.adapter.IconTextActionAdapter;
 import org.ligi.android.common.intents.IntentHelper;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.tracedroid.logging.Log;
-import org.openpilot.uavtalk.UAVObjects;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -55,6 +54,8 @@ public class ConnectionMenu extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
 

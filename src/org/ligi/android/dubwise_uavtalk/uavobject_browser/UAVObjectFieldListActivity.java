@@ -20,6 +20,7 @@
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.common.adapter.PeriodicallyInvalidateAdapter;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.tracedroid.Log;
 import org.openpilot.uavtalk.UAVObject;
@@ -54,6 +55,8 @@ public class UAVObjectFieldListActivity extends UAVObjectFieldBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+            
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
 

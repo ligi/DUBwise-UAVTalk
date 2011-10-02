@@ -19,9 +19,11 @@
 
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.ListActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -37,6 +39,13 @@ public abstract class UAVObjectFieldBaseActivity extends ListActivity {
 	public int objid; 
 	private final static int MENU_APPLY=0;
 	private final static int MENU_SAVE=1;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+    }
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

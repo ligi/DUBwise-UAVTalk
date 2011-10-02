@@ -29,6 +29,7 @@ import java.util.Vector;
 import org.ligi.android.R;
 import org.ligi.android.common.dialogs.DialogDiscarder;
 import org.ligi.android.common.intents.IntentHelper;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -185,6 +186,9 @@ public class StatusVoiceBlockEditActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         myActivity=this;
 
         this.setTitle("Edit StatusVoice Profile " + StatusVoicePreferences.getProfileName());

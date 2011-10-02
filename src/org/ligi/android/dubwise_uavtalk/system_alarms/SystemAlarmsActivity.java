@@ -26,6 +26,7 @@ package org.ligi.android.dubwise_uavtalk.system_alarms;
 
 import java.util.Vector;
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
@@ -57,8 +58,8 @@ public class SystemAlarmsActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        this.setTheme(R.style.base_theme);
+        DUBwiseUAVTalkActivityCommons.before_content(this);
+        
         this.setContentView(R.layout.list);
 
         refreshAlarmVector();

@@ -22,6 +22,7 @@ package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 import java.util.Vector;
 
 import org.ligi.android.common.dialogs.DialogDiscarder;
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObjectMetaData;
@@ -70,6 +71,8 @@ public class UAVObjectsListActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        DUBwiseUAVTalkActivityCommons.before_content(this);
         
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);
@@ -303,19 +306,15 @@ public class UAVObjectsListActivity extends ListActivity {
 
     }
     
-    private final static int MENU_PREFERENCES=0;
-
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0,MENU_PREFERENCES,0,R.string.settings)
-			.setIcon(android.R.drawable.ic_menu_preferences);
-		
+		getMenuInflater().inflate(R.menu.uavobjectlist_menu,menu);
 		return true;
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
-	    case MENU_PREFERENCES:
-	    	startActivity(new Intent(this, UAVTalkPrefsActivity.class));
+	    case R.id.menu_search:
+	    	onSearchRequested();
 	    	break;
 	    }
 	    return false;
