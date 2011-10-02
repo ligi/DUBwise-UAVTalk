@@ -1,5 +1,6 @@
 package org.ligi.android.dubwise_uavtalk.pitune;
 
+import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
@@ -27,6 +28,9 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
 		    super.onCreate(savedInstanceState); 
+		    
+		    DUBwiseUAVTalkActivityCommons.before_content(this);
+		    
 		    UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getStabilizationSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
 	    
 		    running=true;

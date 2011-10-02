@@ -14,7 +14,7 @@ public class DashBoardFragmentPagerAdapter extends FragmentPagerAdapter implemen
 
     @Override
     public int getCount() {
- 	   return 2;
+ 	   return 3;
     }
 
 	@Override
@@ -32,7 +32,7 @@ public class DashBoardFragmentPagerAdapter extends FragmentPagerAdapter implemen
 		case 1:
 			return "SETUP";
 		case 2:
-			return "WTF";
+			return "DEV";
 		}
 		return null;
 	}

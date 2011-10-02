@@ -26,9 +26,11 @@ package org.ligi.android.dubwise_uavtalk.outputtest;
 
 
 import org.ligi.android.commons.SeekBarMinMax;
+import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
+import org.openpilot.uavtalk.UAVTalkDefinitions;
 
 
 import android.app.Activity;
@@ -65,6 +67,7 @@ public class OutputTestActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	    UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getActuatorSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
 
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.list);

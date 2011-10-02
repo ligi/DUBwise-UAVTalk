@@ -26,9 +26,11 @@ package org.ligi.android.dubwise_uavtalk.channelview;
 
 import org.ligi.android.dubwise.rc.CurveEditView;
 import org.ligi.android.dubwise.rc.CurveEditView.OnChangeListener;
+import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
+import org.openpilot.uavtalk.UAVTalkDefinitions;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -50,6 +52,8 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getMixerSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
 
         this.setContentView(R.layout.curve_edit);
         cev=((CurveEditView)this.findViewById(R.id.curve_edit));

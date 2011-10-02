@@ -25,8 +25,6 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class DashboardFragment extends Fragment {
 	private int num=0;
@@ -74,7 +72,7 @@ public class DashboardFragment extends Fragment {
 		img.setBounds(img_bounds);
 		if (sel_img!=null)
 			sel_img.setBounds(img_bounds);
-		
+		b.setTextAppearance(this.getActivity(), R.style.dashboard_button_textappearance);
 		b.setCompoundDrawables(null,img, null,null);
 		b.setBackgroundDrawable(null);
 		
@@ -126,6 +124,9 @@ public class DashboardFragment extends Fragment {
 			v.addView(createDashboardButton(R.string.channels,R.drawable.dashboard_chan_norm,R.drawable.dashboard_chan_sel,new Intent(this.getActivity(),ChannelViewActivity.class),"chan"));
 			v.addView(createDashboardButton(R.string.pitune,R.drawable.dashboard_tune_norm,R.drawable.dashboard_tune_sel,new Intent(this.getActivity(),PITuneActivity.class),"tune"));
 			v.addView(createDashboardButton(R.string.status_voice,R.drawable.dashboard_voice_norm,R.drawable.dashboard_voice_sel,new Intent(this.getActivity(),StatusVoicePreferencesActivity.class),"voice"));
+			break;
+		case 2:
+			v.addView(createDashboardButton(R.string.edit_uavobjects,android.R.drawable.ic_menu_preferences,android.R.drawable.ic_menu_preferences,new Intent("EDIT_UAVOBJECT"),"uavobjbrowse"));
 			break;
 		}
 		

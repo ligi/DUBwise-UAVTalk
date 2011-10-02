@@ -2,42 +2,35 @@ package org.ligi.android.dubwise_uavtalk.dobar;
 
 import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalk;
-import org.ligi.android.dubwise_uavtalk.instruments.ArtificialHorizon;
 import org.ligi.android.dubwise_uavtalk.system_alarms.IconicSystemAlarmsActionBarThingy;
-import org.ligi.android.dubwise_uavtalk.system_alarms.SystemAlarmsActionBarThingy;
 import org.ligi.android.uavtalk.dubwise.R;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.view.View.OnTouchListener;
 
-public class DoBar extends LinearLayout implements OnTouchListener {
+public class DoBar extends LinearLayout  {
 	private Context context;
-	private String profile="default";
-	
-	public void setProfile(String profile) {
-		this.profile=profile;
-		layout();
-	}
+	private LayoutParams myLP;
 	
 	public DoBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context=context;
+		myLP=this.generateLayoutParams(attrs);
 		layout();
-		this.setOnTouchListener(this);
+		
 	}
+
+	
 
 	private void layout() {
 		this.removeAllViews();
 		
-		LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams( (int) getResources().getDimension(R.dimen.actionbar_height),(int) getResources().getDimension(R.dimen.actionbar_height));
+		LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams( myLP.height,myLP.height);
 		this.setOrientation(LinearLayout.HORIZONTAL);
 		//this.setBackgroundResource(R.drawable.dashboard_metal_top_bg);
 		//this.setBackgroundColor(Color.TRANSPARENT);
@@ -80,14 +73,6 @@ public class DoBar extends LinearLayout implements OnTouchListener {
 			this.addView(instr);
 		}*/
 		
-	}
-
-	public boolean onTouch(View v, MotionEvent event) {
-		
-		//new AlertDialog.Builder(this.getContext()).setTitle("Add Gadgets")
-		//.setAdapter(new All, listener)
-		//.show();
-		return false;
 	}
 
 }

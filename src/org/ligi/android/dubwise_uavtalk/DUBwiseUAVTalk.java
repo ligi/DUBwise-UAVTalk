@@ -25,7 +25,6 @@
 package org.ligi.android.dubwise_uavtalk;
 
 import org.ligi.android.R;
-import org.ligi.android.common.intents.IntentHelper;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
 import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
@@ -37,13 +36,11 @@ import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
 
 import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Window;
 
 /**
  * MainMenu/Entry/DashBoard Activity for DUBwise UAVTalk
@@ -88,11 +85,12 @@ public class DUBwiseUAVTalk extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        DUBwiseUAVTalkActivityCommons.before_content(this);
         kickstart(this);
         
         this.setTheme(R.style.base_theme);
         this.setContentView(R.layout.dashboard_pager);
+        
         
         DashBoardFragmentPagerAdapter pituneAdapter = new DashBoardFragmentPagerAdapter(this.getSupportFragmentManager());
         ViewPager awesomePager = (ViewPager) findViewById(R.id.dashboard_pager);
@@ -104,24 +102,5 @@ public class DUBwiseUAVTalk extends FragmentActivity {
         if (indicator!=null)
         	indicator.setViewPager(awesomePager);
         
-    }
-    
-    private final static int MENU_SAVE_EDIT=0;
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.clear();
-        menu.add(0,MENU_SAVE_EDIT,0,"Edit UAVObjects").setIcon(android.R.drawable.ic_menu_edit);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-        case MENU_SAVE_EDIT:
-        	IntentHelper.action(this, "EDIT_UAVOBJECT");
-        	break;
-        }
-        return true;
     }
 }

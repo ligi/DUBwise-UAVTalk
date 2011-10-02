@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.ligi.android.dubwise_uavtalk.dobar.DoBar  xmlns:android="http://schemas.android.com/apk/res/android" 
+			android:id="@+id/DoBar" 
+			android:layout_height="?android:attr/actionBarSize" 
+			android:layout_width="fill_parent"/>

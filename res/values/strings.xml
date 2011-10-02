@@ -49,5 +49,5 @@
     <string name="curves">curves</string>
     <string name="throttle_curve">ThrottleCurve</string>
     <string name="error_title">Problem</string>
-
+    <string name="edit_uavobjects">edit UAVObjects</string>
 </resources>
