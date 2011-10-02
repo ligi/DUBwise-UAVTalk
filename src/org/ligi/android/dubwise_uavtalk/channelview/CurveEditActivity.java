@@ -77,26 +77,21 @@ public class CurveEditActivity extends Activity implements OnChangeListener {
 		UAVObjects.getMixerSettings().setThrottleCurve1(cev.getCurve());
 	}
 
-	private final static int MENU_RESET=0;
-	private final static int MENU_SAVE=1;
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.clear();
-		menu.addSubMenu(0,MENU_RESET, 0,"Reset").setIcon(android.R.drawable.ic_menu_revert);
-		menu.addSubMenu(0,MENU_SAVE, 0,"Save").setIcon(android.R.drawable.ic_menu_save);
+		getMenuInflater().inflate(R.menu.curve_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
-		case MENU_RESET:
+		case R.id.menu_revert:
 			cev.setCurve(new float[] { 0.0f,0.25f,0.5f,0.75f,1f });
 			cev.invalidate();
 			break;
 			
-		case MENU_SAVE:
+		case R.id.menu_save:
 			UAVObjectPersistHelper.persistWithDialog(this,UAVObjects.getMixerSettings());
 			break;
 		}
