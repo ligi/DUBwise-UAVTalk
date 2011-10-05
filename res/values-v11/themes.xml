@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="parent_transparent" parent="android:Theme.Holo.Wallpaper"/>
+	<style name="parent_default" parent="android:Theme.Holo"/>
+	<style name="parent_actionbar" parent="android:style/Widget.Holo.ActionBar"/>
+</resources>

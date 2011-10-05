@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="transparent_theme" parent="android:Theme.Holo.Wallpaper">
+
+	<style name="parent_transparent" parent="android:Theme.Wallpaper"/>
+	<style name="parent_default" parent="android:Theme"/>
+	<style name="parent_actionbar" parent="android:style/Widget.ActionBar"/>
+
+	<style name="transparent_theme" parent="parent_transparent">
 		<item name="android:actionBarStyle">@style/ActionBar</item>
 		<item name="android:windowNoTitle">@bool/own_actionbar</item>
 	</style>
 
-	<style name="empty_theme" parent="android:Theme.Holo.Wallpaper">
+	<style name="empty_theme" parent="parent_transparent">
 		<item name="android:windowNoTitle">true</item>
 	</style>
 
-	<style name="base_theme" parent="android:Theme.Holo">
+	<style name="base_theme" parent="parent_default">
 		<item name="android:actionBarStyle">@style/ActionBar</item>
 		<item name="android:windowNoTitle">@bool/own_actionbar</item>
 		<item name="android:windowBackground">@drawable/dashboard_metal</item>
 	</style>
 
-	<style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">
+	<style name="ActionBar" parent="parent_actionbar">
     	<item name="android:background">#00000000</item> 
 		<item name="android:displayOptions">showCustom</item>
     	<item name="android:customNavigationLayout">@layout/do_bar_for_actionbar</item>
