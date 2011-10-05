@@ -11,6 +11,8 @@ import android.content.Intent;
 public class DUBwiseUAVTalkStartupActivity extends Activity{
 
 	private Activity ctx;
+	private boolean running=true;
+	private Thread kickstarter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,9 @@ public class DUBwiseUAVTalkStartupActivity extends Activity{
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				ctx.finish();
+				running=false;
+				if (kickstarter!=null)
+					kickstarter.stop();
 			}
 			
 		});
@@ -32,12 +37,15 @@ public class DUBwiseUAVTalkStartupActivity extends Activity{
 			public void run() {
 				Looper.prepare();
 				DUBwiseUAVTalk.kickstart(ctx);
-				ctx.startActivity(new Intent(ctx,DUBwiseUAVTalkDashboardActivity.class));	
+				if (running) 
+					ctx.startActivity(new Intent(ctx,DUBwiseUAVTalkDashboardActivity.class));	
+				ctx.finish();
 			}
 			
 		}
 		
-		new Thread(new KickStarter()).start();
+		kickstarter=new Thread(new KickStarter());
+		kickstarter.start();
 	}
 
 }
