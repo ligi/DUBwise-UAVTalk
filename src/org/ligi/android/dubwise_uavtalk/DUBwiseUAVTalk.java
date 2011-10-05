@@ -24,9 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk;
 
-import org.ligi.android.R;
 import org.ligi.android.dubwise_uavtalk.connection.StartupConnectionHandler;
-import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferences;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoiceTTSFeederThread;
 import org.ligi.android.dubwise_uavtalk.uavobject_browser.UAVTalkPrefs;
@@ -34,12 +32,10 @@ import org.ligi.tracedroid.TraceDroid;
 import org.ligi.tracedroid.logging.Log;
 import org.ligi.tracedroid.sending.TraceDroidEmailSender;
 import org.openpilot.uavtalk.UAVObjects;
-
-import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
 
 /**
  * MainMenu/Entry/DashBoard Activity for DUBwise UAVTalk
@@ -84,20 +80,8 @@ public class DUBwiseUAVTalk extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DUBwiseUAVTalkActivityCommons.before_content(this);
-        kickstart(this);
-        
-        this.setContentView(R.layout.dashboard_pager);
-        
-        DashBoardFragmentPagerAdapter pituneAdapter = new DashBoardFragmentPagerAdapter(this.getSupportFragmentManager());
-        ViewPager awesomePager = (ViewPager) findViewById(R.id.dashboard_pager);
-        awesomePager.setAdapter(pituneAdapter);
-        
-        TitlePageIndicator indicator =
-                (TitlePageIndicator)findViewById( R.id.indicator );
 
-        if (indicator!=null)
-        	indicator.setViewPager(awesomePager);
-        
+        this.startActivity(new Intent(this,DUBwiseUAVTalkStartupActivity.class));
+        finish();
     }
 }

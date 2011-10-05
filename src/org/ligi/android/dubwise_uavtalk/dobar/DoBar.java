@@ -22,10 +22,7 @@ public class DoBar extends LinearLayout  {
 		this.context=context;
 		myLP=this.generateLayoutParams(attrs);
 		layout();
-		
 	}
-
-	
 
 	private void layout() {
 		this.removeAllViews();
@@ -58,6 +55,7 @@ public class DoBar extends LinearLayout  {
 		if (this.isInEditMode())
 			return;
 
+		
 		ConnectionStatusDoBarGadget csv=new ConnectionStatusDoBarGadget(context);
 		csv.setLayoutParams(lp);
 		this.addView(csv);
