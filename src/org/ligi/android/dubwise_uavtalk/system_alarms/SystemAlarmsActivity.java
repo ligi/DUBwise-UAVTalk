@@ -34,13 +34,12 @@ import org.openpilot.uavtalk.uavobjects.SystemAlarms;
 
 import android.app.Activity;
 import android.app.ListActivity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -53,6 +52,7 @@ import android.widget.TextView;
 public class SystemAlarmsActivity extends ListActivity {
 
     private myArrayAdapter adapter;
+    
 
     /** Called when the activity is first created. */
     @Override
@@ -76,7 +76,7 @@ public class SystemAlarmsActivity extends ListActivity {
     }
 
     public void refreshAlarmVector() {
-        myAlarmVector=new Vector<myAlarm>();
+        myAlarmVector=new Vector<SystemAlarmClass>();
 
         // interesting ones first
         byte[] level_order_arr={SystemAlarms.ALARM_CRITICAL,SystemAlarms.ALARM_ERROR,SystemAlarms.ALARM_WARNING,SystemAlarms.ALARM_OK,SystemAlarms.ALARM_UNINITIALISED};
@@ -84,15 +84,15 @@ public class SystemAlarmsActivity extends ListActivity {
         for (int lvl_i=0;lvl_i<level_order_arr.length;lvl_i++)
         	for (int i=0;i<UAVObjects.getSystemAlarms().getAlarm().length;i++)
         		if (level_order_arr[lvl_i]==UAVObjects.getSystemAlarms().getAlarm()[i])
-        			myAlarmVector.add(new myAlarm(SystemAlarms.getAlarmElementNames()[i],UAVObjects.getSystemAlarms().getAlarm()[i]));
+        			myAlarmVector.add(new SystemAlarmClass(SystemAlarms.getAlarmElementNames()[i],UAVObjects.getSystemAlarms().getAlarm()[i]));
 
     }
-    private Vector<myAlarm> myAlarmVector;
+    private Vector<SystemAlarmClass> myAlarmVector;
     
-    class myAlarm {
+    class SystemAlarmClass {
     	private String label;
     	private byte level;
-    	public myAlarm(String label,byte level) {
+    	public SystemAlarmClass(String label,byte level) {
     		this.label=label;
     		this.level=level;
     	}
@@ -108,48 +108,45 @@ public class SystemAlarmsActivity extends ListActivity {
     }
     class myArrayAdapter extends BaseAdapter { 
 
-        private Activity context; 
+    	private LayoutInflater mLayoutInflater;
 
         public myArrayAdapter(Activity context) {
             super();
-            this.context=context;
+            mLayoutInflater=LayoutInflater.from(context);
         } 
         
         public View getView(int position, View convertView, ViewGroup parent) {
-        	myAlarm act_alarm=myAlarmVector.get(position);
-            LinearLayout lin=new LinearLayout(context);
-            lin.setOrientation(LinearLayout.VERTICAL);
-            TextView label_tv=new TextView(context);
+        	View view=mLayoutInflater.inflate(R.layout.icon_and_text4list, null);
+        	
+        	SystemAlarmClass act_alarm=myAlarmVector.get(position);
+        	
+        	
+            TextView label_tv=(TextView)view.findViewById(R.id.alarm_txt);
             label_tv.setText(act_alarm.getLabel());
+            ImageView alert_img=(ImageView)view.findViewById(R.id.alarm_image);
             switch (act_alarm.getLevel()) {
             case SystemAlarms.ALARM_UNINITIALISED:
-            	lin.setBackgroundResource(R.drawable.sysalerts_grey_bg);
-            	label_tv.setTextColor(Color.BLACK);
+            	alert_img.setBackgroundResource(R.drawable.error_inactive);
             	break;
             
             case SystemAlarms.ALARM_CRITICAL:
+            	alert_img.setBackgroundResource(R.drawable.error_inactive);
             	label_tv.setText(label_tv.getText()+"(!)"); // ;-)
             	// no break wanted
             case SystemAlarms.ALARM_ERROR:
-            	lin.setBackgroundResource(R.drawable.sysalerts_red_bg);
-            	label_tv.setTextColor(Color.WHITE);
-            	
+            	alert_img.setBackgroundResource(R.drawable.error_active);
             	break;
             	
             case SystemAlarms.ALARM_WARNING:
-            	lin.setBackgroundResource(R.drawable.sysalerts_yellow_bg);
-            	label_tv.setTextColor(Color.BLACK);
+            	alert_img.setBackgroundResource(R.drawable.error_yellow);
             	break;
 
             case SystemAlarms.ALARM_OK:
-            	lin.setBackgroundResource(R.drawable.sysalerts_green_bg);
-            	label_tv.setTextColor(Color.BLACK);
+            	alert_img.setBackgroundResource(R.drawable.error_green);
             	break;
             }
             
-            label_tv.setTextSize(TypedValue.COMPLEX_UNIT_MM,15.0f);
-            lin.addView(label_tv);
-            return(lin); 
+            return(view); 
         }
 
         public int getCount() {

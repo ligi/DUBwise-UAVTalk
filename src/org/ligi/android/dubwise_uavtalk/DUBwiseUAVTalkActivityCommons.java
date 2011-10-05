@@ -9,7 +9,7 @@ public class DUBwiseUAVTalkActivityCommons {
 
 	public static void before_content(Activity activity) {
 		activity.getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-		activity.setTheme(R.style.transparent_theme);
-		//activity.setTheme(R.style.base_theme);
+		//activity.setTheme(R.style.transparent_theme);
+		activity.setTheme(R.style.base_theme);
 	}
 }
