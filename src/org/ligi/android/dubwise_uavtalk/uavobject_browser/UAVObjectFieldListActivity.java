@@ -157,4 +157,9 @@ public class UAVObjectFieldListActivity extends UAVObjectFieldBaseActivity {
             return row;
         }		
     }
+    
+	@Override
+	void notifyContentChange() {
+		my_adapter.notifyDataSetChanged();		
+	}
 }

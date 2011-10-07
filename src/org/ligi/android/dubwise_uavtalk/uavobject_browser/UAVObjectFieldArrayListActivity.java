@@ -62,6 +62,7 @@ public class UAVObjectFieldArrayListActivity extends UAVObjectFieldBaseActivity 
         UAVObjects.init();
         ma=new myArrayAdapter(this, android.R.layout.simple_list_item_1, UAVObjects.getObjectByID(objid).getFieldDescriptions()[fieldid].getElementNames());
         this.setListAdapter(ma);
+        
     }
 
     @Override
@@ -93,4 +94,9 @@ public class UAVObjectFieldArrayListActivity extends UAVObjectFieldBaseActivity 
 
         }
     }
+
+	@Override
+	void notifyContentChange() {
+		ma.notifyDataSetChanged();		
+	}
 }

@@ -13,4 +13,9 @@
           android:title="@string/menu_save"
           android:showAsAction="ifRoom|withText" />
           
+     <item android:id="@+id/menu_load"
+          android:icon="@android:drawable/ic_menu_rotate"
+          android:title="@string/menu_load"
+          android:showAsAction="ifRoom|withText" />
+          
 </menu>
