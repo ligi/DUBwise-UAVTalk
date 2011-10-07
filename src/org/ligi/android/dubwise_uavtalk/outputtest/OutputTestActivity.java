@@ -25,6 +25,7 @@
 package org.ligi.android.dubwise_uavtalk.outputtest;
 
 
+import org.ligi.android.common.dialogs.DialogDiscarder;
 import org.ligi.android.commons.SeekBarMinMax;
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
@@ -88,11 +89,7 @@ public class OutputTestActivity extends ListActivity {
         .setTitle(R.string.special_awareness)
         .setMessage(R.string.outputtest_warning)
         .setIcon(android.R.drawable.ic_dialog_alert)
-        .setPositiveButton("OK",new OnClickListener() {
-
-			public void onClick(DialogInterface dialog, int which) {
-			}
-        })        
+        .setPositiveButton("OK",new DialogDiscarder())        
         .setNegativeButton("BACK!",new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				finish();
