@@ -53,11 +53,9 @@ public class PITuneFragment extends Fragment {
 			fieldDescByName.put(d.getName(), d);
 
 		Float mod_base = 0.0001f;
-		String middle_str="";
 		switch(mNum) {
 		case 0:
 			mod_base = 0.0001f;
-			middle_str="Rate / Inner loop";
 			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 0),
 					v.findViewById(id.kp_nick), mod_base);
 			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchRatePID"), 1),
@@ -81,7 +79,6 @@ public class PITuneFragment extends Fragment {
 			break;
 		case 1:
 			mod_base = 0.1f;
-			middle_str="Attitude / Outer loop";
 			
 			connectFloat(new UAVObjectLink(fieldDescByName.get("PitchPI"), 0),
 					v.findViewById(id.kp_nick), mod_base);
