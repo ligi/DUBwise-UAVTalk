@@ -2,6 +2,7 @@ package org.ligi.android.dubwise_uavtalk.pitune;
 
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
+import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectLoadHelper;
 import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
@@ -13,6 +14,8 @@ import com.jakewharton.android.viewpagerindicator.TitleProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -20,32 +23,78 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-
-public class PITuneActivity extends FragmentActivity implements Runnable{
+/**
+ * Activity to tune the 
+ * @author ligi
+ *
+ */
+public class PITuneActivity extends FragmentActivity {
 			
 	   private boolean running=true;
-		
+	   private PITuneFragmentPagerAdapter pituneAdapter;
+	   private FragmentActivity ctx;
+	   
+	   public class AutoValueApplyer implements Runnable {
+		   public void run() {
+	   
+			while(running) {
+				try {
+					UAVObjectPersistHelper.apply(UAVObjects.getStabilizationSettings());
+					Thread.sleep(400);
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		}
+	   }
+	   
+	   public void setContent() {
+			ctx.setContentView(R.layout.pitune_pager);
+			
+			pituneAdapter = new PITuneFragmentPagerAdapter(getSupportFragmentManager());
+			ViewPager awesomePager = (ViewPager) findViewById(R.id.pitune_pager);
+			awesomePager.setAdapter(pituneAdapter);
+			
+			TitlePageIndicator indicator =	(TitlePageIndicator)findViewById( R.id.indicator );
+
+		    if (indicator!=null)
+		    	indicator.setViewPager(awesomePager);
+	   }
+	   
 	   @Override
 	    public void onCreate(Bundle savedInstanceState) {
 		    super.onCreate(savedInstanceState); 
+		    ctx=this;
 		    
 		    DUBwiseUAVTalkActivityCommons.before_content(this);
 		    
 		    UAVTalkGCSThread.getInstance().send_obj(UAVObjects.getStabilizationSettings(),UAVTalkDefinitions.TYPE_OBJ_REQ);
-	    
-		    running=true;
-		    new Thread(this).start();
-	        this.setContentView(R.layout.pitune_pager);
-	        
-	        PITuneFragmentPagerAdapter pituneAdapter = new PITuneFragmentPagerAdapter(getSupportFragmentManager());
-	        ViewPager awesomePager = (ViewPager) findViewById(R.id.pitune_pager);
-	        awesomePager.setAdapter(pituneAdapter);
-	        
-	        TitlePageIndicator indicator =
-	                (TitlePageIndicator)findViewById( R.id.indicator );
+		    Handler ready_handler=new Handler() {
 
-	        if (indicator!=null)
-	        	indicator.setViewPager(awesomePager);
+				@Override
+				public void handleMessage(Message msg) {
+					super.handleMessage(msg);
+				    running=true;
+					new Thread(new AutoValueApplyer()).start();
+					setContent();
+					
+				}
+		    	
+		    };
+		    
+		    Handler dismiss_handler=new Handler() {
+
+				@Override
+				public void handleMessage(Message msg) {
+					super.handleMessage(msg);
+					setContent();
+				}
+		    	
+		    };
+		    
+		    UAVObjectLoadHelper.loadWithDialog(this,UAVObjects.getStabilizationSettings(),ready_handler,dismiss_handler);
+	      
 	   }
 
 	   @Override
@@ -108,15 +157,5 @@ public class PITuneActivity extends FragmentActivity implements Runnable{
 		return true;
 	}
 
-	public void run() {
-		while(running) {
-			try {
-				UAVObjectPersistHelper.apply(UAVObjects.getStabilizationSettings());
-				Thread.sleep(400);
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-			}
-		}
-	}
+	
 }
