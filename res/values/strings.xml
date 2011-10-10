@@ -51,6 +51,7 @@
     <string name="error_title">Problem</string>
     <string name="edit_uavobjects">edit UAVObjects</string>
     <string name="menu_save">Save</string>
+    <string name="menu_load">Load</string>
     <string name="menu_apply">Apply</string>
     <string name="menu_help">Help</string>
     <string name="menu_revert">Revert</string>

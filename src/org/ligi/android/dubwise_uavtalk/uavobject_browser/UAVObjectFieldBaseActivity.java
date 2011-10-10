@@ -20,12 +20,15 @@
 package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
+import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectLoadHelper;
 import org.ligi.android.dubwise_uavtalk.uavobjects_helper.UAVObjectPersistHelper;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -39,14 +42,18 @@ import android.view.MenuItem;
 public abstract class UAVObjectFieldBaseActivity extends ListActivity {
 
 	public int objid; 
+	private UAVObjectFieldBaseActivity ctx;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	ctx=this;
         super.onCreate(savedInstanceState);
         
         DUBwiseUAVTalkActivityCommons.before_content(this);
     }
 	
+    abstract void notifyContentChange() ;
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	getMenuInflater().inflate(R.menu.uavobjectedit_menu, menu);
@@ -62,6 +69,16 @@ public abstract class UAVObjectFieldBaseActivity extends ListActivity {
 	case R.id.menu_apply:
 		UAVObjectPersistHelper.apply(UAVObjects.getObjectByID(objid));
 		return true;
+	case R.id.menu_load:
+		Handler h=new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				ctx.notifyContentChange();
+			}
+			
+		};
+		UAVObjectLoadHelper.loadWithDialog(this, UAVObjects.getObjectByID(objid), h);
 	}
 	return false;
 	}
