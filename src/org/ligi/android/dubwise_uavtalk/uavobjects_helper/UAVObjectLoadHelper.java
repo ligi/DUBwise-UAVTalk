@@ -1,11 +1,14 @@
 package org.ligi.android.dubwise_uavtalk.uavobjects_helper;
 
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
+import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObject;
 import org.openpilot.uavtalk.UAVTalkDefinitions;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.Handler;
 import android.os.Message;
 /**
@@ -16,12 +19,13 @@ import android.os.Message;
  */
 public class UAVObjectLoadHelper {
 
-	public static void loadWithDialog(Context ctx,final UAVObject obj,final Handler finishing_callback) {
+	public static void loadWithDialog(Context ctx,final UAVObject obj,final Handler finishing_callback,final Handler cancel_callback) {
 		
 		final int DIALOG_DISMISS = 0;
 
 		final AlertDialog dialog = ProgressDialog.show(ctx, "Loading",
-				"loading values from your board", true, true);
+				"loading values from your board", true, true); 
+
 		final Handler handler = new Handler() {
 			public void handleMessage(Message msg) {
 				finishing_callback.sendEmptyMessage(0);
@@ -29,26 +33,53 @@ public class UAVObjectLoadHelper {
 			}
 		};
 
-		new Thread() {
+		
+		class CheckThread extends Thread {
+			public boolean running=true;
 			public void run() {
 				
 				int i = 0;
 				
 				long last_t=obj.getMetaData().getLastDeserialize();
 				load(obj);
-				while (last_t==obj.getMetaData().getLastDeserialize())
+				while (running)
 					try {
+						// if we got an update
+						if (last_t!=obj.getMetaData().getLastDeserialize()) {
+							handler.sendEmptyMessage(DIALOG_DISMISS);
+							break;
+						}
 						Thread.sleep(100);
 						i++;
 
 						if ((i % 23) == 0)  // every 2.3s reinitiate loading
 							load(obj);
 
+						
 					} catch (InterruptedException e) {
 					}
-				handler.sendEmptyMessage(DIALOG_DISMISS);
+					
 			}
-		}.start();
+		};
+		
+		final CheckThread check_thread=new CheckThread();
+		
+		dialog.setOnCancelListener(new OnCancelListener() {
+
+			@Override
+			public void onCancel(DialogInterface arg0) {
+				check_thread.running=false;
+				if(cancel_callback!=null) 
+					cancel_callback.sendEmptyMessage(0);
+			}});
+
+
+		
+		check_thread.start();
+	}
+	
+	public static void loadWithDialog(Context ctx,final UAVObject obj,final Handler finishing_callback) {
+		loadWithDialog(ctx,obj,finishing_callback,null);
 	}
 	
 	public final static void load(UAVObject obj) {
