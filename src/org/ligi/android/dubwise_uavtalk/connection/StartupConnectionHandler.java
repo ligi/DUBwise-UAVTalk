@@ -24,14 +24,8 @@
 
 package org.ligi.android.dubwise_uavtalk.connection;
 
-import it.gerdavax.easybluetooth.LocalDevice;
-import it.gerdavax.easybluetooth.ReadyListener;
-
-import org.ligi.android.uavtalk.dubwise.R;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -51,40 +45,10 @@ public class StartupConnectionHandler {
         if (mySharedPreferences.getBoolean("saved",false)) {  // if we have a default connection
             String url= mySharedPreferences.getString("url","corrupt settings data");
             String name=mySharedPreferences.getString("name","corrupt settings data");
-            if (url.startsWith(ConnectionManager.BT_PROTO_START)) {
-
-                class myReadyListener extends ReadyListener {
-
-                    private String name;
-                    private String url;
-                    private AlertDialog alert2close;
-                    
-                    public myReadyListener(String name,String url,AlertDialog alert2close) {
-                        this.name=name;
-                        this.url=url;
-                        this.alert2close=alert2close;
-                    }
-                    
-                    @Override
-                    public void ready() {
-                        ConnectionManager.connect(name,url);
-                        alert2close.dismiss();
-                        
-                    }
-                }
-
-                ProgressDialog pd=new ProgressDialog(activity);
-                pd.setTitle(activity.getResources().getString(R.string.please_wait));
-                pd.setMessage(activity.getResources().getString(R.string.switching_on_bt));
-                pd.show();
-
-                LocalDevice.getInstance().init(activity.getApplicationContext(), new myReadyListener(name,url,pd));
-
-            }
-            else {
-                ConnectionManager.connect(name,url);
-            }
-
+            if (url.startsWith(ConnectionManager.BT_PROTO_START)) 
+                BluetoothAdapter.getDefaultAdapter().enable();
+            ConnectionManager.connect(name,url);
+            
         }
     }
 
