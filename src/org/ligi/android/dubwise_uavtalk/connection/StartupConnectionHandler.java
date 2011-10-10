@@ -28,15 +28,13 @@ import it.gerdavax.easybluetooth.LocalDevice;
 import it.gerdavax.easybluetooth.ReadyListener;
 
 import org.ligi.android.uavtalk.dubwise.R;
-import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkDevSettings;
-import org.ligi.android.dubwise_uavtalk.instruments.InstrumentDisplayActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
 /**
  * Handles automatic connecting on startup - like loading and saving connections
  * 
@@ -59,13 +57,11 @@ public class StartupConnectionHandler {
 
                     private String name;
                     private String url;
-                    private Activity myActivity;
                     private AlertDialog alert2close;
                     
-                    public myReadyListener(Activity context,String name,String url,AlertDialog alert2close) {
+                    public myReadyListener(String name,String url,AlertDialog alert2close) {
                         this.name=name;
                         this.url=url;
-                        this.myActivity=context;
                         this.alert2close=alert2close;
                     }
                     
@@ -73,7 +69,6 @@ public class StartupConnectionHandler {
                     public void ready() {
                         ConnectionManager.connect(name,url);
                         alert2close.dismiss();
-                        HandshakeStatusAlertDialog.show(myActivity,true,DUBwiseUAVTalkDevSettings.getStartIntent(myActivity));
                         
                     }
                 }
@@ -83,14 +78,12 @@ public class StartupConnectionHandler {
                 pd.setMessage(activity.getResources().getString(R.string.switching_on_bt));
                 pd.show();
 
-                LocalDevice.getInstance().init(activity.getApplicationContext(), new myReadyListener(activity,name,url,pd));
+                LocalDevice.getInstance().init(activity.getApplicationContext(), new myReadyListener(name,url,pd));
 
             }
             else {
                 ConnectionManager.connect(name,url);
-                HandshakeStatusAlertDialog.show(activity,true,new Intent(activity,InstrumentDisplayActivity.class));
             }
-
 
         }
     }
