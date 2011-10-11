@@ -381,7 +381,7 @@ public class UAVTalkGCSThread implements Runnable, UAVObjectChangeListener {
                     act_uavobject.deserialize(data_buff);
                 rxPackets++;
             } else {
-                rxError("CRC ERR data_length=" + data_length + " objid=0x" + String.format("0x%X",act_uavobject.getObjID()));
+                rxError("CRC ERR data_length=" + data_length + " objid=0x" + String.format("0x%X",act_uavobject.getObjID()) + " instanceid " + instance_id + " packet_size" + packet_size);
             }
 
             state=STATE_SYNC;

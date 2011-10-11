@@ -28,7 +28,6 @@ import org.openpilot.uavtalk.UAVObjectFieldDescription;
 import org.openpilot.uavtalk.UAVObjects;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

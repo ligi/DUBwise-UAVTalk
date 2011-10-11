@@ -1,7 +1,6 @@
 package org.ligi.android.dubwise_uavtalk.uavobjects_helper;
 
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
-import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObject;
 import org.openpilot.uavtalk.UAVTalkDefinitions;
 import android.app.AlertDialog;
