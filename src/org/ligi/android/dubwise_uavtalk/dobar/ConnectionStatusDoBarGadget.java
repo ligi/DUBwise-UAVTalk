@@ -3,6 +3,7 @@ package org.ligi.android.dubwise_uavtalk.dobar;
 import org.ligi.android.R;
 import org.ligi.android.dubwise_uavtalk.connection.HandshakeStatusAlertDialog;
 import org.ligi.android.dubwise_uavtalk.connection.UAVTalkGCSThread;
+import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.FlightTelemetryStats;
 
@@ -71,28 +72,30 @@ public class ConnectionStatusDoBarGadget extends View implements Runnable,DoBarG
 		
 	}
 	
+	private Drawable getActDrawable() {
+		switch (UAVObjects.getFlightTelemetryStats().getStatus()) {
+		case FlightTelemetryStats.STATUS_CONNECTED:
+			Drawable res=icon_flow2;
+			if ((((draw_round/3)%2)==0)&&(UAVTalkGCSThread.getInstance().getRxPackets()>last_bytes))
+				res= icon_flow1;
+			
+			last_bytes=UAVTalkGCSThread.getInstance().getRxPackets();
+			return res;
+		case FlightTelemetryStats.STATUS_DISCONNECTED:
+			return icon_inactive;
+
+		case FlightTelemetryStats.STATUS_HANDSHAKEACK:
+		case FlightTelemetryStats.STATUS_HANDSHAKEREQ:
+			return icon_active;
+		}
+		Log.w("no Icon for status");
+		return icon_inactive;
+	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		draw_round++;
-		switch (UAVObjects.getFlightTelemetryStats().getStatus()) {
-		case FlightTelemetryStats.STATUS_CONNECTED:
-			if ((((draw_round/3)%2)==0)&&(UAVTalkGCSThread.getInstance().getRxPackets()>last_bytes))
-				icon_flow1.draw(canvas);
-			else
-				icon_flow2.draw(canvas);
-
-			
-			last_bytes=UAVTalkGCSThread.getInstance().getRxPackets();
-			break;
-		case FlightTelemetryStats.STATUS_DISCONNECTED:
-			icon_inactive.draw(canvas);
-			break;
-		case FlightTelemetryStats.STATUS_HANDSHAKEACK:
-		case FlightTelemetryStats.STATUS_HANDSHAKEREQ:
-			icon_active.draw(canvas);
-			break;
-		}
+		getActDrawable().draw(canvas);
 	}
 
 
