@@ -27,9 +27,13 @@ package org.ligi.android.dubwise_uavtalk;
 import org.ligi.android.R;
 import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
 import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * MainMenu/DashBoard Activity for DUBwise UAVTalk
@@ -42,9 +46,9 @@ public class DUBwiseUAVTalkDashboardActivity extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         DUBwiseUAVTalkActivityCommons.before_content(this);
+    	super.onCreate(savedInstanceState);
+
         
         this.setContentView(R.layout.dashboard_pager);
         
@@ -58,4 +62,38 @@ public class DUBwiseUAVTalkDashboardActivity extends FragmentActivity {
         	indicator.setViewPager(awesomePager); // connect indicator and pager
         
     }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		this.getMenuInflater().inflate(R.menu.dashboard_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	private final static int REQUEST_SETTINGS=0;
+	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		Intent intent = getIntent();
+		finish();
+		startActivity(intent);
+		super.onActivityResult(arg0, arg1, arg2);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.menu_preferneces:
+			this.startActivityForResult(new Intent(this,DUBwiseUAVTalkPreferencesActivity.class),REQUEST_SETTINGS);
+
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+    
+    
 }
