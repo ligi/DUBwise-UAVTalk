@@ -24,6 +24,14 @@ public class ConnectionStatusDoBarGadget extends View implements Runnable,DoBarG
 
 	private boolean running;
 	
+	private int draw_round=0;
+	private int last_bytes=0;
+
+	private Drawable icon_inactive;
+	private Drawable icon_active;
+	private Drawable icon_flow1;
+	private Drawable icon_flow2;
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		HandshakeStatusAlertDialog.show(this.getContext(),false,null);
@@ -41,11 +49,6 @@ public class ConnectionStatusDoBarGadget extends View implements Runnable,DoBarG
 		start();
 	}
 
-	private Drawable icon_inactive;
-	private Drawable icon_active;
-	private Drawable icon_flow1;
-	private Drawable icon_flow2;
-	
 	private void start() {
 		running=true;
 		icon_inactive=this.getResources().getDrawable(R.drawable.connstate_inactive);
@@ -67,8 +70,6 @@ public class ConnectionStatusDoBarGadget extends View implements Runnable,DoBarG
 		icon_flow2.setBounds(bounds);
 		
 	}
-	int draw_round=0;
-	int last_bytes=0;
 	
 	
 	@Override
