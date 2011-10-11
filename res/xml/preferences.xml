@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference android:entryValues="@array/skins" android:entries="@array/skins" android:defaultValue="default" android:persistent="true" android:enabled="true" android:key="@string/pref_key_skin" android:title="Skin" android:summary="set the look of this"></ListPreference>
+    <ListPreference android:summary="Activity to start when connected" android:title="Initial Activity" android:key=""></ListPreference>
+    
+</PreferenceScreen>
