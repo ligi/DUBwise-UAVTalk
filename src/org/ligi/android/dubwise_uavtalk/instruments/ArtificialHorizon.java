@@ -45,7 +45,6 @@ public class ArtificialHorizon extends View{
     private Path crossHairPath;
     
     private final static float line_width=3;
-    private float black_line_width=3;
     
 	private Paint mWhiteLinePaint;
 	private Paint mBlackLinePaint;
