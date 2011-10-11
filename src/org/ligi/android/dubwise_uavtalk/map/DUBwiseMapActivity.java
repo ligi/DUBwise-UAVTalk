@@ -74,6 +74,7 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 
 		mapView.setSatellite(true);
 		 
+		@SuppressWarnings("deprecation")
 		LinearLayout zoomView = (LinearLayout) mapView.getZoomControls();
 
 		zoomView.setLayoutParams(new ViewGroup.LayoutParams
@@ -133,9 +134,9 @@ public class DUBwiseMapActivity extends MapActivity implements LocationListener 
 
 	public void onLocationChanged(Location location) {
 		if (location != null) {
-			double lat = location.getLatitude();
-			double lng = location.getLongitude();
-			GeoPoint p = new GeoPoint((int) (lat * 1000000), (int)( lng * 1000000));
+			//double lat = location.getLatitude();
+			//double lng = location.getLongitude();
+			//GeoPoint p = new GeoPoint((int) (lat * 1000000), (int)( lng * 1000000));
 			//overlay.phonePoint=p;
 			//mapView.getController().animateTo(p);
 		}
