@@ -8,7 +8,6 @@ import org.openpilot.uavtalk.uavobjects.FlightTelemetryStats;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -87,12 +86,10 @@ public class ConnectionStatusDoBarGadget extends View implements Runnable,DoBarG
 			break;
 		case FlightTelemetryStats.STATUS_DISCONNECTED:
 			icon_inactive.draw(canvas);
-			//canvas.drawColor(Color.RED);
 			break;
 		case FlightTelemetryStats.STATUS_HANDSHAKEACK:
 		case FlightTelemetryStats.STATUS_HANDSHAKEREQ:
 			icon_active.draw(canvas);
-			//canvas.drawColor(Color.YELLOW);
 			break;
 		}
 	}
