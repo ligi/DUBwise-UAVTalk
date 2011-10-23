@@ -1,10 +1,10 @@
 package org.ligi.android.dubwise_uavtalk.dashboard;
 
+import com.viewpagerindicator.TitleProvider;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
-import com.jakewharton.android.viewpagerindicator.TitleProvider;
 
 public class DashBoardFragmentPagerAdapter extends FragmentPagerAdapter implements TitleProvider{
     

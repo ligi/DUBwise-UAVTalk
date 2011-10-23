@@ -55,7 +55,7 @@ public class SettingsListActivity extends ListActivity {
         DUBwiseUAVTalkActivityCommons.before_content(this);
         
         myAdapter = new IconTextActionAdapter(this);
-        myAdapter.style(R.layout.icon_and_text, R.id.text, R.id.image);
+        myAdapter.style(R.layout.icon_and_text4list, R.id.text, R.id.image);
 
         myAdapter.add(MENU_VOICE,android.R.drawable.ic_lock_silent_mode_off, R.string.status_voice);
         myAdapter.add(MENU_UAVOBJS,android.R.drawable.ic_menu_agenda, R.string.uavobjects);

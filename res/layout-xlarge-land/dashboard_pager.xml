@@ -3,7 +3,7 @@
     android:orientation="vertical">
      
      <include layout="@layout/do_bar_include"/>
-		
+	 <include layout="@layout/title_page_indicator"/>
 			 
      <com.jakewharton.android.viewpagerindicator.TitlePageIndicator
         android:id="@+id/indicator"

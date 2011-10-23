@@ -8,8 +8,8 @@ import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.UAVTalkDefinitions;
 
-import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
-import com.jakewharton.android.viewpagerindicator.TitleProvider;
+import com.viewpagerindicator.TitlePageIndicator;
+import com.viewpagerindicator.TitleProvider;
 
 import android.content.Intent;
 import android.net.Uri;

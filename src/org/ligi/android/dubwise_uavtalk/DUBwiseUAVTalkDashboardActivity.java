@@ -26,7 +26,8 @@ package org.ligi.android.dubwise_uavtalk;
 
 import org.ligi.android.R;
 import org.ligi.android.dubwise_uavtalk.dashboard.DashBoardFragmentPagerAdapter;
-import com.jakewharton.android.viewpagerindicator.TitlePageIndicator;
+
+import com.viewpagerindicator.TitlePageIndicator;
 
 import android.content.Intent;
 import android.os.Bundle;

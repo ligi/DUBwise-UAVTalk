@@ -25,7 +25,6 @@
 package org.ligi.android.dubwise_uavtalk.system_alarms;
 
 import java.util.Vector;
-
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
@@ -51,6 +50,7 @@ import android.widget.TextView;
  */
 public class SystemAlarmsActivity extends ListActivity {
 
+	
     private myArrayAdapter adapter;
     
 
@@ -121,9 +121,9 @@ public class SystemAlarmsActivity extends ListActivity {
         	SystemAlarmClass act_alarm=myAlarmVector.get(position);
         	
         	
-            TextView label_tv=(TextView)view.findViewById(R.id.alarm_txt);
+            TextView label_tv=(TextView)view.findViewById(R.id.text);
             label_tv.setText(act_alarm.getLabel());
-            ImageView alert_img=(ImageView)view.findViewById(R.id.alarm_image);
+            ImageView alert_img=(ImageView)view.findViewById(R.id.image);
             switch (act_alarm.getLevel()) {
             case SystemAlarms.ALARM_UNINITIALISED:
             	alert_img.setBackgroundResource(R.drawable.error_inactive);

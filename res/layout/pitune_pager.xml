@@ -6,15 +6,7 @@
 				android:orientation="vertical">
    
     <include layout="@layout/do_bar_include"/>
-	
-			
-	<com.jakewharton.android.viewpagerindicator.TitlePageIndicator
-        android:id="@+id/indicator"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-        />
-		
-	
+	<include layout="@layout/title_page_indicator"/>
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:id="@+id/tableRow1">
 		<TextView android:text="Nick" android:layout_weight="0.3" android:gravity="center"
