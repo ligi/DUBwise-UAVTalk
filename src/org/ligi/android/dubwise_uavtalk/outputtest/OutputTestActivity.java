@@ -24,8 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.outputtest;
 
-
-import org.ligi.android.commons.SeekBarMinMax;
+import org.ligi.android.common.SeekBarMinMax;
 import org.ligi.android.dubwise_uavtalk.R;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;
