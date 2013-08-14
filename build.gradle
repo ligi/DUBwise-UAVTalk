@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.+'
+    }
+}
+
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+    maven {
+        url project.hasProperty('ligisMavenUrl') ? ligisMavenUrl : "https://raw.github.com/ligi/ligis-mvn-repo/master";
+    }
+    maven {
+         url 'https://github.com/Goddchen/mvn-repo/raw/master/'
+    }
+}
+
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "17.0.0"
+
+    dependencies {
+        compile fileTree(dir: 'lib', include: '*.jar')
+        compile 'org.ligi:AndroidHelper:0.18'
+        compile 'org.ligi:DUBwiseCommons:0.6'
+        compile 'org.ligi:tracedroid:1.1'
+
+	compile "com.actionbarsherlock:viewpagerindicator:2.4.1"
+        compile 'com.android.support:support-v4:18.0.0'
+    }
+}
