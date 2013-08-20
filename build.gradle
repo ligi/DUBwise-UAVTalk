@@ -26,8 +26,8 @@ android {
 
     dependencies {
         compile fileTree(dir: 'lib', include: '*.jar')
-        compile 'org.ligi:AndroidHelper:0.18'
-        compile 'org.ligi:DUBwiseCommons:0.6'
+        compile 'org.ligi:AndroidHelper:0.19'
+        compile 'org.ligi:DUBwiseCommons:0.7'
         compile 'org.ligi:tracedroid:1.1'
 
 	compile "com.actionbarsherlock:viewpagerindicator:2.4.1"
