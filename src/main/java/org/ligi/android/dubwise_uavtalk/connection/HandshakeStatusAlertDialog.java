@@ -24,7 +24,7 @@
 
 package org.ligi.android.dubwise_uavtalk.connection;
 
-import org.ligi.androidhelper.helpers.dialog.DialogDiscardingOnClickListener;
+import org.ligi.axt.helpers.dialog.DialogDiscardingOnClickListener;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.FlightTelemetryStats;

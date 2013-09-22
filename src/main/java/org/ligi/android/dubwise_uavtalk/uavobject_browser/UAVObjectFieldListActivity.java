@@ -21,7 +21,7 @@ package org.ligi.android.dubwise_uavtalk.uavobject_browser;
 
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
-import org.ligi.androidhelper.adapters.PeriodicallyInvalidateAdapter;
+import org.ligi.axt.adapters.PeriodicallyInvalidateAdapter;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObject;
 import org.openpilot.uavtalk.UAVObjectFieldDescription;

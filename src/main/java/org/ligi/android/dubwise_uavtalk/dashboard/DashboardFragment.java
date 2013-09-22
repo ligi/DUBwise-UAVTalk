@@ -8,7 +8,7 @@ import org.ligi.android.dubwise_uavtalk.outputtest.OutputTestActivity;
 import org.ligi.android.dubwise_uavtalk.pitune.PITuneActivity;
 import org.ligi.android.dubwise_uavtalk.statusvoice.StatusVoicePreferencesActivity;
 import org.ligi.android.uavtalk.dubwise.R;
-import org.ligi.androidhelper.AndroidHelper;
+import org.ligi.axt.AXT;
 
 import com.google.android.apps.iosched.ui.widget.DashboardLayout;
 import android.content.Intent;
@@ -101,7 +101,7 @@ public class DashboardFragment extends Fragment {
         });
 		button.setTextColor(Color.WHITE);
 		
-		AndroidHelper.at(button).startIntentOnClick(i);
+		AXT.at(button).startIntentOnClick(i);
 		return button;
 	}
 	

@@ -1,6 +1,6 @@
 package org.ligi.android.dubwise_uavtalk.system_alarms;
 
-import org.ligi.androidhelper.AndroidHelper;
+import org.ligi.axt.AXT;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObjects;
 import org.openpilot.uavtalk.uavobjects.SystemAlarms;
@@ -121,7 +121,7 @@ public class SystemAlarmsActionBarThingy extends View {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		AndroidHelper.at(getContext()).startActivityForClass(SystemAlarmsActivity.class);
+		AXT.at(getContext()).startActivityForClass(SystemAlarmsActivity.class);
 		// TODO Auto-generated method stub
 		return super.onTouchEvent(event);
 	}

@@ -29,7 +29,7 @@ import java.util.Vector;
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
 import org.ligi.android.common.intents.IntentHelper;
-import org.ligi.androidhelper.helpers.dialog.DialogDiscardingOnClickListener;
+import org.ligi.axt.helpers.dialog.DialogDiscardingOnClickListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;

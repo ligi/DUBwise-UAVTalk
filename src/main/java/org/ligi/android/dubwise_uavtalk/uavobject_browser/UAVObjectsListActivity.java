@@ -23,7 +23,7 @@ import java.util.Vector;
 
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
-import org.ligi.androidhelper.helpers.dialog.DialogDiscardingOnClickListener;
+import org.ligi.axt.helpers.dialog.DialogDiscardingOnClickListener;
 import org.ligi.tracedroid.logging.Log;
 import org.openpilot.uavtalk.UAVObjectMetaData;
 import org.openpilot.uavtalk.UAVObjects;

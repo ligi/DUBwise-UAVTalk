@@ -26,7 +26,7 @@ package org.ligi.android.dubwise_uavtalk.statusvoice;
 
 import org.ligi.android.dubwise_uavtalk.DUBwiseUAVTalkActivityCommons;
 import org.ligi.android.uavtalk.dubwise.R;
-import org.ligi.androidhelper.base_activities.RefreshingStringBaseListActivity;
+import org.ligi.axt.base_activities.RefreshingStringBaseListActivity;
 
 
 import android.os.Bundle;

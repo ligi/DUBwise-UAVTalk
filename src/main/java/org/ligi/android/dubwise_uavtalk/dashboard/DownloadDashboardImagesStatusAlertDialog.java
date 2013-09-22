@@ -31,7 +31,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.http.util.ByteArrayBuffer;
-import org.ligi.androidhelper.helpers.dialog.DialogDiscardingOnClickListener;
+import org.ligi.axt.helpers.dialog.DialogDiscardingOnClickListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
