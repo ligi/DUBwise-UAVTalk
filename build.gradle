@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.6'
+        classpath 'com.android.tools.build:gradle:0.7.+'
     }
 }
 
@@ -21,16 +21,21 @@ repositories {
 
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "17.0.0"
+    compileSdkVersion 19
+    buildToolsVersion "19.0.1"
 
     dependencies {
         compile fileTree(dir: 'lib', include: '*.jar')
-        compile 'org.ligi:AXT:0.21'
+        compile 'org.ligi:AXT:0.25'
         compile 'org.ligi:DUBwiseCommons:0.7'
         compile 'org.ligi:tracedroid:1.1'
 
 	compile "com.actionbarsherlock:viewpagerindicator:2.4.1"
-        compile 'com.android.support:support-v4:18.0.0'
+        compile 'com.android.support:support-v4:19.0.0'
     }
+
+    lintOptions { 
+      abortOnError false 
+    } 
+
 }
